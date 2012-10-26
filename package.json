@@ -1,0 +1,28 @@
+{
+  "name": "beechart-editor",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "app.js",
+  "dependencies": {
+    "connect": "~2.3.0",
+    "express": "~2.5.9",
+    "findit": "~0.1.2",
+    "iconv-lite": "~0.2.0",
+    "jade": "~0.26.1",
+    "nib": "~0.5.0",
+    "stylus": "~0.27.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sjpsega/beechart-editor.git"
+  },
+  "keywords": [
+    "beechart"
+  ],
+  "author": "sjpsega",
+  "license": "BSD"
+}
