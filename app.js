@@ -11,6 +11,9 @@ var express = require('express')
 ;
 // nib
 var server = connect();
+
+var cssException = ["css/bootstrap.css"];
+
 function compile(str, path) {
   return stylus(str)
     .set('filename', path)
@@ -86,6 +89,16 @@ function replacePath(fpath,dir,type){
     fpath = fpath.join('/').replace(/(.*)(\/)([^/]+)$/,'$1$3');
     
     return fpath
+}
+
+function findSomeInArray(obj,arr){
+    var loop = arr.length;
+    for(var i=0;i<loop;i++){
+        if(arr[i]===obj){
+            return true;
+        }
+    }
+    return false;
 }
 
 
@@ -166,7 +179,7 @@ app.get(/((?:html|css|js|img|swf|)\/)(?:[^/.]+\/)?([^/]+)(?:\.)([\w]+)$/, functi
         break;
         case 'css':
         //访问swf中的css文件
-        if(fpath.indexOf("swf/css") > -1){
+        if(fpath.indexOf("swf/css") > -1 || findSomeInArray(fpath,cssException)){
             res.sendfile(fpath);
             return;
         }

@@ -7,7 +7,24 @@ html
         meta(name="keywords",content="beechart, chart, forfree, opensource, simple, 图表, 免费, 开源")
         link(rel="shortcut icon",type="image/x-icon",href="favicon.ico")
         link(rel="stylesheet",type="text/css",href="css/bootstrap.css")
+        link(rel="stylesheet",type="text/css",href="css/page.css")
     body
+        .navbar.navbar-fixed-top.navbar-inverse
+            .navbar-inner
+                .container-fluid
+                    a.brand(href="#") BeeChart
+        .container-fluid
+            .row-fluid
+                .span4
+                    .well
+                        ul.nav.nav-tabs
+                            li.active
+                                a(href="#") 通用样式
+                            li
+                                a(href="#") 饼图专有
+                .span8
+                    .well.flash-container
+
         script(src="js/jquery.js")
         script(src="js/underscore.js")
         script(src="js/backbone.js")
