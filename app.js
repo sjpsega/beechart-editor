@@ -7,8 +7,58 @@ var express = require('express')
 ,   nib = require('nib')
 ,   app = express.createServer()
 ,   watchPaths = ['styl']
-,   iconv = require('iconv-lite');
-;
+,   iconv = require('iconv-lite')
+,   watch = require("./node_modules/watch/main");
+
+watch.createMonitor('./styl', function (monitor) {
+    // monitor.files['/home/mikeal/.zshrc'] // Stat object for my zshrc.
+    // console.log(monitor.files);
+    monitor.on("created", function (f, stat) {
+      // Handle file changes
+      console.log("created",f,stat);
+    })
+    monitor.on("changed", function (f, curr, prev) {
+      // Handle new files
+       
+       f = f.replace("\\","/");
+       var str = fs.readFileSync(f,'utf-8');
+       var fpath = replacePath(f,'css');
+       console.log("changed",f,fpath,replacePath("css/a.css","styl"),str);
+        compile(str,f)
+            .set('path',watchPaths)
+            .use(nib())
+            .render(function(err,css){
+                console.log(err,css);
+                if(err){
+                    next(err);
+                    return
+                }
+                var buffer = iconv.encode(css, 'utf-8');
+                fs.open( fpath, 'w', 0644, function(err,fd){
+                    if(err){
+                        fs.close(fd)
+                        next(err);
+                        return
+                    }
+                    fs.write(fd, buffer, 0, buffer.length, 0, function(e){
+                        if(err){
+                            fs.close(fd)
+                            next(err);
+                            return
+                        }
+                        // res.write(fs.readFileSync(fpath));
+                        // res.end();
+                        fs.close(fd)
+                    });
+                });
+            });
+    })
+    monitor.on("removed", function (f, stat) {
+      // Handle removed files
+       console.log("removed",f);
+    })
+  }  
+)
 // nib
 var server = connect();
 
@@ -27,6 +77,7 @@ server.use(stylus.middleware({
 app.configure(function(){
     app.use(express.errorHandler());
     app.use(express.bodyParser());
+	app.use(express.logger('dev'));
 });
 
 function max(arr){
@@ -83,12 +134,12 @@ function replacePath(fpath,dir,type){
     name = fpath.pop();
     name = name.replace(/(.*)(\.)([^./]+)$/,'$1$2|$3').split('|');
     fpath = fpath.concat(name);
+    console.log("name",name,fpath);
     lastIndex = fpath.length - 1;
     dir && (fpath[0] = fpath[fpath.length - 1] = dir)   
     type && (fpath[lastIndex] = type);
     fpath = fpath.join('/').replace(/(.*)(\/)([^/]+)$/,'$1$3');
-    
-    return fpath
+    return fpath;
 }
 
 function findSomeInArray(obj,arr){
@@ -190,35 +241,35 @@ app.get(/((?:html|css|js|img|swf|)\/)(?:[^/.]+\/)?([^/]+)(?:\.)([\w]+)$/, functi
                 res.sendfile(fpath);
                 return
             }
-            str = fs.readFileSync(stylusPath,'utf-8');
-            compile(str,stylusPath)
-                //.set('filename',stylusPath)
-                .set('path',watchPaths)
-                .use(nib())
-                .render(function(err,css){
-                    if(err){
-                        next(err);
-                        return
-                    }
-                    var buffer = iconv.encode(css, 'utf-8');
-                    fs.open( fpath, 'w', 0644, function(err,fd){
-                        if(err){
-                            fs.close(fd)
-                            next(err);
-                            return
-                        }
-                        fs.write(fd, buffer, 0, buffer.length, 0, function(e){
-                            if(err){
-                                fs.close(fd)
-                                next(err);
-                                return
-                            }
-                            res.write(fs.readFileSync(fpath));
-                            res.end();
-                            fs.close(fd)
-                        });
-                    });
-                });
+            // str = fs.readFileSync(stylusPath,'utf-8');
+            // console.log(stylusPath,watchPaths);
+            // compile(str,stylusPath)
+            //     .set('path',watchPaths)
+            //     .use(nib())
+            //     .render(function(err,css){
+            //         if(err){
+            //             next(err);
+            //             return
+            //         }
+            //         var buffer = iconv.encode(css, 'utf-8');
+            //         fs.open( fpath, 'w', 0644, function(err,fd){
+            //             if(err){
+            //                 fs.close(fd)
+            //                 next(err);
+            //                 return
+            //             }
+            //             fs.write(fd, buffer, 0, buffer.length, 0, function(e){
+            //                 if(err){
+            //                     fs.close(fd)
+            //                     next(err);
+            //                     return
+            //                 }
+            //                 res.write(fs.readFileSync(fpath));
+            //                 res.end();
+            //                 fs.close(fd)
+            //             });
+            //         });
+            //     });
         },ifModifiedSince);            
         break;
         case 'js':
