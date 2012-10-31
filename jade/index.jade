@@ -19,9 +19,29 @@ html
                     .well
                         ul.nav.nav-tabs
                             li.active
-                                a(href="#") 通用样式
+                                a(href="#general",data-toggle="tab") 通用样式
                             li
-                                a(href="#") 饼图专有
+                                a(href="#pie",data-toggle="tab") 饼图专有
+                        .tab-content
+                            .tab-pane.active#general
+                                .well#generalPosSet
+                                    h4 legend位置
+                                    label.radio.inline
+                                        input(type="radio",name="legendPos",value="1")#inlineCheckbox1
+                                        span 上
+                                    label.radio.inline
+                                        input(type="radio",name="legendPos",value="2")#inlineCheckbox1
+                                        span 下
+                                    label.radio.inline
+                                        input(type="radio",name="legendPos",value="")#inlineCheckbox1
+                                        span 左
+                                    label.radio.inline
+                                        input(type="radio",name="legendPos",value="")#inlineCheckbox1
+                                        span 右
+                                    label.radio.inline
+                                        input(type="radio",name="legendPos",value="")#inlineCheckbox1
+                                        span none
+                            .tab-pane#pie
                 .span8
                     .well.flash-container
 
@@ -29,6 +49,13 @@ html
         script(src="js/underscore.js")
         script(src="js/backbone.js")
         script(src="js/bootstrap.js")
+        script(src="http://sjpsega.github.com/beechart/js/beechart/flash.js")
+        script(src="js/general.js")
+        script(src="js/app.js")
         script(src="js/page.js")
+        script
+            $(function () {
+                $('#myTab a:last').tab('show');
+            })
 
 

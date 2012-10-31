@@ -10,48 +10,50 @@ var express = require('express')
 ,   iconv = require('iconv-lite')
 ,   watch = require("./node_modules/watch/main");
 
+//监听styl目录修改，生成css
 watch.createMonitor('./styl', function (monitor) {
     // monitor.files['/home/mikeal/.zshrc'] // Stat object for my zshrc.
-    // console.log(monitor.files);
-    monitor.on("created", function (f, stat) {
-      // Handle file changes
-      console.log("created",f,stat);
-    })
-    monitor.on("changed", function (f, curr, prev) {
-      // Handle new files
-       
-       f = f.replace("\\","/");
-       var str = fs.readFileSync(f,'utf-8');
-       var fpath = replacePath(f,'css');
-       console.log("changed",f,fpath,replacePath("css/a.css","styl"),str);
+
+    function createCss(f){
+        f = f.replace("\\","/");
+        var str = fs.readFileSync(f,'utf-8');
+        var fpath = replacePath(f,'css');
         compile(str,f)
-            .set('path',watchPaths)
-            .use(nib())
-            .render(function(err,css){
-                console.log(err,css);
+        .set('path',watchPaths)
+        .use(nib())
+        .render(function(err,css){
+            console.log(err,css);
+            if(err){
+                next(err);
+                return
+            }
+            var buffer = iconv.encode(css, 'utf-8');
+            fs.open( fpath, 'w', 0644, function(err,fd){
                 if(err){
+                    fs.close(fd)
                     next(err);
                     return
                 }
-                var buffer = iconv.encode(css, 'utf-8');
-                fs.open( fpath, 'w', 0644, function(err,fd){
+                fs.write(fd, buffer, 0, buffer.length, 0, function(e){
                     if(err){
                         fs.close(fd)
                         next(err);
                         return
                     }
-                    fs.write(fd, buffer, 0, buffer.length, 0, function(e){
-                        if(err){
-                            fs.close(fd)
-                            next(err);
-                            return
-                        }
-                        // res.write(fs.readFileSync(fpath));
-                        // res.end();
-                        fs.close(fd)
-                    });
+                    fs.close(fd)
                 });
             });
+        });
+    }
+    monitor.on("created", function (f, stat) {
+      // Handle file changes
+      console.log("created",f);
+      createCss(f);
+    })
+    monitor.on("changed", function (f, curr, prev) {
+      // Handle new files
+       console.log("changed",f);
+       createCss(f);
     })
     monitor.on("removed", function (f, stat) {
       // Handle removed files
@@ -134,7 +136,6 @@ function replacePath(fpath,dir,type){
     name = fpath.pop();
     name = name.replace(/(.*)(\.)([^./]+)$/,'$1$2|$3').split('|');
     fpath = fpath.concat(name);
-    console.log("name",name,fpath);
     lastIndex = fpath.length - 1;
     dir && (fpath[0] = fpath[fpath.length - 1] = dir)   
     type && (fpath[lastIndex] = type);
@@ -197,81 +198,50 @@ app.get(/((?:html|css|js|img|swf|)\/)(?:[^/.]+\/)?([^/]+)(?:\.)([\w]+)$/, functi
 
     switch(ftype){
         case 'html':
-        //修改html的判断路径，直接在根目录下
-        var htmlPath = replacePath(fpath,'');
-        var fpaths = fpath.split('.');
-        var name = fpaths[0];
-        var jadePath = "jade/"+name+".jade";
-        setHead(jadePath,'html',function(){
-            str = fs.readFileSync(jadePath,'utf-8');
-            try{
-                str = jade.compile(str, { filename: jadePath, pretty: true })();
-                var buffer = iconv.encode(str, 'utf-8');
-                if(!str && str!='')throw "jade compile error";
-                fs.open( htmlPath, 'w', 0644, function(err,fd){
-                    if(err){
-                        next(err);
-                        fs.close(fd)
-                        return
-                    }
-                    fs.write(fd, buffer, 0, buffer.length, 0, function(e){
+            //修改html的判断路径，直接在根目录下
+            var htmlPath = replacePath(fpath,'');
+            var fpaths = fpath.split('.');
+            var name = fpaths[0];
+            var jadePath = "jade/"+name+".jade";
+            setHead(jadePath,'html',function(){
+                str = fs.readFileSync(jadePath,'utf-8');
+                try{
+                    str = jade.compile(str, { filename: jadePath, pretty: true })();
+                    var buffer = iconv.encode(str, 'utf-8');
+                    if(!str && str!='')throw "jade compile error";
+                    fs.open( htmlPath, 'w', 0644, function(err,fd){
                         if(err){
                             next(err);
+                            fs.close(fd)
                             return
                         }
-                        res.sendfile(fpath);
-                        fs.close(fd);
+                        fs.write(fd, buffer, 0, buffer.length, 0, function(e){
+                            if(err){
+                                next(err);
+                                return
+                            }
+                            res.sendfile(fpath);
+                            fs.close(fd);
+                        });
                     });
-                });
-            }catch(e){
-                res.sendfile(fpath);
-            }
-        });
-        break;
+                }catch(e){
+                    res.sendfile(fpath);
+                }
+            });
+            break;
         case 'css':
-        //访问swf中的css文件
-        if(fpath.indexOf("swf/css") > -1 || findSomeInArray(fpath,cssException)){
-            res.sendfile(fpath);
-            return;
-        }
-        var stylusPath = replacePath(fpath,'styl');
-        fpath = replacePath(fpath,'css');
-        setHead(stylusPath,'css',function(notModify){
-            if(notModify){
+            //访问swf中的css文件
+            if(fpath.indexOf("swf/css") > -1 || findSomeInArray(fpath,cssException)){
                 res.sendfile(fpath);
-                return
+                return;
             }
-            // str = fs.readFileSync(stylusPath,'utf-8');
-            // console.log(stylusPath,watchPaths);
-            // compile(str,stylusPath)
-            //     .set('path',watchPaths)
-            //     .use(nib())
-            //     .render(function(err,css){
-            //         if(err){
-            //             next(err);
-            //             return
-            //         }
-            //         var buffer = iconv.encode(css, 'utf-8');
-            //         fs.open( fpath, 'w', 0644, function(err,fd){
-            //             if(err){
-            //                 fs.close(fd)
-            //                 next(err);
-            //                 return
-            //             }
-            //             fs.write(fd, buffer, 0, buffer.length, 0, function(e){
-            //                 if(err){
-            //                     fs.close(fd)
-            //                     next(err);
-            //                     return
-            //                 }
-            //                 res.write(fs.readFileSync(fpath));
-            //                 res.end();
-            //                 fs.close(fd)
-            //             });
-            //         });
-            //     });
-        },ifModifiedSince);            
-        break;
+            var stylusPath = replacePath(fpath,'styl');
+            fpath = replacePath(fpath,'css');
+            res.sendfile(fpath);
+            // setHead(stylusPath,'css',function(notModify){
+            //         res.sendfile(fpath);
+            // },ifModifiedSince);            
+            break;
         case 'js':
             fpath = replacePath(fpath,'js');
             res.sendfile(fpath);
