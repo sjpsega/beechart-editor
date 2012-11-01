@@ -24,22 +24,22 @@ html
                                 a(href="#pie",data-toggle="tab") 饼图专有
                         .tab-content
                             .tab-pane.active#general
-                                .well#generalPosSet
+                                .well#generalPosSet(data-style="legend",data-key="position")
                                     h4 legend位置
                                     label.radio.inline
-                                        input(type="radio",name="legendPos",value="1")#inlineCheckbox1
+                                        input(type="radio",name="legendPos",value="top")
                                         span 上
                                     label.radio.inline
-                                        input(type="radio",name="legendPos",value="2")#inlineCheckbox1
+                                        input(type="radio",name="legendPos",value="bottom")
                                         span 下
                                     label.radio.inline
-                                        input(type="radio",name="legendPos",value="")#inlineCheckbox1
+                                        input(type="radio",name="legendPos",value="left")
                                         span 左
                                     label.radio.inline
-                                        input(type="radio",name="legendPos",value="")#inlineCheckbox1
+                                        input(type="radio",name="legendPos",value="right")
                                         span 右
                                     label.radio.inline
-                                        input(type="radio",name="legendPos",value="")#inlineCheckbox1
+                                        input(type="radio",name="legendPos",value="none")
                                         span none
                             .tab-pane#pie
                 .span8
@@ -50,6 +50,7 @@ html
         script(src="js/backbone.js")
         script(src="js/bootstrap.js")
         script(src="http://sjpsega.github.com/beechart/js/beechart/flash.js")
+        script(src="js/legend.js")
         script(src="js/general.js")
         script(src="js/app.js")
         script(src="js/page.js")

@@ -1,20 +1,14 @@
-var GeneralModel = Backbone.Model.extend({
-
-})
-
 var GeneralView = Backbone.View.extend({
     el:$("#general"),
     initialize:function(){
-        this.generalPosSet = this.$("#generalPosSet");
+        this.views = [];
         this.defaultSetting();
     },
     events:{
-        "click #generalPosSet input[type='radio']":"generalPosSetChange"
     },
     defaultSetting:function(){
-
-    },
-    generalPosSetChange : function(e){
-        console.log(e);
+        var legendView = new LegendView();
+        this.views.push(legendView);
+        this.model.push(legendView.model);
     }
 })

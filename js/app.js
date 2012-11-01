@@ -11,6 +11,7 @@ var AppView = Backbone.View.extend({
     render:function(){
         this.startFlash();
         this.renderModelAndView();
+        this.model.on("change",this.modelChange);
     },
     startFlash:function(){
         if(this.options.type=="pie" && this.flash){
@@ -27,9 +28,11 @@ var AppView = Backbone.View.extend({
     },
     renderModelAndView:function(){
         if(this.options.type=="pie"){
-            var generalMod = new GeneralModel();
-            this.model.add(generalMod);
-            this.views.push(new GeneralView(generalMod));
+            var generalView = new GeneralView({model:this.model});
+            this.views.push(generalView);
         }
+    },
+    modelChange:function(e){
+        console.log("model change",e.changedAttributes());
     }
 })
