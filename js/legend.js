@@ -1,3 +1,8 @@
+/*
+ Legend样式
+ @author  jianping.shenjp
+ @date    2012-11-2
+*/
 var LegendModel = Backbone.Model.extend({
     styleName : "legend",
     defaults:function(){
@@ -23,12 +28,8 @@ var LegendView = Backbone.View.extend({
     generalPosSetChange : function(e){
         var target = $(e.target);
         var well = target.closest(".well");
-        // var styleName = well.data("style");
         var propertyKey = well.data("key");
         var propertyVal = target.val();
-        // console.log(styleName,propertyKey,propertyVal,{propertyKey:propertyVal});
-        // var obj = {};
-        // obj[propertyKey] = propertyVal;
         this.model.set(propertyKey,propertyVal);
     }
 })

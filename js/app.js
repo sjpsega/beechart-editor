@@ -1,3 +1,8 @@
+/*
+ 控制单元
+ @author  jianping.shenjp
+ @date    2012-11-2
+*/
 var AppModel = Backbone.Collection.extend({
     
 })
@@ -14,16 +19,24 @@ var AppView = Backbone.View.extend({
         this.model.on("change",this.modelChange);
     },
     startFlash:function(){
+        var chart;
         if(this.options.type=="pie" && this.flash){
-            this.flash.flash({
+            chart = this.flash.flash({
                 swf        : 'http://sjpsega.github.com/beechart/swf/beechart-pie.swf',
-                width      : 600, 
+                width      : 750, 
                 height     : 450, 
                 allowScriptAccess : "always",
                 flashvars  : { 
-                  dataUrl : 'http://sjpsega.github.com/beechart/swf/data/site-reffers.xml'
+                  dataUrl : 'http://sjpsega.github.com/beechart/swf/data/site-reffers.xml',
+                  debug:true
                 } 
             });
+        }
+        if(chart){
+            $(document).on("redrawFlash",function(e,data){
+                console.log("redrawFlash",data);
+                chart.getFlash().parseCSS(data,true);
+            })
         }
     },
     renderModelAndView:function(){
@@ -32,7 +45,8 @@ var AppView = Backbone.View.extend({
             this.views.push(generalView);
         }
     },
-    modelChange:function(e){
-        console.log("model change",e.changedAttributes());
+    modelChange:function(model){
+        console.log("model change",model.styleName,model.changedAttributes());
+        StyleCenter.getInstance().setStyle(model.styleName,model.changedAttributes());
     }
 })
