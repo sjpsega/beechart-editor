@@ -24,23 +24,35 @@ html
                                 a(href="#pie",data-toggle="tab") 饼图专有
                         .tab-content
                             .tab-pane.active#general
-                                .well#generalPosSet(data-style="legend",data-key="position")
-                                    h4 legend位置
-                                    label.radio.inline
-                                        input(type="radio",name="legendPos",value="top")
-                                        span 上
-                                    label.radio.inline
-                                        input(type="radio",name="legendPos",value="bottom")
-                                        span 下
-                                    label.radio.inline
-                                        input(type="radio",name="legendPos",value="left")
-                                        span 左
-                                    label.radio.inline
-                                        input(type="radio",name="legendPos",value="right")
-                                        span 右
-                                    label.radio.inline
-                                        input(type="radio",name="legendPos",value="none")
-                                        span none
+                                .well#legend-set
+                                    .containe(data-key="position")
+                                        h5 legend位置
+                                        label.radio.inline
+                                            input(type="radio",name="position-group",value="top")
+                                            span 上
+                                        label.radio.inline
+                                            input(type="radio",name="position-group",value="bottom")
+                                            span 下
+                                        label.radio.inline
+                                            input(type="radio",name="position-group",value="left")
+                                            span 左
+                                        label.radio.inline
+                                            input(type="radio",name="position-group",value="right")
+                                            span 右
+                                        label.radio.inline
+                                            input(type="radio",name="position-group",value="none")
+                                            span none
+                                    .containe(data-key="align")
+                                        h5 legend水平对齐
+                                        label.radio.inline
+                                            input(type="radio",name="align-group",value="left")
+                                            span 左对齐
+                                        label.radio.inline
+                                            input(type="radio",name="align-group",value="right")
+                                            span 右对齐
+                                        label.radio.inline
+                                            input(type="radio",name="align-group",value="center")
+                                            span 居中
                             .tab-pane#pie
                 .span8
                     .well.flash-container

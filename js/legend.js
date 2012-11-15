@@ -1,5 +1,5 @@
 /*
- Legend样式
+ Legend
  @author  jianping.shenjp
  @date    2012-11-2
 */
@@ -14,7 +14,7 @@ var LegendModel = Backbone.Model.extend({
 })
 
 var LegendView = Backbone.View.extend({
-    el:$("#generalPosSet"),
+    el:$("#legend-set"),
     initialize:function(){
         this.model = new LegendModel();
         this.defaultSetting();
@@ -27,7 +27,7 @@ var LegendView = Backbone.View.extend({
     },
     generalPosSetChange : function(e){
         var target = $(e.target);
-        var well = target.closest(".well");
+        var well = target.closest(".containe");
         var propertyKey = well.data("key");
         var propertyVal = target.val();
         this.model.set(propertyKey,propertyVal);

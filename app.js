@@ -8,43 +8,49 @@ var express = require('express')
 ,   app = express.createServer()
 ,   watchPaths = ['styl']
 ,   iconv = require('iconv-lite')
-,   watch = require("./node_modules/watch/main");
+,   watch = require("./node_modules/watch/main")
+,   readfiles = require("./readfiles");
 
-//ç›‘å¬stylç›®å½•ä¿®æ”¹ï¼Œç”Ÿæˆcss
-watch.createMonitor('./styl', function (monitor) {
-    // monitor.files['/home/mikeal/.zshrc'] // Stat object for my zshrc.
+//³õÊ¼ÖØÐÂÉú³ÉÒ»±écss
+var stylusFiles = readfiles.readfiles("styl");
+stylusFiles.forEach(function(file){
+    createCss(file);
+});
 
-    function createCss(f){
-        f = f.replace("\\","/");
-        var str = fs.readFileSync(f,'utf-8');
-        var fpath = replacePath(f,'css');
-        compile(str,f)
-        .set('path',watchPaths)
-        .use(nib())
-        .render(function(err,css){
-            console.log(err,css);
+function createCss(f){
+    f = f.replace("\\","/");
+    var str = fs.readFileSync(f,'utf-8');
+    var fpath = replacePath(f,'css');
+    compile(str,f)
+    .set('path',watchPaths)
+    .use(nib())
+    .render(function(err,css){
+        console.log(err,css);
+        if(err){
+            next(err);
+            return
+        }
+        var buffer = iconv.encode(css, 'utf-8');
+        fs.open( fpath, 'w', 0644, function(err,fd){
             if(err){
+                fs.close(fd)
                 next(err);
                 return
             }
-            var buffer = iconv.encode(css, 'utf-8');
-            fs.open( fpath, 'w', 0644, function(err,fd){
+            fs.write(fd, buffer, 0, buffer.length, 0, function(e){
                 if(err){
                     fs.close(fd)
                     next(err);
                     return
                 }
-                fs.write(fd, buffer, 0, buffer.length, 0, function(e){
-                    if(err){
-                        fs.close(fd)
-                        next(err);
-                        return
-                    }
-                    fs.close(fd)
-                });
+                fs.close(fd)
             });
         });
-    }
+    });
+}
+    
+//¼àÌýstylÄ¿Â¼ÐÞ¸Ä£¬Éú³Écss
+watch.createMonitor('./styl', function (monitor) {
     monitor.on("created", function (f, stat) {
       // Handle file changes
       console.log("created",f);
@@ -179,7 +185,7 @@ app.get(/((?:html|css|js|img|swf|)\/)(?:[^/.]+\/)?([^/]+)(?:\.)([\w]+)$/, functi
                     modifyTime = pathFilesChangeDate( watchPaths, mtime, 'styl' ) 
                     mtime =  modifyTime || mtime; 
                 }else{
-                    //ç¬¬ä¸€æ¬¡è®¿é—®
+                    //µÚÒ»´Î·ÃÎÊ
                     modifyTime = true;
                     mtime = new Date(stats.mtime).toUTCString();
                 }
@@ -198,7 +204,7 @@ app.get(/((?:html|css|js|img|swf|)\/)(?:[^/.]+\/)?([^/]+)(?:\.)([\w]+)$/, functi
 
     switch(ftype){
         case 'html':
-            //ä¿®æ”¹htmlçš„åˆ¤æ–­è·¯å¾„ï¼Œç›´æŽ¥åœ¨æ ¹ç›®å½•ä¸‹
+            //ÐÞ¸ÄhtmlµÄÅÐ¶ÏÂ·¾¶£¬Ö±½ÓÔÚ¸ùÄ¿Â¼ÏÂ
             var htmlPath = replacePath(fpath,'');
             var fpaths = fpath.split('.');
             var name = fpaths[0];
@@ -230,7 +236,7 @@ app.get(/((?:html|css|js|img|swf|)\/)(?:[^/.]+\/)?([^/]+)(?:\.)([\w]+)$/, functi
             });
             break;
         case 'css':
-            //è®¿é—®swfä¸­çš„cssæ–‡ä»¶
+            //·ÃÎÊswfÖÐµÄcssÎÄ¼þ
             if(fpath.indexOf("swf/css") > -1 || findSomeInArray(fpath,cssException)){
                 res.sendfile(fpath);
                 return;
