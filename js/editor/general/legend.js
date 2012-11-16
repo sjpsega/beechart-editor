@@ -20,12 +20,12 @@ var LegendView = Backbone.View.extend({
         this.defaultSetting();
     },
     events:{
-        "click input[type='radio']":"clickHandler"
+        "click input[type='radio']":"generalPosSetChange"
     },
     defaultSetting:function(){
 
     },
-    clickHandler : function(e){
+    generalPosSetChange : function(e){
         var target = $(e.target);
         var well = target.closest(".containe");
         var propertyKey = well.data("key");

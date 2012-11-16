@@ -1,22 +1,22 @@
 /*
- Legend
+ chart下的pie专有属性
  @author  jianping.shenjp
  @date    2012-11-2
 */
-var LegendModel = Backbone.Model.extend({
-    styleName : "legend",
+var PieInChartModel = Backbone.Model.extend({
+    styleName : "chart",
     defaults:function(){
         return {
-            position:"bottom",
-            align:"center"
+            animate:"clockwise",
+            startAngle:0
         }
     }
 })
 
-var LegendView = Backbone.View.extend({
-    el:$("#legend-set"),
+var PieInChartView = Backbone.View.extend({
+    el:$("#pie-chart-set"),
     initialize:function(){
-        this.model = new LegendModel();
+        this.model = new PieInChartModel();
         this.defaultSetting();
     },
     events:{

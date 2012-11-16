@@ -43,6 +43,8 @@ var AppView = Backbone.View.extend({
         if(this.options.type=="pie"){
             var generalView = new GeneralView({model:this.model});
             this.views.push(generalView);
+            var pieView = new PieView({model:this.model});
+            this.views.push(pieView);
         }
     },
     modelChange:function(model){

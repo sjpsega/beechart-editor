@@ -54,6 +54,24 @@ html
                                             input(type="radio",name="align-group",value="center")
                                             span 居中
                             .tab-pane#pie
+                                .well#pie-chart-set
+                                    .containe(data-key="animate")
+                                        h5 pie初始动画
+                                        label.radio.inline
+                                            input(type="radio",name="pie-animate-group",value="clockwise")
+                                            span 顺时针
+                                        label.radio.inline
+                                            input(type="radio",name="pie-animate-group",value="counter_clockwise")
+                                            span 逆时针
+                                        label.radio.inline
+                                            input(type="radio",name="pie-animate-group",value="composite")
+                                            span 组合
+                                        label.radio.inline
+                                            input(type="radio",name="pie-animate-group",value="expand")
+                                            span 扩张
+                                        label.radio.inline
+                                            input(type="radio",name="pie-animate-group",value="none")
+                                            span none
                 .span8
                     .well.flash-container
 
@@ -62,15 +80,14 @@ html
         script(src="js/backbone.js")
         script(src="js/bootstrap.js")
         script(src="http://sjpsega.github.com/beechart/js/beechart/flash.js")
-        script(src="js/legend.js")
-        script(src="js/general.js")
-        script(src="js/stylesheet.js")
-        script(src="js/stylecenter.js")
-        script(src="js/app.js")
-        script(src="js/page.js")
+        script(src="js/editor/stylesheet.js")
+        script(src="js/editor/stylecenter.js")
+        script(src="js/editor/app.js")
+        script(src="js/editor/page.js")
+        script(src="js/editor/general/general.js")
+        script(src="js/editor/general/legend.js")
+        script(src="js/editor/pie/pie.js")
+        script(src="js/editor/pie/pie-chart.js")
         script
-            $(function () {
-                $('#myTab a:last').tab('show');
-            })
 
 
