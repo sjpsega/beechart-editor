@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
     lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
+      files: ['grunt.js', 'test/*.js']
     },
     test: {
       files: ['test/**/*.js']
@@ -37,6 +37,7 @@ module.exports = function(grunt) {
           'css/*.css': ['styl/*.styl'] // compile individually into dest, maintaining folder structure
         }
       },
+      //暂时不知道这个的作用
       flatten: {
         options: {
           flatten: true
@@ -47,8 +48,9 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: '<config:lint.files>',
-      tasks: 'lint test jade stylus'
+      files: ['jade/*.jade',
+              'styl/*.styl'],
+      tasks: 'jade stylus'
     },
     server: {
       port: 80,

@@ -1,4 +1,6 @@
 jQuery(function($){
+    module("Backbone test");
+
     test("test Collectin",3,function(){
         var aModel = Backbone.Model.extend({
             defaults:{
@@ -32,7 +34,42 @@ jQuery(function($){
         equal(a.get("age"),28);
         equal(colChange,true,"Collection can get model attr change");
 
-
     });
 
+    module("stylesheet test");
+
+    test("去掉注释",function(){
+        var testStr = 
+            "/**\
+             * QUnit v1.11.0pre - A JavaScript Unit Testing Framework\
+             *\
+             * http://qunitjs.com\
+             *\
+             * Copyright 2012 jQuery Foundation and other contributors\
+             * Released under the MIT license.\
+             * http://jquery.org/license\
+             */\
+             \
+            /** Font Family and Sizes */\
+            chart {\
+                animate : clockwise;\
+                colors  : #FA6222,#FEC53F,#DBEE27,#87C822,#49AFB1;\
+                order   : asc;\
+            }\
+            legend item label {\
+                color   : inherit;\
+            }";
+        var expected = 
+            "chart {\
+                animate : clockwise;\
+                colors  : #FA6222,#FEC53F,#DBEE27,#87C822,#49AFB1;\
+                order   : asc;\
+            }\
+            legend item label {\
+                color   : inherit;\
+            }";
+
+        var str = testStr.replace(/\/\*[^*\/]*\*\//mg, '') //去掉注释
+        equal(str,expected);
+    })
 })

@@ -22,14 +22,17 @@ var AppView = Backbone.View.extend({
         var chart;
         if(this.options.type=="pie" && this.flash){
             chart = this.flash.flash({
-                swf        : 'http://sjpsega.github.com/beechart/swf/beechart-pie.swf',
+                swf        : 'swf/beechart-pie.swf',
                 width      : 750, 
                 height     : 450, 
                 allowScriptAccess : "always",
                 flashvars  : { 
-                  dataUrl : 'http://sjpsega.github.com/beechart/swf/data/site-reffers.xml',
+                  dataUrl : 'swf/data/site-reffers.xml',
                   debug:true
                 } 
+            });
+            chart.on("swfReady.flash",function(){
+                StyleCenter.getInstance().setStyle(new StyleSheet(chart.getFlash()._returnChartCSS()));
             });
         }
         if(chart){
