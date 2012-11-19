@@ -48,9 +48,15 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['jade/*.jade',
-              'styl/*.styl'],
-      tasks: 'jade stylus'
+      jade: {
+        files: ['jade/*.jade'],
+        tasks: 'jade'
+
+      },
+      stylus: {
+        files: ['styl/*.styl'],
+        tasks: 'stylus'
+      }
     },
     server: {
       port: 80,
