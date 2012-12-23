@@ -38,7 +38,7 @@ jQuery(function($){
 
     module("stylesheet test");
 
-    test("去掉注释",function(){
+    test("样式解析",function(){
         var testStr = 
             "/**\
              * QUnit v1.11.0pre - A JavaScript Unit Testing Framework\
@@ -50,7 +50,7 @@ jQuery(function($){
              * http://jquery.org/license\
              */\
              \
-            /** Font Family and Sizes */\
+            /* Font Family and Sizes */\
             chart {\
                 animate : clockwise;\
                 colors  : #FA6222,#FEC53F,#DBEE27,#87C822,#49AFB1;\
@@ -58,6 +58,7 @@ jQuery(function($){
             }\
             legend item label {\
                 color   : inherit;\
+                fontsize   : 14;\
             }";
         var expected = 
             "chart {\
@@ -67,9 +68,13 @@ jQuery(function($){
             }\
             legend item label {\
                 color   : inherit;\
+                fontsize   : 14;\
             }";
-
-        var str = testStr.replace(/\/\*[^*\/]*\*\//mg, '') //去掉注释
-        equal(str,expected);
+        var styleSheet = new StyleSheet();
+        styleSheet.parseCSS(testStr);
+        ok(!!styleSheet.getStyle("chart"));
+        ok(styleSheet.getStyle("chart")["animate"]=="clockwise");
+        ok(!!styleSheet.getStyle("legend item label"));
+        ok(styleSheet.getStyle("legend item label")["fontsize"]=="14");
     })
 })
