@@ -4,7 +4,7 @@
  @date    2012-11-2
 */
 var GeneralView = Backbone.View.extend({
-    el:$("#pie"),
+    el:$("#general"),
     initialize:function(){
         this.views = [];
         this.defaultSetting();

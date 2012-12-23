@@ -6,58 +6,47 @@
 
 var StyleSheet = function(style){
     this._style = {};
-    this.parseCSS(style);
+    if(style){
+        this.parseCSS(style);
+    }
 }
 StyleSheet.prototype = {
     parseCSS:function(CSSText){
         /**
-        * 空的样式项目会造成原生StyleSheet的解析错误，故去掉 
-        */
-        var EMPTY_ITEM_PATTERN = /\w+\s*{\s*}/;
-        
-        /**
         * 查找样式名称中带有空格(space/tab/newline)的块
         */
-        var SPACE_ITEM_PATTERN = /(\w+(?:\s+\w+)+)\s*{([^}]*\s*[^}]*)}/mg;
+        var SPACE_ITEM_PATTERN = /([\w\s]+)\s*{([^}]*\s*[^}]*)}/mg;
         
         /**
         * 查找这样的设置: 
         * styleName : styleValue
         */
         var PARIR_PATTERN = /([\w.]+)\s*:\s*([^;\n]+)/g;
-        
 
-        var src = CSSText;
+        var str = CSSText;
         
-        if (src) {
+        if (str) {
             
-            src = src.replace(/\/\*[^*\/]*\*\//mg, '') //去掉注释
-                    .replace(/(?<=\w)\s+(?=:)|(?<=:)\s+(?=\w|;)/g, ''); //去掉多余空格
+            str = str.replace(/\/\*.*\*\//mg, '') //去掉注释
+            str = _.string.strip(str);//去掉前后空白
             
-            var mtc = [];
-            var name = "";
-            var values = "";
-            var style = {};
-            var mtcValue = [];
-            var styleValue = "";
-            while (mtc = SPACE_ITEM_PATTERN.exec(src)) {
-                name = mtc[1];
-                values = mtc[2];
-                style = getStyle(name);
-                while (mtcValue = PARIR_PATTERN.exec(values)) {
-                    styleValue = mtcValue[2];
-                    styleValue = styleValue.replace(/\s+$/g, '');
-                    style[mtcValue[1]] = styleValue;
+            var arr,name,values,styleValue,styleObj;
+            while(arr = SPACE_ITEM_PATTERN.exec(str)){
+                name = _.string.strip(arr[1]);
+                values = _.string.strip(arr[2]);
+                styleObj = {};
+                while (arr = PARIR_PATTERN.exec(values)) {
+                    styleValue = _.string.strip(arr[2]);
+                    styleObj[arr[1]] = styleValue;
                 }
-                this.setStyle(name, style);
+                this.setStyle(name, styleObj);
             }
-            
-            src = src.replace(SPACE_ITEM_PATTERN, '')
-                     .replace(EMPTY_ITEM_PATTERN, '');
         }
-        consolg.log("parseCSS",src);
     },
     setStyle:function(styleName,styleObject){
-
+        this._style[styleName] = styleObject;
+    },
+    getStyle:function(styleName){
+        return this._style[styleName];
     }
 }

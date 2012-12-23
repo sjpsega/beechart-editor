@@ -4,13 +4,6 @@
  @date    2012-11-2
 */
 var LegendModel = Backbone.Model.extend({
-    styleName : "legend",
-    defaults:function(){
-        return {
-            position:"bottom",
-            align:"center"
-        }
-    }
 })
 
 var LegendView = Backbone.View.extend({
@@ -23,7 +16,27 @@ var LegendView = Backbone.View.extend({
         "click input[type='radio']":"generalPosSetChange"
     },
     defaultSetting:function(){
-
+        //绑定事件对象，否则会出错，会丢失this。新版本流行on来监听事件并绑定对象
+        _.bindAll(this,["dataReadyHandler"]);
+        jQuery(document).one("dataReady",this.dataReadyHandler);
+    },
+    dataReadyHandler:function(){
+        var styleObj = StyleCenter.getInstance().getStyle("legend");
+        var radios;
+        var value;
+        var temp;
+        if(!_.isEmpty(styleObj)){
+            if(styleObj["position"]){
+                radios = this.$el.find(".containe input:radio[name='position-group']");
+                value = styleObj["position"];
+                jQuery.each(radios,function(index,item){
+                    temp = $(item);
+                    if(temp.val()==value){
+                        temp.prop("checked",true);
+                    }
+                });
+            }
+        }
     },
     generalPosSetChange : function(e){
         var target = $(e.target);

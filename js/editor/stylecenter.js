@@ -10,12 +10,22 @@ var StyleCenter = (function(){
         var styleSheet;
         return {
             setStyleSheet:function(styleSheet){
-                styleSheet = styleSheet;
+                this.styleSheet = styleSheet;
+                $(document).triggerHandler("dataReady");
             },
             setStyle:function(styleName,styleObj){
                 var styleStr = (styleName+JSON.stringify(styleObj)+"").replace(/\"/g,"");
-                console.log("setStyle",styleStr);
+                var style = this.styleSheet.getStyle(styleName);
+                if(style){
+                    style = _.extend(style,styleObj);
+                    this.styleSheet.setStyle(styleName,style);
+                }
+                console.log("setStyle",styleStr,style);
+                style = null;
                 $(document).triggerHandler("redrawFlash",[styleStr]);
+            },
+            getStyle:function(styleName){
+                return this.styleSheet.getStyle(styleName);
             }
         }
     }

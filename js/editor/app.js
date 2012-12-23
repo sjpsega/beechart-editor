@@ -32,7 +32,7 @@ var AppView = Backbone.View.extend({
                 } 
             });
             chart.on("swfReady.flash",function(){
-                StyleCenter.getInstance().setStyle(new StyleSheet(chart.getFlash()._returnChartCSS()));
+                StyleCenter.getInstance().setStyleSheet(new StyleSheet(chart.getFlash()._returnChartCSS()));
             });
         }
         if(chart){
@@ -51,7 +51,7 @@ var AppView = Backbone.View.extend({
         }
     },
     modelChange:function(model){
-        console.log("model change",model.styleName,model.changedAttributes());
+        console.log("model change:",model.styleName,model.changedAttributes());
         StyleCenter.getInstance().setStyle(model.styleName,model.changedAttributes());
     }
 })
