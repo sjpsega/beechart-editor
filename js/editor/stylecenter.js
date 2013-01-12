@@ -20,7 +20,7 @@ var StyleCenter = (function(){
                     style = _.extend(style,styleObj);
                     this.styleSheet.setStyle(styleName,style);
                 }
-                console.log("setStyle",styleStr,style);
+                log("setStyle",styleStr,style);
                 style = null;
                 $(document).triggerHandler("redrawFlash",[styleStr]);
             },

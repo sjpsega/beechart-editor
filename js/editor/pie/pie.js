@@ -12,7 +12,10 @@ var PieView = Backbone.View.extend({
     events:{
     },
     defaultSetting:function(){
-        var pieInChartView = new PieInChartView();
+        var pieInChartView = new PieInChartView({
+            modelClz:PieInChartModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("chart")
+        });
         this.views.push(pieInChartView);
         this.model.push(pieInChartView.model);
     }

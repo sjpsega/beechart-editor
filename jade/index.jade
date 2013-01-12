@@ -25,53 +25,10 @@ html
                         .tab-content
                             .tab-pane.active#general
                                 .well#legend-set
-                                    .containe(data-key="position")
-                                        h5 legend位置
-                                        label.radio.inline
-                                            input(type="radio",name="position-group",value="top")
-                                            span 上
-                                        label.radio.inline
-                                            input(type="radio",name="position-group",value="bottom")
-                                            span 下
-                                        label.radio.inline
-                                            input(type="radio",name="position-group",value="left")
-                                            span 左
-                                        label.radio.inline
-                                            input(type="radio",name="position-group",value="right")
-                                            span 右
-                                        label.radio.inline
-                                            input(type="radio",name="position-group",value="none")
-                                            span none
-                                    .containe(data-key="align")
-                                        h5 legend水平对齐
-                                        label.radio.inline
-                                            input(type="radio",name="align-group",value="left")
-                                            span 左对齐
-                                        label.radio.inline
-                                            input(type="radio",name="align-group",value="right")
-                                            span 右对齐
-                                        label.radio.inline
-                                            input(type="radio",name="align-group",value="center")
-                                            span 居中
+                                    include include/general-set.jade
                             .tab-pane#pie
                                 .well#pie-chart-set
-                                    .containe(data-key="animate")
-                                        h5 pie初始动画
-                                        label.radio.inline
-                                            input(type="radio",name="pie-animate-group",value="clockwise")
-                                            span 顺时针
-                                        label.radio.inline
-                                            input(type="radio",name="pie-animate-group",value="counter_clockwise")
-                                            span 逆时针
-                                        label.radio.inline
-                                            input(type="radio",name="pie-animate-group",value="composite")
-                                            span 组合
-                                        label.radio.inline
-                                            input(type="radio",name="pie-animate-group",value="expand")
-                                            span 扩张
-                                        label.radio.inline
-                                            input(type="radio",name="pie-animate-group",value="none")
-                                            span none
+                                    include include/pie-set.jade
                 .span8
                     .well.flash-container
 
@@ -81,6 +38,7 @@ html
         script(src="js/backbone.js")
         script(src="js/bootstrap.js")
         script(src="http://sjpsega.github.com/beechart/js/beechart/flash.js")
+        script(src="js/editor/base/base.js")
         script(src="js/editor/stylesheet.js")
         script(src="js/editor/stylecenter.js")
         script(src="js/editor/app.js")
@@ -89,6 +47,7 @@ html
         script(src="js/editor/general/legend.js")
         script(src="js/editor/pie/pie.js")
         script(src="js/editor/pie/pie-chart.js")
+        script(src="js/log.js")
         script
 
 

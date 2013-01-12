@@ -4,6 +4,7 @@
  @date    2012-11-2
 */
 var LegendModel = Backbone.Model.extend({
+    styleName : "legend"
 })
 
 var LegendView = Backbone.View.extend({
@@ -34,6 +35,7 @@ var LegendView = Backbone.View.extend({
                     if(temp.val()==value){
                         temp.prop("checked",true);
                     }
+                    temp = null;
                 });
             }
         }
