@@ -4,9 +4,13 @@
  @date    2012-11-2
 */
 jQuery(function($) {
-    var appView = new AppView({
-        el: $("body"),
-        model: new AppModel(),
-        type: "pie"
-    });
+    try{
+        var appView = new AppView({
+            el: $("body"),
+            model: new AppModel(),
+            type: "pie"
+        });
+    }catch(e){
+        console.log(e);
+    }
 })

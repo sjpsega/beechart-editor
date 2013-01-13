@@ -126,7 +126,6 @@ jQuery(function($){
         var AdvView = BaseView.extend({
             initialize:function(){
                 AdvView.__super__.initialize.apply(this,arguments);
-                console.log("aaa");
             }
         });
         var view = new AdvView({
@@ -134,5 +133,19 @@ jQuery(function($){
             modelAttributes : styleSheet.getStyle("chart")
         });
         equal(view.model.get("order"),"asc");
+    });
+    test("underscore each",function(){
+        var obj = {
+            startAngle: 0, 
+            animate: "clockwise", 
+            colors: "#FA6222,#FEC53F,#DBEE27,#87C822,#49AFB1", 
+            order: "asc"
+        };
+        var loop = 0;
+        _.each(obj,function(val,key){
+            console.log(key,val);
+            loop+=1;
+        });
+        equal(loop,4);
     });
 })

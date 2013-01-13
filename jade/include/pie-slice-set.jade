@@ -1,0 +1,24 @@
+.containe(data-key="labelPosition")
+    h5 圆饼对应label放置的方式
+    label.radio.inline
+        input(type="radio",name="labelPosition-group",value="none")
+        span none
+    label.radio.inline
+        input(type="radio",name="labelPosition-group",value="normal")
+        span 外部水平
+    label.radio.inline
+        input(type="radio",name="labelPosition-group",value="inside")
+        span 内部
+    label.radio.inline
+        input(type="radio",name="labelPosition-group",value="inside!")
+        span 内部(若显示不下则隐藏)
+    label.radio.inline
+        input(type="radio",name="labelPosition-group",value="outside")
+        span 外部径向
+    label.radio.inline
+        input(type="radio",name="labelPosition-group",value="callout")
+        span 引导线
+.containe(data-key="frameThickness")
+    h5 圆饼边框线条粗细
+    input(type="number",max="100",min="0")
+

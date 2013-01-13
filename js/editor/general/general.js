@@ -12,7 +12,10 @@ var GeneralView = Backbone.View.extend({
     events:{
     },
     defaultSetting:function(){
-        var legendView = new LegendView();
+        var legendView = new LegendView({
+            modelClz:LegendModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("legend")
+        });
         this.views.push(legendView);
         this.model.push(legendView.model);
     }

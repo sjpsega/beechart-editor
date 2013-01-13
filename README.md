@@ -3,7 +3,7 @@ beechart-editor
 
 基本逻辑
 
-* flash 开放获取目前样式的接口，外界可以获得flash的现有样式，然后根据样式显示(_returnChartCSS)；开放图表重绘接口(_updateViewNow)；
+* 开放的隐藏接口：返回图表默认样式(_returnChartCSS),重绘图表(_updateViewNow),设置图表状态(_setState)
 * editor根据flash默认样式和默认数据进行默认设置
 * collection收集所有model，model里面有修改，collection有感知，然后设置图表样式
 * js需要做样式解析setStyle,getStyle

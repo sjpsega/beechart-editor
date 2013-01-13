@@ -1,5 +1,5 @@
 /*
- 鎺у埗鍗曞厓
+ 控制单元
  @author  jianping.shenjp
  @date    2012-11-2
 */
@@ -16,10 +16,11 @@ var AppView = Backbone.View.extend({
     },
     render:function(){
         this.startFlash();
-        //缁戝畾浜嬩欢瀵硅薄锛屽惁鍒欎細鍑洪敊锛屼細涓㈠けthis銆傛柊鐗堟湰娴佽on鏉ョ洃鍚簨浠跺苟缁戝畾瀵硅薄
+        this.model.on("change",this.modelChange);
+        
+        //绑定事件对象，否则会出错，会丢失this。新版本流行on来监听事件并绑定对象
         _.bindAll(this,["renderModelAndView"]);
         $(document).one("dataReady",this.renderModelAndView);
-        this.model.on("change",this.modelChange);
     },
     startFlash:function(){
         if(this.options.type=="pie" && this.flash){
