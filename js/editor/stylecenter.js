@@ -26,6 +26,9 @@ var StyleCenter = (function(){
             },
             getStyle:function(styleName){
                 return this.styleSheet.getStyle(styleName);
+            },
+            returnCSSText:function(){
+                return this.styleSheet.returnCSSText();
             }
         }
     }

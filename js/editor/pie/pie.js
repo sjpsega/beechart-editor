@@ -21,7 +21,7 @@ var PieView = Backbone.View.extend({
 
         var pieSliceSetView = new PieSliceSetView({
             modelClz:PieSliceSetModel,
-            modelAttributes : StyleCenter.getInstance().getStyle("chart")
+            modelAttributes : StyleCenter.getInstance().getStyle("slice")
         });
         this.views.push(pieSliceSetView);
         this.model.push(pieSliceSetView.model);

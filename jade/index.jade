@@ -13,6 +13,9 @@ html
             .navbar-inner
                 .container-fluid
                     a.brand(href="#") BeeChart
+                    ul.nav.pull-right
+                        a(href="#chart-type-switch-modal",role="button",data-toggle="modal").btn.btn-inverse#switch 切换图表类型
+                        button.btn.btn-inverse#download 下载当前样式
         .container-fluid
             .row-fluid
                 .span4
@@ -32,25 +35,27 @@ html
                                 .well#pie-slice-set
                                     include include/pie-slice-set.jade
                 .span8
-                    .well.flash-container
-
+                    .well.flash-container(tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true")
+        include include/chart-type-switch-modal.jade
+                
         script(src="js/jquery.js")
         script(src="js/underscore.js")
         script(src="js/underscore.string.js")
         script(src="js/backbone.js")
         script(src="js/bootstrap.js")
-        script(src="http://sjpsega.github.com/beechart/js/beechart/flash.js")
+        script(src="js/flash.js")
+        script(src="js/FileSaver.js")
+        script(src="js/log.js")
         script(src="js/editor/base/base.js")
         script(src="js/editor/stylesheet.js")
         script(src="js/editor/stylecenter.js")
         script(src="js/editor/app.js")
-        script(src="js/editor/page.js")
         script(src="js/editor/general/general.js")
         script(src="js/editor/general/legend.js")
         script(src="js/editor/pie/pie.js")
         script(src="js/editor/pie/pie-chart-set.js")
         script(src="js/editor/pie/pie-slice-set.js")
-        script(src="js/log.js")
+        script(src="js/editor/init.js")
         script
 
 

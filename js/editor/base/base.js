@@ -19,7 +19,7 @@ var BaseView = Backbone.View.extend({
     */
     setDefaultValue:function(){
         var self = this;
-        log(this.model.attributes);
+        log(this.model.styleName,this.model.attributes);
         _.each(this.model.attributes,function(value,key){
             var inputs = $(".containe[data-key="+ key +"] input",self.$el);
             var input_type,temp,itemValue;

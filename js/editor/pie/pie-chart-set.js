@@ -7,7 +7,6 @@ var PieChartSetModel = Base.extend({
     styleName : "chart",
     defaults : function(){
         return {
-            startAngle : 0
         }
     }
 })

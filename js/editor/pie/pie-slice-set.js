@@ -7,8 +7,6 @@ var PieSliceSetModel = Base.extend({
     styleName : "slice",
     defaults : function(){
         return {
-            labelPosition  : "callout",
-            frameThickness : 0
         }
     }
 })

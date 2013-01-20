@@ -38,7 +38,7 @@ jQuery(function($){
 
     module("stylesheet test");
 
-    test("样式解析",function(){
+    test("样式解析styleSheet测试",function(){
         var testStr = 
             "/**\
              * QUnit v1.11.0pre - A JavaScript Unit Testing Framework\
@@ -76,6 +76,92 @@ jQuery(function($){
         ok(styleSheet.getStyle("chart")["animate"]=="clockwise");
         ok(!!styleSheet.getStyle("legend item label"));
         ok(styleSheet.getStyle("legend item label")["fontsize"]=="14");
+    })
+    
+    test("styleCenter样式解析测试",3,function(){
+        var testStr = 
+            "/**\
+             * QUnit v1.11.0pre - A JavaScript Unit Testing Framework\
+             *\
+             * http://qunitjs.com\
+             *\
+             * Copyright 2012 jQuery Foundation and other contributors\
+             * Released under the MIT license.\
+             * http://jquery.org/license\
+             */\
+             \
+            /* Font Family and Sizes */\
+            chart {\
+                animate : clockwise;\
+                colors  : #FA6222,#FEC53F,#DBEE27,#87C822,#49AFB1;\
+                order   : asc;\
+            }\
+            legend item label {\
+                color   : inherit;\
+                fontsize   : 14;\
+            }";
+        var expected = {
+              "animate": "none",
+              "colors": "#FA6222,#FEC53F,#DBEE27,#87C822,#49AFB1",
+              "order": "none"
+            };
+        var styleCenter = StyleCenter.getInstance();
+        var styleSheet = new StyleSheet();
+        styleSheet.parseCSS(testStr);
+        styleCenter.setStyleSheet(styleSheet);
+        styleCenter.setStyle("chart",{
+                    animate : "none"
+                });
+        styleCenter.setStyle("chart",{
+                    order : "none"
+                });
+        equal(styleCenter.getStyle("chart")["animate"],"none");
+        equal(styleCenter.getStyle("chart")["order"],"none");
+        deepEqual(styleCenter.getStyle("chart"),expected);
+    })  
+
+    test("返回css文本测试",1,function(){
+        var testStr = 
+            "/**\
+             * QUnit v1.11.0pre - A JavaScript Unit Testing Framework\
+             *\
+             * http://qunitjs.com\
+             *\
+             * Copyright 2012 jQuery Foundation and other contributors\
+             * Released under the MIT license.\
+             * http://jquery.org/license\
+             */\
+             \
+            /* Font Family and Sizes */\
+            chart {\
+                animate : clockwise;\
+                colors  : #FA6222,#FEC53F,#DBEE27,#87C822,#49AFB1;\
+                order   : asc;\
+            }\
+            legend item label {\
+                color   : inherit;\
+                fontsize   : 14;\
+            }";
+        var expected = 
+            "chart {\
+                animate : none;\
+                colors  : #FA6222,#FEC53F,#DBEE27,#87C822,#49AFB1;\
+                order   : asc;\
+            }\
+            legend item label {\
+                color   : inherit;\
+                fontsize   : 14;\
+            }";
+        var styleCenter = StyleCenter.getInstance();
+        var styleSheet = new StyleSheet();
+        styleSheet.parseCSS(testStr);
+        styleCenter.setStyleSheet(styleSheet);
+        styleCenter.setStyle("chart",{
+                    animate : "none"
+                });
+        var testStyleSheet = new StyleSheet();
+        testStyleSheet.parseCSS(styleCenter.returnCSSText());
+        equal(testStyleSheet.getStyle("chart")["animate"],"none");
     })
 
     module("基本模块测试");
@@ -143,7 +229,6 @@ jQuery(function($){
         };
         var loop = 0;
         _.each(obj,function(val,key){
-            console.log(key,val);
             loop+=1;
         });
         equal(loop,4);

@@ -48,5 +48,24 @@ StyleSheet.prototype = {
     },
     getStyle:function(styleName){
         return this._style[styleName];
+    },
+    /**
+    * 将样式对象转成CSS格式的字符串
+    */
+    returnCSSText:function(){
+        var outputArr = [],styleObj,styleObjArr;
+        var names = _.keys(this._style);
+        var self = this;
+        _.each(names,function(name){
+            obj = self.getStyle(name);
+            styleObjArr = [];
+            styleObjArr.push(name.concat("{"));
+            _.each(obj,function(objValue,objName){
+                styleObjArr.push(['\t', objName, ': ', objValue, ';'].join(''));
+            });
+            styleObjArr.push("}");
+            outputArr.push(styleObjArr.join("\n"));
+        });
+        return outputArr.join("\n");
     }
 }

@@ -1,3 +1,32 @@
+chart-background()
+    background:url("../img/charttype.png") no-repeat
 body
     padding-top: 60px;
     padding-bottom: 40px;
+.chart-types
+    width: 400px
+    margin: 0 auto
+    li
+        margin-left:30px
+        i
+            width:32px
+            height:32px
+            display: inline-block
+            chart-background()
+        .line
+            i
+                background-position:0 -110px
+        .bar
+            i
+                background-position: 0 -54px
+        .pie 
+            i
+                background-position: 0 0
+        .timeline
+            i
+                background-position: -3px -168px
+#chart-type-switch-modal
+    .alert
+        padding: 4px 35px 4px 14px
+        margin-bottom: 0
+

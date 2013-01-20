@@ -7,7 +7,6 @@ var LegendModel = Base.extend({
     styleName : "legend",
     defaults : function(){
         return {
-            align:"center"
         }
     }
 })
