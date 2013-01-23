@@ -19,23 +19,9 @@ html
         .container-fluid
             .row-fluid
                 .span4
-                    .well
-                        ul.nav.nav-tabs
-                            li.active
-                                a(href="#general",data-toggle="tab") 通用样式
-                            li
-                                a(href="#pie",data-toggle="tab") 饼图专有
-                        .tab-content
-                            .tab-pane.active#general
-                                .well#legend-set
-                                    include include/general-set.jade
-                            .tab-pane#pie
-                                .well#pie-chart-set
-                                    include include/pie-chart-set.jade
-                                .well#pie-slice-set
-                                    include include/pie-slice-set.jade
-                .span8
-                    .well.flash-container(tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true")
+                    .well#config-container
+                .span8.flash-container
+                    .well#flash-container.hide
         include include/chart-type-switch-modal.jade
                 
         script(src="js/jquery.js")
@@ -56,6 +42,21 @@ html
         script(src="js/editor/pie/pie-chart-set.js")
         script(src="js/editor/pie/pie-slice-set.js")
         script(src="js/editor/init.js")
-        script
+        script(type="text/template")#pie-config
+            ul.nav.nav-tabs
+                li.active
+                    a(href="#general",data-toggle="tab") 通用样式
+                li
+                    a(href="#pie",data-toggle="tab") 饼图专有
+            .tab-content
+                .tab-pane.active#general
+                    .well#legend-set
+                        include include/general-set.jade
+                .tab-pane#pie
+                    .well#pie-chart-set
+                        include include/pie-chart-set.jade
+                    .well#pie-slice-set
+                        include include/pie-slice-set.jade
+        script(type="text/template")#line-config
 
 

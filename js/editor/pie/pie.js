@@ -4,24 +4,30 @@
  @date    2012-11-2
 */
 var PieView = Backbone.View.extend({
-    el:$("#general"),
     initialize:function(){
         this.views = [];
         this.defaultSetting();
     },
-    events:{
+    remove:function(){
+        _.each(this.views,function(view){
+            view.remove();
+        });
+        PieView.__super__.remove.apply(this,arguments);
+        return this;
     },
     defaultSetting:function(){
         var pieChartSetView = new PieChartSetView({
             modelClz:PieChartSetModel,
-            modelAttributes : StyleCenter.getInstance().getStyle("chart")
+            modelAttributes : StyleCenter.getInstance().getStyle("chart"),
+            el:$("#pie-chart-set")
         });
         this.views.push(pieChartSetView);
         this.model.push(pieChartSetView.model);
 
         var pieSliceSetView = new PieSliceSetView({
             modelClz:PieSliceSetModel,
-            modelAttributes : StyleCenter.getInstance().getStyle("slice")
+            modelAttributes : StyleCenter.getInstance().getStyle("slice"),
+            el:$("#pie-slice-set")
         });
         this.views.push(pieSliceSetView);
         this.model.push(pieSliceSetView.model);

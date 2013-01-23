@@ -21,7 +21,8 @@ var BaseView = Backbone.View.extend({
         var self = this;
         log(this.model.styleName,this.model.attributes);
         _.each(this.model.attributes,function(value,key){
-            var inputs = $(".containe[data-key="+ key +"] input",self.$el);
+            var inputs = $(".containe[data-key='"+ key +"'] input",self.$el);
+            console.log(self.$el,key,".containe[data-key='"+ key +"'] input",inputs.length,$(".containe input",self.$el).length);
             var input_type,temp,itemValue;
             if(inputs.length){
                 input_type = inputs.attr("type");
@@ -38,6 +39,7 @@ var BaseView = Backbone.View.extend({
                         temp = null;
                     });
                 }
+                inputs = null;
             }
         })
     },

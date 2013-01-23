@@ -28,7 +28,9 @@ jQuery(function($) {
             chartTypeSwitchModel:function(){
                 var model = $("#chart-type-switch-modal");
                 var isTypeChoise = false,
-                currentBtn;
+                currentBtn,
+                appView,
+                lastChoiseType;
                 model.modal();
                 var btns = $(".chart-types button",model);
                 var alertDiv = $(".alert",model);
@@ -53,16 +55,30 @@ jQuery(function($) {
                 });
                 confirmBtn.click(function(e){
                     alertshow();
-                    if(currentBtn){
-                        var charttype = currentBtn.data("charttype");
-                        var appView = new AppView({
-                            el: $("body"),
-                            model: new AppModel(),
-                            type: charttype
-                        });
-                        model.modal("hide");
+                    if(!currentBtn){
+                        return;
                     }
+                    var charttype = currentBtn.data("charttype");
+                    if(lastChoiseType == charttype){
+                        model.modal("hide");
+                        return;
+                    }
+                    newFlashContainer();
+                    lastChoiseType = charttype;
+                    if(appView){
+                        appView.remove();
+                    }
+                    appView = new AppView({
+                        el: $("body"),
+                        model: new AppModel(),
+                        type: charttype,
+                        templateId:"#"+charttype+"-config"
+                    });
+                    model.modal("hide");
                 });
+                function newFlashContainer(){
+                    $(".flash-container").append("<div id='flash-container' class='well hide ui-flash'>");
+                }
                 function alertshow(){
                     if(!isTypeChoise){
                         alertDiv.stop().fadeIn().delay(2000).fadeOut();

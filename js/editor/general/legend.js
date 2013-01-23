@@ -12,5 +12,4 @@ var LegendModel = Base.extend({
 })
 
 var LegendView = BaseView.extend({
-    el:$("#legend-set")
 })

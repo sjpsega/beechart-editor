@@ -12,5 +12,4 @@ var PieSliceSetModel = Base.extend({
 })
 
 var PieSliceSetView = BaseView.extend({
-    el:$("#pie-slice-set")
 })

@@ -12,5 +12,4 @@ var PieChartSetModel = Base.extend({
 })
 
 var PieChartSetView = BaseView.extend({
-    el:$("#pie-chart-set")
 })
