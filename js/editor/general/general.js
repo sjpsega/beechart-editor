@@ -16,6 +16,14 @@ var GeneralView = Backbone.View.extend({
         return this;
     },
     defaultSetting:function(){
+        var commonView = new CommonView({
+            modelClz:CommonModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("chart"),
+            el:$("#common-set")
+        });
+        this.views.push(commonView);
+        this.model.push(commonView.model);
+
         var legendView = new LegendView({
             modelClz:LegendModel,
             modelAttributes : StyleCenter.getInstance().getStyle("legend"),
@@ -23,5 +31,14 @@ var GeneralView = Backbone.View.extend({
         });
         this.views.push(legendView);
         this.model.push(legendView.model);
+
+        var tooltipView = new TooltipView({
+            modelClz:TooltipModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("tooltip"),
+            el:$("#tooltip-set")
+        });
+        this.views.push(tooltipView);
+        this.model.push(tooltipView.model);
+        
     }
 })

@@ -22,7 +22,6 @@ var BaseView = Backbone.View.extend({
         log(this.model.styleName,this.model.attributes);
         _.each(this.model.attributes,function(value,key){
             var inputs = $(".containe[data-key='"+ key +"'] input",self.$el);
-            console.log(self.$el,key,".containe[data-key='"+ key +"'] input",inputs.length,$(".containe input",self.$el).length);
             var input_type,temp,itemValue;
             if(inputs.length){
                 input_type = inputs.attr("type");

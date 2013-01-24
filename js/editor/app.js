@@ -8,7 +8,6 @@ var AppModel = Backbone.Collection.extend({
 })
 
 var AppView = Backbone.View.extend({
-    chart : null,
     initialize:function(){
         this.flash = this.$el.find("#flash-container");
         this.config_container = this.$el.find("#config-container");
@@ -22,7 +21,10 @@ var AppView = Backbone.View.extend({
         this.dispose();
         this.flash.remove();
         this.config_container.children().remove();
-        chart = null;
+        this.chart.off(".flash");
+        this.chart = null;
+        $(document).off("redrawFlash");
+        this.dispose();
         return this;
     },
     render:function(){
@@ -46,9 +48,9 @@ var AppView = Backbone.View.extend({
         };
         var dataMap = {
             "pie":"swf/data/site-reffers.xml",
-            "line":"swf/data/site-reffers.xml",
-            "bar":"swf/data/site-reffers.xml",
-            "timeline":"swf/data/site-reffers.xml"
+            "line":"swf/data/2-serials.xml",
+            "bar":"swf/data/mon-av-temp.xml",
+            "timeline":"swf/data/small_data.json"
         }
         if(this.options.type && this.flash){
             self.chart = this.flash.flash({
@@ -74,17 +76,25 @@ var AppView = Backbone.View.extend({
         }
     },
     renderModelAndView:function(){
-        if(this.options.type=="pie"){
-            var generalView = new GeneralView({
-                                                model:this.model,
-                                                el:$("#general")
-                                            });
-            this.views.push(generalView);
-            var pieView = new PieView({
-                                        model:this.model,
-                                        el:$("#general")
-                                    });
-            this.views.push(pieView);
+        var self = this;
+        var renderMap = {
+            pie:function(){
+                var generalView = new GeneralView({model:self.model});
+                self.views.push(generalView);
+                var pieView = new PieView({model:self.model});
+                self.views.push(pieView);
+            },
+            line:function(){
+                var generalView = new GeneralView({model:self.model});
+                self.views.push(generalView);
+                var pieView = new PieView({model:self.model});
+                self.views.push(pieView);
+            }
+        }
+        try{
+            renderMap[self.options.type]();
+        }catch(e){
+            alert(e);
         }
     },
     modelChange:function(model){

@@ -37,7 +37,10 @@ html
         script(src="js/editor/stylecenter.js")
         script(src="js/editor/app.js")
         script(src="js/editor/general/general.js")
+        script(src="js/editor/general/common.js")
         script(src="js/editor/general/legend.js")
+        script(src="js/editor/general/tooltip.js")
+        script(src="js/editor/line/line.js")
         script(src="js/editor/pie/pie.js")
         script(src="js/editor/pie/pie-chart-set.js")
         script(src="js/editor/pie/pie-slice-set.js")
@@ -51,12 +54,28 @@ html
             .tab-content
                 .tab-pane.active#general
                     .well#legend-set
-                        include include/general-set.jade
+                        include include/legend-set.jade
                 .tab-pane#pie
                     .well#pie-chart-set
                         include include/pie-chart-set.jade
                     .well#pie-slice-set
                         include include/pie-slice-set.jade
         script(type="text/template")#line-config
+            ul.nav.nav-tabs
+                li.active
+                    a(href="#general",data-toggle="tab") 通用样式
+                li
+                    a(href="#line",data-toggle="tab") 折线专有
+            .tab-content
+                .tab-pane.active#general
+                    .well#common-set
+                        include include/common-set.jade
+                    .well#legend-set
+                        include include/legend-set.jade
+                    .well#tooltip-set
+                        include include/tooltip-set.jade
+                .tab-pane#line
+        script(type="text/template")#bar-config
+        script(type="text/template")#timeline-config
 
 

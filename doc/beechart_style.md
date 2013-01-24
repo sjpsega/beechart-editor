@@ -55,7 +55,7 @@ line {
     chart
         paddingLeft              number值                       图表显示区域左内边距
         paddingRight             number值                       图表显示区域右内边距
-        leftAxisVisibility       visibl、invisible              y轴是否可见
+        leftAxisVisibility       visible、invisible              y轴是否可见
         animate                  boolean值                      是否有初始动画
         enableTooltip            boolean值                      提示是否可用
 
