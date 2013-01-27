@@ -27,3 +27,25 @@ h3 legend
     label.radio.inline
         input(type="radio",name="align-group",value="center")
         span 居中
+.containe(data-key="valign")
+    h5 垂直对齐
+    label.radio.inline
+        input(type="radio",name="valign-group",value="top")
+        span 上
+    label.radio.inline
+        input(type="radio",name="valign-group",value="middle")
+        span 中
+    label.radio.inline
+        input(type="radio",name="valign-group",value="bottom")
+        span 下
+.containe(data-key="itemEachColumn")
+    h5 每一行最多的item数量
+    input(type="number",name="itemEachColumn",max="10",min="1",step="1")
+.containe(data-key="interactive")
+    h5 item是否可交互(允许用户切换对应数据的显示和隐藏)
+    label.radio.inline
+        input(type="radio",name="interactive-group",value="true")
+        span 是
+    label.radio.inline
+        input(type="radio",name="interactive-group",value="false")
+        span 否

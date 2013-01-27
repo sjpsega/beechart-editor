@@ -18,10 +18,9 @@ html
                         button.btn.btn-inverse#download 下载当前样式
         .container-fluid
             .row-fluid
-                .span4
-                    .well#config-container
                 .span8.flash-container
-                    .well#flash-container.hide
+                .span4
+                    .well#config-container.hide
         include include/chart-type-switch-modal.jade
                 
         script(src="js/jquery.js")
@@ -41,6 +40,7 @@ html
         script(src="js/editor/general/legend.js")
         script(src="js/editor/general/tooltip.js")
         script(src="js/editor/line/line.js")
+        script(src="js/editor/bar/bar.js")
         script(src="js/editor/pie/pie.js")
         script(src="js/editor/pie/pie-chart-set.js")
         script(src="js/editor/pie/pie-slice-set.js")
@@ -76,6 +76,20 @@ html
                         include include/tooltip-set.jade
                 .tab-pane#line
         script(type="text/template")#bar-config
+            ul.nav.nav-tabs
+                li.active
+                    a(href="#general",data-toggle="tab") 通用样式
+                li
+                    a(href="#bar",data-toggle="tab") 折线专有
+            .tab-content
+                .tab-pane.active#general
+                    .well#common-set
+                        include include/common-set.jade
+                    .well#legend-set
+                        include include/legend-set.jade
+                    .well#tooltip-set
+                        include include/tooltip-set.jade
+                .tab-pane#bar
         script(type="text/template")#timeline-config
 
 

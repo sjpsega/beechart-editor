@@ -1,7 +1,4 @@
 h3 tooltip
-.containe(data-key="color")
-    h5 文字颜色
-        input(type="color",name="position-group")
 .containe(data-key="backgroundType")
     h5 背景形式
     label.radio.inline
@@ -10,3 +7,25 @@ h3 tooltip
     label.radio.inline
         input(type="radio",name="backgroundType-group",value="simple")
         span 常规
+.containe(data-key="backgroundAlpha")
+    h5 背景透明度
+    label.range
+        input(type="range",name="backgroundAlpha",max="1",min="0",step="0.05")
+        span
+.for-simple
+    .containe(data-key="backgroundColor")
+        h5 背景颜色
+        input(type="color",name="backgroundColor")
+    .containe(data-key="borderColor")
+        h5 边框颜色
+        input(type="color",name="borderColor")          
+    .containe(data-key="borderThickness")
+        h5 边框粗细
+        label.range
+            input(type="range",name="borderThickness",max="10",min="0",step="0.1")
+            span
+    .containe(data-key="borderAlpha")
+        h5 背景透明度
+        label.range
+            input(type="range",name="borderAlpha",max="1",min="0",step="0.05")
+            span

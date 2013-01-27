@@ -1,4 +1,12 @@
 h3 通用
+.containe(data-key="smooth")
+    h5 数据是否平滑切换
+    label.radio.inline
+        input(type="radio",name="smooth-group",value="true")
+        span 是
+    label.radio.inline
+        input(type="radio",name="smooth-group",value="false")
+        span 否
 .containe(data-key="leftAxisVisibility")
     h5 y轴是否可见
     label.radio.inline
@@ -8,10 +16,34 @@ h3 通用
         input(type="radio",name="leftAxisVisibility-group",value="invisible")
         span 不可见
 .containe(data-key="enableTooltip")
-    h5 是否显示提示
+    h5 是否显示tooltip
     label.radio.inline
         input(type="radio",name="enableTooltip-group",value="true")
         span 显示
     label.radio.inline
         input(type="radio",name="enableTooltip-group",value="false")
         span 隐藏
+.containe(data-key="animate")
+    h5 是否有初始动画
+    label.radio.inline
+        input(type="radio",name="animate-group",value="true")
+        span 有
+    label.radio.inline
+        input(type="radio",name="animate-group",value="false")
+        span 无
+.containe(data-key="paddingLeft")
+    h5 显示区域左内边距
+    input(type="range",name="paddingLeft",max="50",min="0",step="0.5")
+    span
+.containe(data-key="paddingRight")
+    h5 显示区域右内边距
+    input(type="range",name="paddingRight",max="50",min="0",step="0.5")
+    span
+.containe(data-key="paddingTop")
+    h5 显示区域上内边距
+    input(type="range",name="paddingTop",max="50",min="0",step="0.5")
+    span
+.containe(data-key="paddingBottom")
+    h5 显示区域下内边距
+    input(type="range",name="paddingBottom",max="50",min="0",step="0.5")
+    span

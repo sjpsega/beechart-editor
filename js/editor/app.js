@@ -28,7 +28,7 @@ var AppView = Backbone.View.extend({
         return this;
     },
     render:function(){
-        this.config_container.append($(this.options.templateId).html()).show();
+        this.config_container.append($(this.options.templateId).html()).hide();
         this.startFlash();
         this.model.on("change",this.modelChange,this);
 
@@ -89,10 +89,17 @@ var AppView = Backbone.View.extend({
                 self.views.push(generalView);
                 var pieView = new PieView({model:self.model});
                 self.views.push(pieView);
+            },
+            bar:function(){
+                var generalView = new GeneralView({model:self.model});
+                self.views.push(generalView);
+                var barView = new BarView({model:self.model});
+                self.views.push(barView);
             }
         }
         try{
             renderMap[self.options.type]();
+            this.config_container.fadeIn();
         }catch(e){
             alert(e);
         }

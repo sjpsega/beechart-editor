@@ -25,13 +25,13 @@ line {
         colors                   css颜色值，以","分隔           图表预设的颜色取值
 
     tooltip(提示)
-        color                    css颜色值                      文字颜色值
-        backgroundType           slash(特定)\simple(常规)       背景形式
-        backgroundColor          css颜色值                      背景颜色值
-        backgroundAlpha          number值(0-1)                  背景透明度
-        borderColor              css颜色值                      边框的颜色
-        borderThickness          number值                       边框的线条粗细
-        borderAlpha              number值(0-1)                  边框的线条透明度
+        color(只在单条线下有效)         css颜色值                      文字颜色值
+        backgroundType                  slash(特定)\simple(常规)       背景形式
+        backgroundColor(simple有效)     css颜色值                      背景颜色值
+        backgroundAlpha(simple有效)     number值(0-1)                  背景透明度
+        borderColor(simple有效)         css颜色值                      边框的颜色
+        borderThickness(simple有效)     number值                       边框的线条粗细
+        borderAlpha(simple\slash有效)   number值(0-1)                  边框的线条透明度
 
     legend(数据集标记)
         position                 none\top\bottom\left\right\inner     放置位置
@@ -55,6 +55,8 @@ line {
     chart
         paddingLeft              number值                       图表显示区域左内边距
         paddingRight             number值                       图表显示区域右内边距
+        paddingTop               number值                       图表显示区域上内边距
+        paddingBottom            number值                       图表显示区域下内边距
         leftAxisVisibility       visible、invisible              y轴是否可见
         animate                  boolean值                      是否有初始动画
         enableTooltip            boolean值                      提示是否可用
