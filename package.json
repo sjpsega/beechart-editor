@@ -4,6 +4,7 @@
   "description": "beechart-editor\r ===============",
   "main": "app.js",
   "directories": {
+    "doc": "doc",
     "test": "test"
   },
   "dependencies": {
@@ -26,5 +27,8 @@
     "url": "https://github.com/sjpsega/beechart-editor.git"
   },
   "author": "",
-  "license": "BSD"
+  "license": "BSD",
+  "keywords": [
+    "chart"
+  ]
 }

@@ -31,3 +31,6 @@ body {
   padding: 4px 35px 4px 14px;
   margin-bottom: 0;
 }
+#flash-container {
+  position: fixed;
+}

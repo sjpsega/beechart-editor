@@ -21,11 +21,9 @@
     </div>
     <div class="container-fluid">
       <div class="row-fluid">
+        <div class="span8 flash-container"></div>
         <div class="span4">
-          <div id="config-container" class="well"></div>
-        </div>
-        <div class="span8 flash-container">
-          <div id="flash-container" class="well hide"></div>
+          <div id="config-container" class="well hide"></div>
         </div>
       </div>
     </div>
@@ -83,6 +81,7 @@
     <script src="js/editor/general/legend.js"></script>
     <script src="js/editor/general/tooltip.js"></script>
     <script src="js/editor/line/line.js"></script>
+    <script src="js/editor/bar/bar.js"></script>
     <script src="js/editor/pie/pie.js"></script>
     <script src="js/editor/pie/pie-chart-set.js"></script>
     <script src="js/editor/pie/pie-slice-set.js"></script>
@@ -124,6 +123,31 @@
               </label>
               <label class="radio inline">
                 <input type="radio" name="align-group" value="center"><span>居中</span>
+              </label>
+            </div>
+            <div data-key="valign" class="containe">
+              <h5>垂直对齐</h5>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="top"><span>上</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="middle"><span>中</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="bottom"><span>下</span>
+              </label>
+            </div>
+            <div data-key="itemEachColumn" class="containe">
+              <h5>每一行最多的item数量</h5>
+              <input type="number" name="itemEachColumn" max="10" min="1" step="1">
+            </div>
+            <div data-key="interactive" class="containe">
+              <h5>item是否可交互(允许用户切换对应数据的显示和隐藏)</h5>
+              <label class="radio inline">
+                <input type="radio" name="interactive-group" value="true"><span>是</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="interactive-group" value="false"><span>否</span>
               </label>
             </div>
           </div>
@@ -194,6 +218,15 @@
         <div id="general" class="tab-pane active">
           <div id="common-set" class="well">
             <h3>通用</h3>
+            <div data-key="smooth" class="containe">
+              <h5>数据是否平滑切换</h5>
+              <label class="radio inline">
+                <input type="radio" name="smooth-group" value="true"><span>是</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="smooth-group" value="false"><span>否</span>
+              </label>
+            </div>
             <div data-key="leftAxisVisibility" class="containe">
               <h5>y轴是否可见</h5>
               <label class="radio inline">
@@ -204,13 +237,38 @@
               </label>
             </div>
             <div data-key="enableTooltip" class="containe">
-              <h5>是否显示提示</h5>
+              <h5>是否显示tooltip</h5>
               <label class="radio inline">
                 <input type="radio" name="enableTooltip-group" value="true"><span>显示</span>
               </label>
               <label class="radio inline">
                 <input type="radio" name="enableTooltip-group" value="false"><span>隐藏</span>
               </label>
+            </div>
+            <div data-key="animate" class="containe">
+              <h5>是否有初始动画</h5>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="true"><span>有</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="false"><span>无</span>
+              </label>
+            </div>
+            <div data-key="paddingLeft" class="containe">
+              <h5>显示区域左内边距</h5>
+              <input type="range" name="paddingLeft" max="50" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="paddingRight" class="containe">
+              <h5>显示区域右内边距</h5>
+              <input type="range" name="paddingRight" max="50" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="paddingTop" class="containe">
+              <h5>显示区域上内边距</h5>
+              <input type="range" name="paddingTop" max="50" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="paddingBottom" class="containe">
+              <h5>显示区域下内边距</h5>
+              <input type="range" name="paddingBottom" max="50" min="0" step="0.5"><span></span>
             </div>
           </div>
           <div id="legend-set" class="well">
@@ -245,14 +303,34 @@
                 <input type="radio" name="align-group" value="center"><span>居中</span>
               </label>
             </div>
+            <div data-key="valign" class="containe">
+              <h5>垂直对齐</h5>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="top"><span>上</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="middle"><span>中</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="bottom"><span>下</span>
+              </label>
+            </div>
+            <div data-key="itemEachColumn" class="containe">
+              <h5>每一行最多的item数量</h5>
+              <input type="number" name="itemEachColumn" max="10" min="1" step="1">
+            </div>
+            <div data-key="interactive" class="containe">
+              <h5>item是否可交互(允许用户切换对应数据的显示和隐藏)</h5>
+              <label class="radio inline">
+                <input type="radio" name="interactive-group" value="true"><span>是</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="interactive-group" value="false"><span>否</span>
+              </label>
+            </div>
           </div>
           <div id="tooltip-set" class="well">
             <h3>tooltip</h3>
-            <div data-key="color" class="containe">
-              <h5>文字颜色
-                <input type="color" name="position-group">
-              </h5>
-            </div>
             <div data-key="backgroundType" class="containe">
               <h5>背景形式</h5>
               <label class="radio inline">
@@ -262,12 +340,203 @@
                 <input type="radio" name="backgroundType-group" value="simple"><span>常规</span>
               </label>
             </div>
+            <div data-key="backgroundAlpha" class="containe">
+              <h5>背景透明度</h5>
+              <label class="range">
+                <input type="range" name="backgroundAlpha" max="1" min="0" step="0.05"><span></span>
+              </label>
+            </div>
+            <div class="for-simple">
+              <div data-key="backgroundColor" class="containe">
+                <h5>背景颜色</h5>
+                <input type="color" name="backgroundColor">
+              </div>
+              <div data-key="borderColor" class="containe">
+                <h5>边框颜色</h5>
+                <input type="color" name="borderColor">
+              </div>
+              <div data-key="borderThickness" class="containe">
+                <h5>边框粗细</h5>
+                <label class="range">
+                  <input type="range" name="borderThickness" max="10" min="0" step="0.1"><span></span>
+                </label>
+              </div>
+              <div data-key="borderAlpha" class="containe">
+                <h5>背景透明度</h5>
+                <label class="range">
+                  <input type="range" name="borderAlpha" max="1" min="0" step="0.05"><span></span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
         <div id="line" class="tab-pane"></div>
       </div>
     </script>
-    <script type="text/template" id="bar-config"></script>
+    <script type="text/template" id="bar-config">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#general" data-toggle="tab">通用样式</a></li>
+        <li><a href="#bar" data-toggle="tab">折线专有</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="general" class="tab-pane active">
+          <div id="common-set" class="well">
+            <h3>通用</h3>
+            <div data-key="smooth" class="containe">
+              <h5>数据是否平滑切换</h5>
+              <label class="radio inline">
+                <input type="radio" name="smooth-group" value="true"><span>是</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="smooth-group" value="false"><span>否</span>
+              </label>
+            </div>
+            <div data-key="leftAxisVisibility" class="containe">
+              <h5>y轴是否可见</h5>
+              <label class="radio inline">
+                <input type="radio" name="leftAxisVisibility-group" value="visible"><span>可见</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="leftAxisVisibility-group" value="invisible"><span>不可见</span>
+              </label>
+            </div>
+            <div data-key="enableTooltip" class="containe">
+              <h5>是否显示tooltip</h5>
+              <label class="radio inline">
+                <input type="radio" name="enableTooltip-group" value="true"><span>显示</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="enableTooltip-group" value="false"><span>隐藏</span>
+              </label>
+            </div>
+            <div data-key="animate" class="containe">
+              <h5>是否有初始动画</h5>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="true"><span>有</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="false"><span>无</span>
+              </label>
+            </div>
+            <div data-key="paddingLeft" class="containe">
+              <h5>显示区域左内边距</h5>
+              <input type="range" name="paddingLeft" max="50" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="paddingRight" class="containe">
+              <h5>显示区域右内边距</h5>
+              <input type="range" name="paddingRight" max="50" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="paddingTop" class="containe">
+              <h5>显示区域上内边距</h5>
+              <input type="range" name="paddingTop" max="50" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="paddingBottom" class="containe">
+              <h5>显示区域下内边距</h5>
+              <input type="range" name="paddingBottom" max="50" min="0" step="0.5"><span></span>
+            </div>
+          </div>
+          <div id="legend-set" class="well">
+            <h3>legend</h3>
+            <div data-key="position" class="containe">
+              <h5>位置</h5>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="top"><span>上</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="bottom"><span>下</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="left"><span>左</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="right"><span>右</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="none"><span>none</span>
+              </label>
+            </div>
+            <div data-key="align" class="containe">
+              <h5>水平对齐</h5>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="left"><span>左对齐</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="right"><span>右对齐</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="center"><span>居中</span>
+              </label>
+            </div>
+            <div data-key="valign" class="containe">
+              <h5>垂直对齐</h5>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="top"><span>上</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="middle"><span>中</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="valign-group" value="bottom"><span>下</span>
+              </label>
+            </div>
+            <div data-key="itemEachColumn" class="containe">
+              <h5>每一行最多的item数量</h5>
+              <input type="number" name="itemEachColumn" max="10" min="1" step="1">
+            </div>
+            <div data-key="interactive" class="containe">
+              <h5>item是否可交互(允许用户切换对应数据的显示和隐藏)</h5>
+              <label class="radio inline">
+                <input type="radio" name="interactive-group" value="true"><span>是</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="interactive-group" value="false"><span>否</span>
+              </label>
+            </div>
+          </div>
+          <div id="tooltip-set" class="well">
+            <h3>tooltip</h3>
+            <div data-key="backgroundType" class="containe">
+              <h5>背景形式</h5>
+              <label class="radio inline">
+                <input type="radio" name="backgroundType-group" value="slash"><span>特定</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="backgroundType-group" value="simple"><span>常规</span>
+              </label>
+            </div>
+            <div data-key="backgroundAlpha" class="containe">
+              <h5>背景透明度</h5>
+              <label class="range">
+                <input type="range" name="backgroundAlpha" max="1" min="0" step="0.05"><span></span>
+              </label>
+            </div>
+            <div class="for-simple">
+              <div data-key="backgroundColor" class="containe">
+                <h5>背景颜色</h5>
+                <input type="color" name="backgroundColor">
+              </div>
+              <div data-key="borderColor" class="containe">
+                <h5>边框颜色</h5>
+                <input type="color" name="borderColor">
+              </div>
+              <div data-key="borderThickness" class="containe">
+                <h5>边框粗细</h5>
+                <label class="range">
+                  <input type="range" name="borderThickness" max="10" min="0" step="0.1"><span></span>
+                </label>
+              </div>
+              <div data-key="borderAlpha" class="containe">
+                <h5>背景透明度</h5>
+                <label class="range">
+                  <input type="range" name="borderAlpha" max="1" min="0" step="0.05"><span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="bar" class="tab-pane"></div>
+      </div>
+    </script>
     <script type="text/template" id="timeline-config"></script>
   </body>
 </html>
