@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BeeChart</title>
+    <meta name="description" content="beechart是免费的开源flash图表">
+    <meta name="keywords" content="beechart, chart, forfree, opensource, simple, 图表, 免费, 开源">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/page.css">
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid"><a href="#" class="brand">BeeChart</a>
+          <ul class="nav pull-right"><a href="#chart-type-switch-modal" role="button" data-toggle="modal" id="switch" class="btn btn-inverse">切换图表类型</a>
+            <button id="download" class="btn btn-inverse">下载当前样式</button>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span4">
+          <div id="config-container" class="well"></div>
+        </div>
+        <div class="span8 flash-container">
+          <div id="flash-container" class="well hide"></div>
+        </div>
+      </div>
+    </div>
+    <div id="chart-type-switch-modal" data-backdrop="static" class="modal fade">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">x</button>
+        <h3>选择图表类型</h3>
+      </div>
+      <div class="modal-body">
+        <ul class="thumbnails chart-types">
+          <li>
+            <button type="button" data-charttype="line" class="btn line"><i></i>
+              <div class="txt">折线图</div>
+            </button>
+          </li>
+          <li>
+            <button type="button" data-charttype="bar" class="btn bar"><i></i>
+              <div class="txt">柱形图</div>
+            </button>
+          </li>
+          <li>
+            <button type="button" data-charttype="pie" class="btn pie"><i></i>
+              <div class="txt">饼图</div>
+            </button>
+          </li>
+          <li>
+            <button type="button" data-charttype="timeline" class="btn timeline"><i></i>
+              <div class="txt">时间线</div>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-left">
+          <div class="alert hide"><strong>请选择图表类型!</strong></div>
+        </div>
+        <button class="btn cancel">取消</button>
+        <button class="btn btn-primary confirm">确定</button>
+      </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/underscore.string.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/flash.js"></script>
+    <script src="js/FileSaver.js"></script>
+    <script src="js/log.js"></script>
+    <script src="js/editor/base/base.js"></script>
+    <script src="js/editor/stylesheet.js"></script>
+    <script src="js/editor/stylecenter.js"></script>
+    <script src="js/editor/app.js"></script>
+    <script src="js/editor/general/general.js"></script>
+    <script src="js/editor/general/common.js"></script>
+    <script src="js/editor/general/legend.js"></script>
+    <script src="js/editor/general/tooltip.js"></script>
+    <script src="js/editor/line/line.js"></script>
+    <script src="js/editor/pie/pie.js"></script>
+    <script src="js/editor/pie/pie-chart-set.js"></script>
+    <script src="js/editor/pie/pie-slice-set.js"></script>
+    <script src="js/editor/init.js"></script>
+    <script type="text/template" id="pie-config">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#general" data-toggle="tab">通用样式</a></li>
+        <li><a href="#pie" data-toggle="tab">饼图专有</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="general" class="tab-pane active">
+          <div id="legend-set" class="well">
+            <h3>legend</h3>
+            <div data-key="position" class="containe">
+              <h5>位置</h5>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="top"><span>上</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="bottom"><span>下</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="left"><span>左</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="right"><span>右</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="none"><span>none</span>
+              </label>
+            </div>
+            <div data-key="align" class="containe">
+              <h5>水平对齐</h5>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="left"><span>左对齐</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="right"><span>右对齐</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="center"><span>居中</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div id="pie" class="tab-pane">
+          <div id="pie-chart-set" class="well">
+            <h3>通用</h3>
+            <div data-key="animate" class="containe">
+              <h5>初始动画</h5>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="clockwise"><span>顺时针</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="counter_clockwise"><span>逆时针</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="composite"><span>组合</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="expand"><span>扩张</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="animate-group" value="none"><span>none</span>
+              </label>
+            </div>
+            <div data-key="startAngle" class="containe">
+              <h5>初始角度</h5>
+              <input type="number" max="360" min="-360">
+            </div>
+          </div>
+          <div id="pie-slice-set" class="well">
+            <h3>slice</h3>
+            <div data-key="labelPosition" class="containe">
+              <h5>圆饼对应label放置的方式</h5>
+              <label class="radio inline">
+                <input type="radio" name="labelPosition-group" value="none"><span>none</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="labelPosition-group" value="normal"><span>外部水平</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="labelPosition-group" value="inside"><span>内部</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="labelPosition-group" value="inside!"><span>内部(若显示不下则隐藏)</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="labelPosition-group" value="outside"><span>外部径向</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="labelPosition-group" value="callout"><span>引导线</span>
+              </label>
+            </div>
+            <div data-key="frameThickness" class="containe">
+              <h5>圆饼边框线条粗细</h5>
+              <input type="number" max="100" min="0">
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+    <script type="text/template" id="line-config">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#general" data-toggle="tab">通用样式</a></li>
+        <li><a href="#line" data-toggle="tab">折线专有</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="general" class="tab-pane active">
+          <div id="common-set" class="well">
+            <h3>通用</h3>
+            <div data-key="leftAxisVisibility" class="containe">
+              <h5>y轴是否可见</h5>
+              <label class="radio inline">
+                <input type="radio" name="leftAxisVisibility-group" value="visible"><span>可见</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="leftAxisVisibility-group" value="invisible"><span>不可见</span>
+              </label>
+            </div>
+            <div data-key="enableTooltip" class="containe">
+              <h5>是否显示提示</h5>
+              <label class="radio inline">
+                <input type="radio" name="enableTooltip-group" value="true"><span>显示</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="enableTooltip-group" value="false"><span>隐藏</span>
+              </label>
+            </div>
+          </div>
+          <div id="legend-set" class="well">
+            <h3>legend</h3>
+            <div data-key="position" class="containe">
+              <h5>位置</h5>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="top"><span>上</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="bottom"><span>下</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="left"><span>左</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="right"><span>右</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="position-group" value="none"><span>none</span>
+              </label>
+            </div>
+            <div data-key="align" class="containe">
+              <h5>水平对齐</h5>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="left"><span>左对齐</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="right"><span>右对齐</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="align-group" value="center"><span>居中</span>
+              </label>
+            </div>
+          </div>
+          <div id="tooltip-set" class="well">
+            <h3>tooltip</h3>
+            <div data-key="color" class="containe">
+              <h5>文字颜色
+                <input type="color" name="position-group">
+              </h5>
+            </div>
+            <div data-key="backgroundType" class="containe">
+              <h5>背景形式</h5>
+              <label class="radio inline">
+                <input type="radio" name="backgroundType-group" value="slash"><span>特定</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="backgroundType-group" value="simple"><span>常规</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div id="line" class="tab-pane"></div>
+      </div>
+    </script>
+    <script type="text/template" id="bar-config"></script>
+    <script type="text/template" id="timeline-config"></script>
+  </body>
+</html>

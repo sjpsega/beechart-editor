@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script src="js/FileSaver.js"></script>
+  </head>
+  <body><a id="downloadFile"></a>
+    <script>
+      (function(){
+          window.URL = window.webkitURL || window.URL;
+          //- window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder ||       window.MozBlobBuilder;
+          var file = new WebKitBlobBuilder();
+          file.append("test"); 
+          var a = document.getElementById("downloadFile");
+          a.hidden = '';
+          a.href = window.URL.createObjectURL(file.getBlob('text/plain;charset=utf-8;'));
+          a.download = 'filename.txt';
+          a.textContent = 'Download file!';
+          
+          get_blob_builder = function() {
+              return window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
+          }
+          
+          var BB = get_blob_builder();
+          var bb = new BB();
+          bb.append("Hello, world!");
+          saveAs(bb.getBlob("text/plain;charset=utf-8"), "hello world.txt");
+      })()
+      
+    </script>
+  </body>
+</html>
