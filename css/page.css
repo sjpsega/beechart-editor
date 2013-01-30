@@ -34,3 +34,6 @@ body {
 #flash-container {
   position: fixed;
 }
+.inline {
+  white-space: nowrap;
+}

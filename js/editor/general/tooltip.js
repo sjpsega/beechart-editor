@@ -14,7 +14,7 @@ var TooltipModel = Base.extend({
 var TooltipView = BaseView.extend({
     defaultAction:function(){
         var backgroundType_checked_radio = $("input[type='radio'][name='backgroundType-group']:checked",this.$el);
-        this.showOrHideForSimple(backgroundType_checked_radio);
+        this.switchForSimpleEnable(backgroundType_checked_radio);
     },
     events : function(){
         return _.extend(
@@ -28,14 +28,15 @@ var TooltipView = BaseView.extend({
     //隐藏backgroundType为非simple条件下的选择项
     backgroundTypeGroupClickHandler:function(e){
         var radio = $(e.target);
-        this.showOrHideForSimple(radio);
+        this.switchForSimpleEnable(radio);
     },
-    showOrHideForSimple:function(radio){
-        var forSimple =  this.$el.find(".for-simple")
+    switchForSimpleEnable:function(radio){
+        var forSimple =  this.$el.find(".for-simple");
+        var inputs = forSimple.find("input");
         if(radio.val()=="simple"){
-            forSimple.fadeIn();
+            inputs.attr("disabled",false);
         }else{
-            forSimple.fadeOut();
+            inputs.attr("disabled",true);
         }
     }
 })
