@@ -57,24 +57,44 @@ line {
         paddingRight             number值                       图表显示区域右内边距
         paddingTop               number值                       图表显示区域上内边距
         paddingBottom            number值                       图表显示区域下内边距
-        leftAxisVisibility       visible、invisible              y轴是否可见
+        leftAxisVisibility       visible、invisible             y轴是否可见
         animate                  boolean值                      是否有初始动画
         enableTooltip            boolean值                      提示是否可用
+        fix(废弃)                auto\none                      x轴数据居中显示
 
     xAxis(x轴)
-        tickLength               number值                       x轴数据断点的长度
+        tickLength               number值                       x轴数据端点的长度
+        tickThickness            number值                       x轴数据端点的粗细
+        tickColor                css颜色值                      x轴线端点的颜色
         lineThickness            number值                       x轴线的粗细
         lineColor                css颜色值                      x轴线的颜色
+        labelGap(废弃)           auto\none                      x轴数据居中
+        labelRotation(废弃)      number值                       label旋转角度
+        tickPosition(废弃)       reverse\other                  端点位置调整
+        labelPosition(废弃)      center\other                   label位置调整
 
     xAxis label
         color                    css颜色值                      label颜色值
         paddingLeft              number值                       label左内边距
         paddingRight             number值                       label右内边距
+        visibility               hidden\visible                 x轴数据label是否显示
 
     yAxis(y轴)
         tickLength               number值                       y轴数据断点的长度
+        tickThickness            number值                       x轴数据端点的粗细
+        tickColor                css颜色值                      x轴线端点的颜色
         lineThickness            number值                       y轴线的粗细
         lineColor                css颜色值                      y轴线的颜色
+        labelGap                 auto\number值                  自动控制是否显示\间隔N个显示
+        labelRotation(废弃)      number值                       label旋转角度
+        tickPosition(废弃)       reverse\other                  端点位置调整
+        labelPosition(废弃)      center\other                   label位置调整
+        
+    yAxis label
+        color                    css颜色值                      label颜色值
+        paddingLeft              number值                       label左内边距
+        paddingRight             number值                       label右内边距
+        visibility               hidden\visible                 x轴数据label是否显示
 
     canvas(背景)
         backgroundColor          css颜色值                      背景颜色值

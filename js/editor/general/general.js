@@ -39,6 +39,21 @@ var GeneralView = Backbone.View.extend({
         });
         this.views.push(tooltipView);
         this.model.push(tooltipView.model);
-        
+
+        var xAxisView = new XAxisView({
+            modelClz:XAxisModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("xaxis"),
+            el:$("#xAxis-set")
+        });
+        this.views.push(xAxisView);
+        this.model.push(xAxisView.model);
+
+        var xAxisLabelView = new XAxisLabelView({
+            modelClz:XAxisLabelModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("xaxis label"),
+            el:$("#xAxis-label-set")
+        });
+        this.views.push(xAxisLabelView);
+        this.model.push(xAxisLabelView.model);
     }
 })

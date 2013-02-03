@@ -39,6 +39,8 @@ html
         script(src="js/editor/general/common.js")
         script(src="js/editor/general/legend.js")
         script(src="js/editor/general/tooltip.js")
+        script(src="js/editor/general/xAxis.js")
+        script(src="js/editor/general/xAxis-label.js")
         script(src="js/editor/line/line.js")
         script(src="js/editor/bar/bar.js")
         script(src="js/editor/pie/pie.js")
@@ -74,6 +76,12 @@ html
                         include include/legend-set.jade
                     .well#tooltip-set
                         include include/tooltip-set.jade
+                    .well#xAxis-set
+                        h3 x轴
+                        include include/axis-set.jade
+                    .well#xAxis-label-set
+                        h3 x轴文字
+                        include include/axis-lable-set.jade
                 .tab-pane#line
         script(type="text/template")#bar-config
             ul.nav.nav-tabs
