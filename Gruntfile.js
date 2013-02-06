@@ -39,20 +39,6 @@ module.exports = function( grunt ) {
 	        }
 	      }
 	    },
-	    watch: {
-	      jade: {
-	        files: ['jade/*.jade','jade/**/*.jade'],
-	        tasks: 'jade'
-	      },
-	      stylus: {
-	        files: ['styl/*.styl'],
-	        tasks: 'stylus'
-	      },
-	      uglify: {
-	        files: ["js/*.js","js/**/*.js"],
-	        tasks: 'uglify'
-	      }
-	    },
 	    connect:{
 	 		server: {
 	 			options:{
@@ -75,9 +61,36 @@ module.exports = function( grunt ) {
 									   "js/**/*.js" ]
 				},
 				options: {
+					 sourceMap: "dist/merge.map",
+					 beautify: true
 				}
 			}
-		}
+		},
+		mincss: {
+		  compress: {
+		    files: {
+		      "dist/merge.css": ["css/*.css"]
+		    }
+		  }
+		},
+		watch: {
+	      jade: {
+	        files: ['jade/*.jade','jade/**/*.jade'],
+	        tasks: 'jade'
+	      },
+	      stylus: {
+	        files: ['styl/*.styl'],
+	        tasks: 'stylus'
+	      },
+	      uglify: {
+	        files: ["js/*.js","js/**/*.js"],
+	        tasks: 'uglify'
+	      },
+	      mincss: {
+	        files: ["css/*.css"],
+	        tasks: 'mincss'
+	      }
+	    }
 	});
 	// Load grunt tasks from NPM packages
 	grunt.loadNpmTasks("grunt-compare-size");
@@ -86,10 +99,11 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks("grunt-contrib-jade");
 	grunt.loadNpmTasks("grunt-contrib-stylus");
 	grunt.loadNpmTasks("grunt-contrib-connect");
+	grunt.loadNpmTasks("grunt-contrib-mincss");
 
 	// Default grunt
-	// grunt.registerTask( "default", ["stylus"] );
-	grunt.registerTask( "default", ["uglify", "jade", "stylus", "connect", "watch"] );
+	// grunt.registerTask( "default", ["mincss"] );
+	grunt.registerTask( "default", ["uglify", "mincss", "jade", "stylus", "connect", "watch"] );
 
 	// Short list as a high frequency watch task
 	// grunt.registerTask( "dev", [ "selector", "build:*:*", "jshint" ] );

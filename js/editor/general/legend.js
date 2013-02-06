@@ -3,7 +3,7 @@
  @author  jianping.shenjp
  @date    2012-11-2
 */
-var LegendModel = Base.extend({
+var LegendModel = BaseModel.extend({
     styleName : "legend",
     defaults : function(){
         return {

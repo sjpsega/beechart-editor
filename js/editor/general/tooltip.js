@@ -3,7 +3,7 @@
  @author  jianping.shenjp
  @date    2013-1-24
 */
-var TooltipModel = Base.extend({
+var TooltipModel = BaseModel.extend({
     styleName : "tooltip",
     defaults : function(){
         return {

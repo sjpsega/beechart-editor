@@ -55,5 +55,23 @@ var GeneralView = Backbone.View.extend({
         });
         this.views.push(xAxisLabelView);
         this.model.push(xAxisLabelView.model);
+
+        var yAxisView = new BaseView({
+            modelClz:BaseModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("yaxis"),
+            styleName : "yaxis",
+            el:$("#yAxis-set")
+        });
+        this.views.push(yAxisView);
+        this.model.push(yAxisView.model);
+
+        var yAxisLabelView = new BaseView({
+            modelClz:BaseModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("yaxis label"),
+            styleName : "yaxis label",
+            el:$("#yAxis-label-set")
+        });
+        this.views.push(yAxisLabelView);
+        this.model.push(yAxisLabelView.model);
     }
 })

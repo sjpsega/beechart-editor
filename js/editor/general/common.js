@@ -3,7 +3,7 @@
  @author  jianping.shenjp
  @date    2013-1-24
 */
-var CommonModel = Base.extend({
+var CommonModel = BaseModel.extend({
     styleName : "chart",
     defaults : function(){
         return {

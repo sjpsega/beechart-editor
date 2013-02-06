@@ -3,7 +3,7 @@
  @author  jianping.shenjp
  @date    2012-11-2
 */
-var PieChartSetModel = Base.extend({
+var PieChartSetModel = BaseModel.extend({
     styleName : "chart",
     defaults : function(){
         return {

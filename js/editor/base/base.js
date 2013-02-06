@@ -1,4 +1,4 @@
-var Base = Backbone.Model.extend({
+var BaseModel = Backbone.Model.extend({
     
 });
 
@@ -7,6 +7,9 @@ var BaseView = Backbone.View.extend({
         var modelClz = this.options.modelClz;
         if(modelClz){
             this.model = new modelClz(this.options.modelAttributes || {});
+        }
+        if(this.options.styleName){
+            this.model.styleName = this.options.styleName;
         }
         modelClz = null;
         this.defaultSetting();

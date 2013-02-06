@@ -6,8 +6,9 @@ html
         meta(name="description",content="beechart是免费的开源flash图表")
         meta(name="keywords",content="beechart, chart, forfree, opensource, simple, 图表, 免费, 开源")
         link(rel="shortcut icon",type="image/x-icon",href="favicon.ico")
-        link(rel="stylesheet",type="text/css",href="css/bootstrap.css")
-        link(rel="stylesheet",type="text/css",href="css/page.css")
+        //- link(rel="stylesheet",type="text/css",href="css/bootstrap.css")
+        //- link(rel="stylesheet",type="text/css",href="css/page.css")
+        link(rel="stylesheet",type="text/css",href="dist/merge.css")
     body
         .navbar.navbar-fixed-top.navbar-inverse
             .navbar-inner
@@ -83,6 +84,14 @@ html
                     .well#xAxis-label-set
                         h3 x轴文字
                         include include/axis-lable-set.jade
+                    .well#yAxis-set
+                        h3 y轴
+                        from
+                            include include/axis-set.jade
+                    .well#yAxis-label-set
+                        h3 y轴文字
+                        from
+                            include include/axis-lable-set.jade
                 .tab-pane#line
         script(type="text/template")#bar-config
             ul.nav.nav-tabs

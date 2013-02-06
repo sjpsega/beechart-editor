@@ -3,7 +3,7 @@
  @author  jianping.shenjp
  @date    2013-1-13
 */
-var PieSliceSetModel = Base.extend({
+var PieSliceSetModel = BaseModel.extend({
     styleName : "slice",
     defaults : function(){
         return {
