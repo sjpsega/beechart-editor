@@ -55,13 +55,6 @@
           </li>
         </ul>
       </div>
-      <div class="modal-footer">
-        <div class="pull-left">
-          <div class="alert hide"><strong>请选择图表类型!</strong></div>
-        </div>
-        <button class="btn cancel">取消</button>
-        <button class="btn btn-primary confirm">确定</button>
-      </div>
     </div>
     <script src="dist/merge.js"></script>
     <script type="text/template" id="pie-config">
@@ -324,7 +317,7 @@
                 <input type="range" name="backgroundAlpha" max="1" min="0" step="0.05"><span></span>
               </label>
             </div>
-            <div class="for-simple">
+            <div id="for-backgroundType-simple">
               <div data-key="backgroundColor" class="containe">
                 <h5>背景颜色</h5>
                 <input type="color" name="backgroundColor">
@@ -348,7 +341,7 @@
             </div>
           </div>
           <div id="xAxis-set" class="well">
-            <h3>x轴</h3>
+            <h3>X轴</h3>
             <div data-key="tickLength" class="containe">
               <h5>端点长度</h5>
               <input type="range" max="10" min="0" step="0.1"><span></span>
@@ -371,24 +364,24 @@
             </div>
           </div>
           <div id="xAxis-label-set" class="well">
-            <h3>x轴文字</h3>
+            <h3>X轴文字</h3>
             <div data-key="visibility" class="containe">
               <h5>是否显示</h5>
               <label class="radio inline">
-                <input type="radio" name="visibility-group" value="visible"><span>显示</span>
+                <input type="radio" name="xasix-visibility-group" value="visible"><span>显示</span>
               </label>
               <label class="radio inline">
-                <input type="radio" name="visibility-group" value="hidden"><span>隐藏</span>
+                <input type="radio" name="xasix-visibility-group" value="hidden"><span>隐藏</span>
               </label>
             </div>
             <div data-key="color" class="containe">
               <h5>颜色</h5>
-              <input type="color"><span></span>
+              <input type="color">
             </div>
           </div>
-          <div id="yAxis-set" class="well">
-            <h3>y轴</h3>
-            <from>
+          <div id="for-yAxis-visible">
+            <div id="yAxis-set" class="well">
+              <h3>Y轴</h3>
               <div data-key="tickLength" class="containe">
                 <h5>端点长度</h5>
                 <input type="range" max="10" min="0" step="0.1"><span></span>
@@ -409,25 +402,50 @@
                 <h5>轴线的颜色</h5>
                 <input type="color">
               </div>
-            </from>
-          </div>
-          <div id="yAxis-label-set" class="well">
-            <h3>y轴文字</h3>
-            <from>
+            </div>
+            <div id="yAxis-label-set" class="well">
+              <h3>Y轴文字</h3>
               <div data-key="visibility" class="containe">
                 <h5>是否显示</h5>
                 <label class="radio inline">
-                  <input type="radio" name="visibility-group" value="visible"><span>显示</span>
+                  <input type="radio" name="yasix-visibility-group" value="visible"><span>显示</span>
                 </label>
                 <label class="radio inline">
-                  <input type="radio" name="visibility-group" value="hidden"><span>隐藏</span>
+                  <input type="radio" name="yasix-visibility-group" value="hidden"><span>隐藏</span>
                 </label>
               </div>
               <div data-key="color" class="containe">
                 <h5>颜色</h5>
-                <input type="color"><span></span>
+                <input type="color">
               </div>
-            </from>
+            </div>
+          </div>
+          <div id="canvas-set" class="well">
+            <h3>Canvas</h3>
+            <div data-key="borderColor" class="containe">
+              <h5>边框颜色</h5>
+              <input type="color">
+            </div>
+            <div data-key="borderThickness" class="containe">
+              <h5>边框粗细</h5>
+              <input type="range" max="10" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="borderAlpha" class="containe">
+              <h5>边框透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="backgroundColor" class="containe">
+              <h5>背景颜色1</h5>
+              <input type="color">
+            </div>
+            <div data-key="backgroundColor2" class="containe">
+              <h5>背景颜色2</h5>
+              <input type="color">
+            </div>
+            <div data-key="backgroundAlpha" class="containe">
+              <h5>边框透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
           </div>
         </div>
         <div id="line" class="tab-pane"></div>
@@ -570,7 +588,7 @@
                 <input type="range" name="backgroundAlpha" max="1" min="0" step="0.05"><span></span>
               </label>
             </div>
-            <div class="for-simple">
+            <div id="for-backgroundType-simple">
               <div data-key="backgroundColor" class="containe">
                 <h5>背景颜色</h5>
                 <input type="color" name="backgroundColor">

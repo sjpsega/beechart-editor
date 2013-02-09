@@ -79,19 +79,20 @@ html
                     .well#tooltip-set
                         include include/tooltip-set.jade
                     .well#xAxis-set
-                        h3 x轴
+                        h3 X轴
                         include include/axis-set.jade
                     .well#xAxis-label-set
-                        h3 x轴文字
-                        include include/axis-lable-set.jade
-                    .well#yAxis-set
-                        h3 y轴
-                        from
+                        h3 X轴文字
+                        include include/xaxis-label-set.jade
+                    #for-yAxis-visible
+                        .well#yAxis-set
+                            h3 Y轴
                             include include/axis-set.jade
-                    .well#yAxis-label-set
-                        h3 y轴文字
-                        from
-                            include include/axis-lable-set.jade
+                        .well#yAxis-label-set
+                            h3 Y轴文字
+                            include include/yaxis-label-set.jade
+                    .well#canvas-set
+                        include include/canvas-set.jade
                 .tab-pane#line
         script(type="text/template")#bar-config
             ul.nav.nav-tabs

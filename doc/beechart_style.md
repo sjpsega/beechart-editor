@@ -97,11 +97,15 @@ line {
         visibility               hidden\visible                 x轴数据label是否显示
 
     canvas(背景)
-        backgroundColor          css颜色值                      背景颜色值
-        backgroundColor2         css颜色值                      背景颜色值(与backgroundColor配合完成间隔颜色效果)
         borderColor              css颜色值                      边框的颜色
         borderThickness          number值                       边框的线条粗细
         borderAlpha              number值(0-1)                  边框的线条透明度
+        backgroundColor          css颜色值                      背景颜色值
+        backgroundColor2         css颜色值                      背景颜色值(与backgroundColor配合完成间隔颜色效果)
+        backgroundAlpha          number值(0-1)                  背景透明度
+        gridThickness            number值                       线条粗细
+        gridColor                css颜色值                      线条颜色值
+        gridAlpha                number值(0-1)                  线条透明度
         priLineThickness         number值                       横线粗细
         priLineColor             css颜色值                      横线颜色值
         priLineAlpha             number值(0-1)                  横线透明度

@@ -25,18 +25,17 @@ var TooltipView = BaseView.extend({
                 }
             );
     },
-    //隐藏backgroundType为非simple条件下的选择项
+    //切换backgroundType选项，显示\隐藏simple条件下的选择项
     backgroundTypeGroupClickHandler:function(e){
         var radio = $(e.target);
         this.switchForSimpleEnable(radio);
     },
     switchForSimpleEnable:function(radio){
-        var forSimple =  this.$el.find(".for-simple");
-        var inputs = forSimple.find("input");
+        var forSimple =  this.$el.find("#for-backgroundType-simple");
+        var isEnable = true;
         if(radio.val()=="simple"){
-            inputs.attr("disabled",false);
-        }else{
-            inputs.attr("disabled",true);
+            isEnable = false;
         }
+        this.switchInputEnable(forSimple,isEnable);
     }
 })

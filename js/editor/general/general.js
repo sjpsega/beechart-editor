@@ -73,5 +73,14 @@ var GeneralView = Backbone.View.extend({
         });
         this.views.push(yAxisLabelView);
         this.model.push(yAxisLabelView.model);
+
+        var canvasView = new BaseView({
+            modelClz:BaseModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("canvas"),
+            styleName : "canvas",
+            el:$("#canvas-set")
+        });
+        this.views.push(canvasView);
+        this.model.push(canvasView.model);
     }
 })

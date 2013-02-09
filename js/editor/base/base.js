@@ -79,5 +79,13 @@ var BaseView = Backbone.View.extend({
         var propertyKey = well.data("key");
         var propertyVal = target.val();
         this.model.set(propertyKey,propertyVal);
+    },
+    switchInputEnable:function(jq_content,isEnable){
+        var inputs = $("input",jq_content);
+        if(isEnable){
+            inputs.attr("disabled",true);
+        }else{
+            inputs.attr("disabled",false);
+        }
     }
 });

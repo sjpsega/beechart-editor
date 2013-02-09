@@ -27,14 +27,11 @@ jQuery(function($) {
             },
             chartTypeSwitchModel:function(){
                 var model = $("#chart-type-switch-modal");
-                var isTypeChoise = false,
-                currentBtn,
-                appView,
+                var currentBtn,
+                lastAppView,
                 lastChoiseType;
                 model.modal();
                 var btns = $(".chart-types button",model);
-                var alertDiv = $(".alert",model);
-                var cancelBtn = $(".cancel.btn",model);
                 var confirmBtn = $(".confirm.btn",model);
                 var modal_backdrop = $(".modal-backdrop");
                 modal_backdrop.click(function(e){
@@ -48,13 +45,9 @@ jQuery(function($) {
                     currentBtn = $(this);
                     btns.removeClass("active");
                     currentBtn.addClass("active");
-                    isTypeChoise = true;
+                    switchType();
                 });
-                cancelBtn.click(function(e){
-                    alertshow();
-                });
-                confirmBtn.click(function(e){
-                    alertshow();
+                function switchType(){
                     if(!currentBtn){
                         return;
                     }
@@ -65,24 +58,19 @@ jQuery(function($) {
                     }
                     newFlashContainer();
                     lastChoiseType = charttype;
-                    if(appView){
-                        appView.remove();
+                    if(lastAppView){
+                        lastAppView.remove();
                     }
-                    appView = new AppView({
+                    lastAppView = new AppView({
                         el: $("body"),
                         model: new AppModel(),
                         type: charttype,
                         templateId:"#"+charttype+"-config"
                     });
                     model.modal("hide");
-                });
+                }
                 function newFlashContainer(){
                     $(".flash-container").append("<div id='flash-container' class='well hide ui-flash'>");
-                }
-                function alertshow(){
-                    if(!isTypeChoise){
-                        alertDiv.stop().fadeIn().delay(2000).fadeOut();
-                    }
                 }
             }
         }
