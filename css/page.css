@@ -37,3 +37,7 @@ body {
 .inline {
   white-space: nowrap;
 }
+.color-input {
+  width: 60px;
+  color: #444;
+}

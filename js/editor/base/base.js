@@ -49,6 +49,9 @@ var BaseView = Backbone.View.extend({
                 if(input_type == "color"){
                     inputs.val(itemValue);
                 }
+                if(inputs.hasClass("color-input")){
+                    inputs.val(itemValue);
+                }
                 inputs = null;
             }
         })
@@ -61,7 +64,26 @@ var BaseView = Backbone.View.extend({
         "keyup input[type='number']":"changeNumberHandler",
         "change input[type='number']":"changeNumberHandler",
         "change input[type='range']":"changeNumberHandler",
-        "change input[type='color']":"valueChangeHanlder",
+        "change input[type='color']":"colorTypeInputValueChangeHanlder",
+        "keyup input.color-input":"colorInputValueChangeHanlder"
+    },
+    /*
+    *修改color选择框的同时，修改color输入框的值
+    */
+    colorTypeInputValueChangeHanlder:function(e){
+        var colorTypeInput = $(e.target);
+        var colorInput = colorTypeInput.next();
+        colorInput.val(colorTypeInput.val());
+        this.valueChangeHanlder(e);
+    },
+    /*
+    * 修改color输入框的同时，修改color选择框的值
+    */
+    colorInputValueChangeHanlder:function(e){
+        var colorInput = $(e.target);
+        var colorTypeInput = colorInput.prev();
+        colorTypeInput.val(colorInput.val());
+        this.valueChangeHanlder(e);
     },
     clickRadioHandler : function(e){
         this.valueChangeHanlder(e);

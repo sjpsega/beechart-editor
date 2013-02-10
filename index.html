@@ -321,10 +321,12 @@
               <div data-key="backgroundColor" class="containe">
                 <h5>背景颜色</h5>
                 <input type="color" name="backgroundColor">
+                <input type="text" class="help-inline color-input">
               </div>
               <div data-key="borderColor" class="containe">
                 <h5>边框颜色</h5>
                 <input type="color" name="borderColor">
+                <input type="text" class="help-inline color-input">
               </div>
               <div data-key="borderThickness" class="containe">
                 <h5>边框粗细</h5>
@@ -351,8 +353,9 @@
               <input type="range" max="10" min="0" step="0.1"><span></span>
             </div>
             <div data-key="tickColor" class="containe">
-              <h5>轴线的颜色</h5>
+              <h5>端点的颜色</h5>
               <input type="color">
+              <input type="text" class="help-inline color-input">
             </div>
             <div data-key="lineThickness" class="containe">
               <h5>轴线的粗细</h5>
@@ -361,6 +364,7 @@
             <div data-key="lineColor" class="containe">
               <h5>轴线的颜色</h5>
               <input type="color">
+              <input type="text" class="help-inline color-input">
             </div>
           </div>
           <div id="xAxis-label-set" class="well">
@@ -377,6 +381,7 @@
             <div data-key="color" class="containe">
               <h5>颜色</h5>
               <input type="color">
+              <input type="text" class="help-inline color-input">
             </div>
           </div>
           <div id="for-yAxis-visible">
@@ -391,8 +396,9 @@
                 <input type="range" max="10" min="0" step="0.1"><span></span>
               </div>
               <div data-key="tickColor" class="containe">
-                <h5>轴线的颜色</h5>
+                <h5>端点的颜色</h5>
                 <input type="color">
+                <input type="text" class="help-inline color-input">
               </div>
               <div data-key="lineThickness" class="containe">
                 <h5>轴线的粗细</h5>
@@ -401,6 +407,7 @@
               <div data-key="lineColor" class="containe">
                 <h5>轴线的颜色</h5>
                 <input type="color">
+                <input type="text" class="help-inline color-input">
               </div>
             </div>
             <div id="yAxis-label-set" class="well">
@@ -417,34 +424,95 @@
               <div data-key="color" class="containe">
                 <h5>颜色</h5>
                 <input type="color">
+                <input type="text" class="help-inline color-input">
               </div>
             </div>
           </div>
           <div id="canvas-set" class="well">
             <h3>Canvas</h3>
             <div data-key="borderColor" class="containe">
-              <h5>边框颜色</h5>
+              <h5>外边框颜色</h5>
               <input type="color">
+              <input type="text" class="help-inline color-input">
             </div>
             <div data-key="borderThickness" class="containe">
-              <h5>边框粗细</h5>
+              <h5>外边框粗细</h5>
               <input type="range" max="10" min="0" step="0.5"><span></span>
             </div>
             <div data-key="borderAlpha" class="containe">
-              <h5>边框透明度</h5>
+              <h5>外边框透明度</h5>
               <input type="range" max="1" min="0" step="0.01"><span></span>
             </div>
             <div data-key="backgroundColor" class="containe">
               <h5>背景颜色1</h5>
               <input type="color">
+              <input type="text" class="help-inline color-input">
             </div>
             <div data-key="backgroundColor2" class="containe">
               <h5>背景颜色2</h5>
               <input type="color">
+              <input type="text" class="help-inline color-input">
             </div>
             <div data-key="backgroundAlpha" class="containe">
-              <h5>边框透明度</h5>
+              <h5>背景透明度</h5>
               <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="gridColor" class="containe">
+              <h5>内网格颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="gridThickness" class="containe">
+              <h5>内网格粗细</h5>
+              <input type="range" max="10" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="gridAlpha" class="containe">
+              <h5>内网格透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="priLineColor" class="containe">
+              <h5>横网格颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="priLineThickness" class="containe">
+              <h5>横网格粗细</h5>
+              <input type="range" max="10" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="priLineAlpha" class="containe">
+              <h5>横网格透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="priLineStyle" class="containe">
+              <h5>横网格类型</h5>
+              <label class="radio inline">
+                <input type="radio" name="priLineStyle-group" value="line"><span>实线</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="priLineStyle-group" value="dashed"><span>点线</span>
+              </label>
+            </div>
+            <div data-key="secLineColor" class="containe">
+              <h5>竖网格颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="secLineThickness" class="containe">
+              <h5>竖网格粗细</h5>
+              <input type="range" max="10" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="secLineAlpha" class="containe">
+              <h5>竖网格透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="secLineStyle" class="containe">
+              <h5>竖网格类型</h5>
+              <label class="radio inline">
+                <input type="radio" name="secLineStyle-group" value="line"><span>实线</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="secLineStyle-group" value="dashed"><span>点线</span>
+              </label>
             </div>
           </div>
         </div>
@@ -592,10 +660,12 @@
               <div data-key="backgroundColor" class="containe">
                 <h5>背景颜色</h5>
                 <input type="color" name="backgroundColor">
+                <input type="text" class="help-inline color-input">
               </div>
               <div data-key="borderColor" class="containe">
                 <h5>边框颜色</h5>
                 <input type="color" name="borderColor">
+                <input type="text" class="help-inline color-input">
               </div>
               <div data-key="borderThickness" class="containe">
                 <h5>边框粗细</h5>

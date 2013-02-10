@@ -240,21 +240,21 @@
             return new e.ActiveXObject("Microsoft.XMLHTTP");
         } catch (t) {}
     }
-    function M() {
+    function H() {
         return setTimeout(function() {
             Jn = t;
         }, 0), Jn = et.now();
     }
-    function L(e, t) {
+    function M(e, t) {
         et.each(t, function(t, n) {
             for (var i = (ni[t] || []).concat(ni["*"]), r = 0, o = i.length; o > r; r++) if (i[r].call(e, t, n)) return;
         });
     }
-    function H(e, t, n) {
+    function L(e, t, n) {
         var i, r = 0, o = ti.length, s = et.Deferred().always(function() {
             delete a.elem;
         }), a = function() {
-            for (var t = Jn || M(), n = Math.max(0, l.startTime + l.duration - t), i = 1 - (n / l.duration || 0), r = 0, o = l.tweens.length; o > r; r++) l.tweens[r].run(i);
+            for (var t = Jn || H(), n = Math.max(0, l.startTime + l.duration - t), i = 1 - (n / l.duration || 0), r = 0, o = l.tweens.length; o > r; r++) l.tweens[r].run(i);
             return s.notifyWith(e, [ l, i, n ]), 1 > i && o ? n : (s.resolveWith(e, [ l ]), 
             !1);
         }, l = s.promise({
@@ -265,7 +265,7 @@
             }, n),
             originalProperties: t,
             originalOptions: n,
-            startTime: Jn || M(),
+            startTime: Jn || H(),
             duration: n.duration,
             tweens: [],
             createTween: function(t, n) {
@@ -278,7 +278,7 @@
             }
         }), u = l.props;
         for (F(u, l.opts.specialEasing); o > r; r++) if (i = ti[r].call(l, e, u, l.opts)) return i;
-        return L(l, u), et.isFunction(l.opts.start) && l.opts.start.call(e, l), et.fx.timer(et.extend(a, {
+        return M(l, u), et.isFunction(l.opts.start) && l.opts.start.call(e, l), et.fx.timer(et.extend(a, {
             anim: l,
             queue: l.opts.queue,
             elem: e
@@ -332,7 +332,7 @@
     function I(e) {
         return et.isWindow(e) ? e : 9 === e.nodeType ? e.defaultView || e.parentWindow : !1;
     }
-    var P, q, z = e.document, W = e.location, V = e.navigator, U = e.jQuery, X = e.$, Q = Array.prototype.push, G = Array.prototype.slice, J = Array.prototype.indexOf, Y = Object.prototype.toString, K = Object.prototype.hasOwnProperty, Z = String.prototype.trim, et = function(e, t) {
+    var P, q, z = e.document, V = e.location, W = e.navigator, U = e.jQuery, X = e.$, Q = Array.prototype.push, G = Array.prototype.slice, J = Array.prototype.indexOf, Y = Object.prototype.toString, K = Object.prototype.hasOwnProperty, Z = String.prototype.trim, et = function(e, t) {
         return new et.fn.init(e, t, P);
     }, tt = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source, nt = /\S/, it = /\s+/, rt = [], ot = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, st = /^(?:[^#<]*(<[\w\W]+>)[^>]*$|#([\w\-]*)$)/, at = /^<(\w+)\s*\/?>(?:<\/\1>|)$/, lt = /^[\],:{}\s]*$/, ut = /(?:^|:|,)(?:\s*\[)+/g, ct = /\\(?:["\\\/bfnrt]|u[\da-fA-F]{4})/g, ht = /"[^"\\\r\n]*"|true|false|null|-?(?:\d\d*\.|)\d+(?:[eE][\-+]?\d+|)/g, ft = /^-ms-/, dt = /-([\da-z])/gi, pt = function(e, t) {
         return (t + "").toUpperCase();
@@ -1084,7 +1084,7 @@
             }
         });
     });
-    var At = /^(?:textarea|input|select)$/i, jt = /^([^\.]*|)(?:\.(.+)|)$/, Dt = /^key/, Mt = /^(?:mouse|contextmenu)|click/, Lt = /^(?:focusinfocus|focusoutblur)$/;
+    var At = /^(?:textarea|input|select)$/i, jt = /^([^\.]*|)(?:\.(.+)|)$/, Dt = /^key/, Ht = /^(?:mouse|contextmenu)|click/, Mt = /^(?:focusinfocus|focusoutblur)$/;
     et.event = {
         add: function(e, n, i, r, o) {
             var s, a, l, u, c, h, f, d, p, g, m;
@@ -1133,14 +1133,14 @@
         trigger: function(n, i, r, o) {
             if (!r || 3 !== r.nodeType && 8 !== r.nodeType) {
                 var s, a, l, u, c, h, f, d, p, g, m = n.type || n, v = n.namespace ? n.namespace.split(".") : [];
-                if (!Lt.test(m + et.event.triggered) && (m.indexOf("!") >= 0 && (m = m.slice(0, -1), 
+                if (!Mt.test(m + et.event.triggered) && (m.indexOf("!") >= 0 && (m = m.slice(0, -1), 
                 a = !0), m.indexOf(".") >= 0 && (v = m.split("."), m = v.shift(), v.sort()), r && !et.event.customEvent[m] || et.event.global[m])) if (n = "object" == typeof n ? n[et.expando] ? n : new et.Event(m, n) : new et.Event(m), 
                 n.type = m, n.isTrigger = !0, n.exclusive = a, n.namespace = v.join("."), n.namespace_re = n.namespace ? RegExp("(^|\\.)" + v.join("\\.(?:.*\\.|)") + "(\\.|$)") : null, 
                 h = 0 > m.indexOf(":") ? "on" + m : "", r) {
                     if (n.result = t, n.target || (n.target = r), i = null != i ? et.makeArray(i) : [], 
                     i.unshift(n), f = et.event.special[m] || {}, !f.trigger || f.trigger.apply(r, i) !== !1) {
                         if (p = [ [ r, f.bindType || m ] ], !o && !f.noBubble && !et.isWindow(r)) {
-                            for (g = f.delegateType || m, u = Lt.test(g + m) ? r : r.parentNode, c = r; u; u = u.parentNode) p.push([ u, g ]), 
+                            for (g = f.delegateType || m, u = Mt.test(g + m) ? r : r.parentNode, c = r; u; u = u.parentNode) p.push([ u, g ]), 
                             c = u;
                             c === (r.ownerDocument || z) && p.push([ c.defaultView || c.parentWindow || e, g ]);
                         }
@@ -1390,7 +1390,7 @@
     }), et.each("blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error contextmenu".split(" "), function(e, t) {
         et.fn[t] = function(e, n) {
             return null == n && (n = e, e = null), arguments.length > 0 ? this.on(t, null, e, n) : this.trigger(t);
-        }, Dt.test(t) && (et.event.fixHooks[t] = et.event.keyHooks), Mt.test(t) && (et.event.fixHooks[t] = et.event.mouseHooks);
+        }, Dt.test(t) && (et.event.fixHooks[t] = et.event.keyHooks), Ht.test(t) && (et.event.fixHooks[t] = et.event.mouseHooks);
     }), function(e, t) {
         function n(e, t, n, i) {
             n = n || [], t = t || D;
@@ -1450,13 +1450,13 @@
             return t ? a.length : a ? n.error(e) : z(e, l).slice(0);
         }
         function l(e, t, n) {
-            var i = t.dir, r = n && "parentNode" === t.dir, o = H++;
+            var i = t.dir, r = n && "parentNode" === t.dir, o = L++;
             return t.first ? function(t, n, o) {
                 for (;t = t[i]; ) if (r || 1 === t.nodeType) return e(t, n, o);
             } : function(t, n, s) {
                 if (s) {
                     for (;t = t[i]; ) if ((r || 1 === t.nodeType) && e(t, n, s)) return t;
-                } else for (var a, l = L + " " + o + " ", u = l + v; t = t[i]; ) if (r || 1 === t.nodeType) {
+                } else for (var a, l = M + " " + o + " ", u = l + v; t = t[i]; ) if (r || 1 === t.nodeType) {
                     if ((a = t[A]) === u) return t.sizset;
                     if ("string" == typeof a && 0 === a.indexOf(l)) {
                         if (t.sizset) return t;
@@ -1511,14 +1511,14 @@
         }
         function d(e, t) {
             var i = t.length > 0, r = e.length > 0, o = function(s, a, l, u, h) {
-                var f, d, p, g = [], m = 0, y = "0", x = s && [], w = null != h, C = E, k = s || r && b.find.TAG("*", h && a.parentNode || a), T = L += null == C ? 1 : Math.E;
+                var f, d, p, g = [], m = 0, y = "0", x = s && [], w = null != h, C = E, k = s || r && b.find.TAG("*", h && a.parentNode || a), T = M += null == C ? 1 : Math.E;
                 for (w && (E = a !== D && a, v = o.el); null != (f = k[y]); y++) {
                     if (r && f) {
                         for (d = 0; p = e[d]; d++) if (p(f, a, l)) {
                             u.push(f);
                             break;
                         }
-                        w && (L = T, v = ++o.el);
+                        w && (M = T, v = ++o.el);
                     }
                     i && ((f = !p && f) && m--, s && x.push(f));
                 }
@@ -1530,7 +1530,7 @@
                     }
                     O.apply(u, g), w && !s && g.length > 0 && m + t.length > 1 && n.uniqueSort(u);
                 }
-                return w && (L = T, E = C), x;
+                return w && (M = T, E = C), x;
             };
             return o.el = 0, i ? I(o) : o;
         }
@@ -1554,7 +1554,7 @@
             return k(e, h)(i, t, r, n, rt.test(e)), n;
         }
         function m() {}
-        var v, y, b, x, w, C, k, T, S, E, _ = "undefined", N = 1 << 31, $ = !0, A = ("sizcache" + Math.random()).replace(".", ""), j = String, D = e.document, M = D.documentElement, L = 0, H = 0, F = [].pop, O = [].push, B = [].slice, R = [].indexOf || function(e) {
+        var v, y, b, x, w, C, k, T, S, E, _ = "undefined", N = 1 << 31, $ = !0, A = ("sizcache" + Math.random()).replace(".", ""), j = String, D = e.document, H = D.documentElement, M = 0, L = 0, F = [].pop, O = [].push, B = [].slice, R = [].indexOf || function(e) {
             for (var t = 0, n = this.length; n > t; t++) if (this[t] === e) return t;
             return -1;
         }, I = function(e, t) {
@@ -1564,7 +1564,7 @@
             return I(function(n, i) {
                 return t.push(n) > b.cacheLength && delete e[t.shift()], e[n + " "] = i;
             }, e);
-        }, q = P(), z = P(), W = P(), V = "[\\x20\\t\\r\\n\\f]", U = "(?:\\\\.|[-\\w]|[^\\x00-\\xa0])+", X = U.replace("w", "w#"), Q = "([*^$|!~]?=)", G = "\\[" + V + "*(" + U + ")" + V + "*(?:" + Q + V + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + X + ")|)|)" + V + "*\\]", J = ":(" + U + ")(?:\\((?:(['\"])((?:\\\\.|[^\\\\])*?)\\2|([^()[\\]]*|(?:(?:" + G + ")|[^:]|\\\\.)*|.*))\\)|)", Y = ":(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + V + "*((?:-\\d)?\\d*)" + V + "*\\)|)(?=[^-]|$)", K = RegExp("^" + V + "+|((?:^|[^\\\\])(?:\\\\.)*)" + V + "+$", "g"), Z = RegExp("^" + V + "*," + V + "*"), tt = RegExp("^" + V + "*([\\x20\\t\\r\\n\\f>+~])" + V + "*"), nt = RegExp(J), it = /^(?:#([\w\-]+)|(\w+)|\.([\w\-]+))$/, rt = /[\x20\t\r\n\f]*[+~]/, ot = /h\d/i, st = /input|select|textarea|button/i, at = /\\(?!\\)/g, lt = {
+        }, q = P(), z = P(), V = P(), W = "[\\x20\\t\\r\\n\\f]", U = "(?:\\\\.|[-\\w]|[^\\x00-\\xa0])+", X = U.replace("w", "w#"), Q = "([*^$|!~]?=)", G = "\\[" + W + "*(" + U + ")" + W + "*(?:" + Q + W + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + X + ")|)|)" + W + "*\\]", J = ":(" + U + ")(?:\\((?:(['\"])((?:\\\\.|[^\\\\])*?)\\2|([^()[\\]]*|(?:(?:" + G + ")|[^:]|\\\\.)*|.*))\\)|)", Y = ":(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + W + "*((?:-\\d)?\\d*)" + W + "*\\)|)(?=[^-]|$)", K = RegExp("^" + W + "+|((?:^|[^\\\\])(?:\\\\.)*)" + W + "+$", "g"), Z = RegExp("^" + W + "*," + W + "*"), tt = RegExp("^" + W + "*([\\x20\\t\\r\\n\\f>+~])" + W + "*"), nt = RegExp(J), it = /^(?:#([\w\-]+)|(\w+)|\.([\w\-]+))$/, rt = /[\x20\t\r\n\f]*[+~]/, ot = /h\d/i, st = /input|select|textarea|button/i, at = /\\(?!\\)/g, lt = {
             ID: RegExp("^#(" + U + ")"),
             CLASS: RegExp("^\\.(" + U + ")"),
             NAME: RegExp("^\\[name=['\"]?(" + U + ")['\"]?\\]"),
@@ -1572,8 +1572,8 @@
             ATTR: RegExp("^" + G),
             PSEUDO: RegExp("^" + J),
             POS: RegExp(Y, "i"),
-            CHILD: RegExp("^:(only|nth|first|last)-child(?:\\(" + V + "*(even|odd|(([+-]|)(\\d*)n|)" + V + "*(?:([+-]|)" + V + "*(\\d+)|))" + V + "*\\)|)", "i"),
-            needsContext: RegExp("^" + V + "*[>+~]|" + Y, "i")
+            CHILD: RegExp("^:(only|nth|first|last)-child(?:\\(" + W + "*(even|odd|(([+-]|)(\\d*)n|)" + W + "*(?:([+-]|)" + W + "*(\\d+)|))" + W + "*\\)|)", "i"),
+            needsContext: RegExp("^" + W + "*[>+~]|" + Y, "i")
         }, ut = function(e) {
             var t = D.createElement("div");
             try {
@@ -1596,12 +1596,12 @@
             2 === e.getElementsByClassName("e").length) : !1;
         }), pt = ut(function(e) {
             e.id = A + 0, e.innerHTML = "<a name='" + A + "'></a><div name='" + A + "'></div>", 
-            M.insertBefore(e, M.firstChild);
+            H.insertBefore(e, H.firstChild);
             var t = D.getElementsByName && D.getElementsByName(A).length === 2 + D.getElementsByName(A + 0).length;
-            return y = !D.getElementById(A), M.removeChild(e), t;
+            return y = !D.getElementById(A), H.removeChild(e), t;
         });
         try {
-            B.call(M.childNodes, 0)[0].nodeType;
+            B.call(H.childNodes, 0)[0].nodeType;
         } catch (gt) {
             B = function(e) {
                 for (var t, n = []; t = this[e]; e++) n.push(t);
@@ -1624,10 +1624,10 @@
         }, w = n.isXML = function(e) {
             var t = e && (e.ownerDocument || e).documentElement;
             return t ? "HTML" !== t.nodeName : !1;
-        }, C = n.contains = M.contains ? function(e, t) {
+        }, C = n.contains = H.contains ? function(e, t) {
             var n = 9 === e.nodeType ? e.documentElement : e, i = t && t.parentNode;
             return e === i || !!(i && 1 === i.nodeType && n.contains && n.contains(i));
-        } : M.compareDocumentPosition ? function(e, t) {
+        } : H.compareDocumentPosition ? function(e, t) {
             return t && !!(16 & e.compareDocumentPosition(t));
         } : function(e, t) {
             for (;t = t.parentNode; ) if (t === e) return !0;
@@ -1728,7 +1728,7 @@
                 },
                 CLASS: function(e) {
                     var t = q[A][e + " "];
-                    return t || (t = RegExp("(^|" + V + ")" + e + "(" + V + "|$)")) && q(e, function(e) {
+                    return t || (t = RegExp("(^|" + W + ")" + e + "(" + W + "|$)")) && q(e, function(e) {
                         return t.test(e.className || typeof e.getAttribute !== _ && e.getAttribute("class") || "");
                     });
                 },
@@ -1865,7 +1865,7 @@
                     return e;
                 })
             }
-        }, T = M.compareDocumentPosition ? function(e, t) {
+        }, T = H.compareDocumentPosition ? function(e, t) {
             var n, i;
             return e === t ? (S = !0, 0) : e.compareDocumentPosition && t.compareDocumentPosition ? 1 & (n = e.compareDocumentPosition(t)) || (i = e.parentNode) && 11 === i.nodeType ? e === D || C(D, e) ? -1 : t === D || C(D, t) ? 1 : 0 : 4 & n ? -1 : 1 : e.compareDocumentPosition ? -1 : 1;
         } : function(e, t) {
@@ -1892,19 +1892,19 @@
         }, n.error = function(e) {
             throw Error("Syntax error, unrecognized expression: " + e);
         }, k = n.compile = function(e, t) {
-            var n, i = [], r = [], o = W[A][e + " "];
+            var n, i = [], r = [], o = V[A][e + " "];
             if (!o) {
                 for (t || (t = a(e)), n = t.length; n--; ) o = f(t[n]), o[A] ? i.push(o) : r.push(o);
-                o = W(e, d(r, i));
+                o = V(e, d(r, i));
             }
             return o;
         }, D.querySelectorAll && function() {
-            var e, t = g, i = /'|\\/g, r = /\=[\x20\t\r\n\f]*([^'"\]]*)[\x20\t\r\n\f]*\]/g, o = [ ":focus" ], s = [ ":active" ], l = M.matchesSelector || M.mozMatchesSelector || M.webkitMatchesSelector || M.oMatchesSelector || M.msMatchesSelector;
+            var e, t = g, i = /'|\\/g, r = /\=[\x20\t\r\n\f]*([^'"\]]*)[\x20\t\r\n\f]*\]/g, o = [ ":focus" ], s = [ ":active" ], l = H.matchesSelector || H.mozMatchesSelector || H.webkitMatchesSelector || H.oMatchesSelector || H.msMatchesSelector;
             ut(function(e) {
-                e.innerHTML = "<select><option selected=''></option></select>", e.querySelectorAll("[selected]").length || o.push("\\[" + V + "*(?:checked|disabled|ismap|multiple|readonly|selected|value)"), 
+                e.innerHTML = "<select><option selected=''></option></select>", e.querySelectorAll("[selected]").length || o.push("\\[" + W + "*(?:checked|disabled|ismap|multiple|readonly|selected|value)"), 
                 e.querySelectorAll(":checked").length || o.push(":checked");
             }), ut(function(e) {
-                e.innerHTML = "<p test=''></p>", e.querySelectorAll("[test^='']").length && o.push("[*^$]=" + V + "*(?:\"\"|'')"), 
+                e.innerHTML = "<p test=''></p>", e.querySelectorAll("[test^='']").length && o.push("[*^$]=" + W + "*(?:\"\"|'')"), 
                 e.innerHTML = "<input type='hidden'/>", e.querySelectorAll(":enabled").length || o.push(":enabled", ":disabled");
             }), o = RegExp(o.join("|")), g = function(e, n, r, s, l) {
                 if (!s && !l && !o.test(e)) {
@@ -1937,7 +1937,7 @@
         n.attr = et.attr, et.find = n, et.expr = n.selectors, et.expr[":"] = et.expr.pseudos, 
         et.unique = n.uniqueSort, et.text = n.getText, et.isXMLDoc = n.isXML, et.contains = n.contains;
     }(e);
-    var Ht = /Until$/, Ft = /^(?:parents|prev(?:Until|All))/, Ot = /^.[^:#\[\.,]*$/, Bt = et.expr.match.needsContext, Rt = {
+    var Lt = /Until$/, Ft = /^(?:parents|prev(?:Until|All))/, Ot = /^.[^:#\[\.,]*$/, Bt = et.expr.match.needsContext, Rt = {
         children: !0,
         contents: !0,
         next: !0,
@@ -2032,7 +2032,7 @@
     }, function(e, t) {
         et.fn[e] = function(n, i) {
             var r = et.map(this, t, n);
-            return Ht.test(e) || (i = n), i && "string" == typeof i && (r = et.filter(i, r)), 
+            return Lt.test(e) || (i = n), i && "string" == typeof i && (r = et.filter(i, r)), 
             r = this.length > 1 && !Rt[e] ? et.unique(r) : r, this.length > 1 && Ft.test(e) && (r = r.reverse()), 
             this.pushStack(r, e, G.call(arguments).join(","));
         };
@@ -2050,7 +2050,7 @@
             return n;
         }
     });
-    var It = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video", Pt = / jQuery\d+="(?:null|\d+)"/g, qt = /^\s+/, zt = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi, Wt = /<([\w:]+)/, Vt = /<tbody/i, Ut = /<|&#?\w+;/, Xt = /<(?:script|style|link)/i, Qt = /<(?:script|object|embed|option|style)/i, Gt = RegExp("<(?:" + It + ")[\\s/>]", "i"), Jt = /^(?:checkbox|radio)$/, Yt = /checked\s*(?:[^=]|=\s*.checked.)/i, Kt = /\/(java|ecma)script/i, Zt = /^\s*<!(?:\[CDATA\[|\-\-)|[\]\-]{2}>\s*$/g, en = {
+    var It = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video", Pt = / jQuery\d+="(?:null|\d+)"/g, qt = /^\s+/, zt = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi, Vt = /<([\w:]+)/, Wt = /<tbody/i, Ut = /<|&#?\w+;/, Xt = /<(?:script|style|link)/i, Qt = /<(?:script|object|embed|option|style)/i, Gt = RegExp("<(?:" + It + ")[\\s/>]", "i"), Jt = /^(?:checkbox|radio)$/, Yt = /checked\s*(?:[^=]|=\s*.checked.)/i, Kt = /\/(java|ecma)script/i, Zt = /^\s*<!(?:\[CDATA\[|\-\-)|[\]\-]{2}>\s*$/g, en = {
         option: [ 1, "<select multiple='multiple'>", "</select>" ],
         legend: [ 1, "<fieldset>", "</fieldset>" ],
         thead: [ 1, "<table>", "</table>" ],
@@ -2145,7 +2145,7 @@
             return et.access(this, function(e) {
                 var n = this[0] || {}, i = 0, r = this.length;
                 if (e === t) return 1 === n.nodeType ? n.innerHTML.replace(Pt, "") : t;
-                if (!("string" != typeof e || Xt.test(e) || !et.support.htmlSerialize && Gt.test(e) || !et.support.leadingWhitespace && qt.test(e) || en[(Wt.exec(e) || [ "", "" ])[1].toLowerCase()])) {
+                if (!("string" != typeof e || Xt.test(e) || !et.support.htmlSerialize && Gt.test(e) || !et.support.leadingWhitespace && qt.test(e) || en[(Vt.exec(e) || [ "", "" ])[1].toLowerCase()])) {
                     e = e.replace(zt, "<$1></$2>");
                     try {
                         for (;r > i; i++) n = this[i] || {}, 1 === n.nodeType && (et.cleanData(n.getElementsByTagName("*")), 
@@ -2231,9 +2231,9 @@
             a) {
                 if ("string" == typeof a) if (Ut.test(a)) {
                     for (y = y || f(n), h = n.createElement("div"), y.appendChild(h), a = a.replace(zt, "<$1></$2>"), 
-                    l = (Wt.exec(a) || [ "", "" ])[1].toLowerCase(), u = en[l] || en._default, c = u[0], 
+                    l = (Vt.exec(a) || [ "", "" ])[1].toLowerCase(), u = en[l] || en._default, c = u[0], 
                     h.innerHTML = u[1] + rn(a) + u[2]; c--; ) h = h.lastChild;
-                    if (!et.support.tbody) for (d = Vt.test(a), p = "table" !== l || d ? "<table>" !== u[1] || d ? [] : h.childNodes : h.firstChild && h.firstChild.childNodes, 
+                    if (!et.support.tbody) for (d = Wt.test(a), p = "table" !== l || d ? "<table>" !== u[1] || d ? [] : h.childNodes : h.firstChild && h.firstChild.childNodes, 
                     s = p.length - 1; s >= 0; --s) et.nodeName(p[s], "tbody") && !p[s].childNodes.length && p[s].parentNode.removeChild(p[s]);
                     !et.support.leadingWhitespace && qt.test(a) && h.insertBefore(n.createTextNode(qt.exec(a)[0]), h.firstChild), 
                     a = h.childNodes, h.parentNode.removeChild(h);
@@ -2433,9 +2433,9 @@
         }); else for (i in e) S(i, e[i], n, o);
         return r.join("&").replace(wn, "+");
     };
-    var En, _n, Nn = et.now(), $n = /#.*$/, An = /^(.*?):[ \t]*([^\r\n]*)\r?$/gm, jn = /^(?:about|app|app\-storage|.+\-extension|file|res|widget):$/, Dn = /^(?:GET|HEAD)$/, Mn = /^\/\//, Ln = /\?/, Hn = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, Fn = /([?&])_=[^&]*/, On = /^([\w\+\.\-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/, Bn = et.fn.load, Rn = {}, In = {}, Pn = [ "*/" ] + [ "*" ];
+    var En, _n, Nn = et.now(), $n = /#.*$/, An = /^(.*?):[ \t]*([^\r\n]*)\r?$/gm, jn = /^(?:about|app|app\-storage|.+\-extension|file|res|widget):$/, Dn = /^(?:GET|HEAD)$/, Hn = /^\/\//, Mn = /\?/, Ln = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, Fn = /([?&])_=[^&]*/, On = /^([\w\+\.\-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/, Bn = et.fn.load, Rn = {}, In = {}, Pn = [ "*/" ] + [ "*" ];
     try {
-        _n = W.href;
+        _n = V.href;
     } catch (qn) {
         _n = z.createElement("a"), _n.href = "", _n = _n.href;
     }
@@ -2453,7 +2453,7 @@
                 i && a.each(i, s || [ e.responseText, t, e ]);
             }
         }).done(function(e) {
-            s = arguments, a.html(r ? et("<div>").append(e.replace(Hn, "")).find(r) : e);
+            s = arguments, a.html(r ? et("<div>").append(e.replace(Ln, "")).find(r) : e);
         }), this;
     }, et.each("ajaxStart ajaxStop ajaxComplete ajaxError ajaxSuccess ajaxSend".split(" "), function(e, t) {
         et.fn[t] = function(e) {
@@ -2562,16 +2562,16 @@
                     if (2 > x) for (t in e) v[t] = [ v[t], e[t] ]; else t = e[C.status], C.always(t);
                 }
                 return this;
-            }, f.url = ((e || f.url || _n) + "").replace($n, "").replace(Mn, En[1] + "//"), 
+            }, f.url = ((e || f.url || _n) + "").replace($n, "").replace(Hn, En[1] + "//"), 
             f.dataTypes = et.trim(f.dataType || "*").toLowerCase().split(it), null == f.crossDomain && (u = On.exec(f.url.toLowerCase()), 
             f.crossDomain = !(!u || u[1] === En[1] && u[2] === En[2] && (u[3] || ("http:" === u[1] ? 80 : 443)) == (En[3] || ("http:" === En[1] ? 80 : 443)))), 
             f.data && f.processData && "string" != typeof f.data && (f.data = et.param(f.data, f.traditional)), 
             _(Rn, f, n, C), 2 === x) return C;
             if (c = f.global, f.type = f.type.toUpperCase(), f.hasContent = !Dn.test(f.type), 
-            c && 0 === et.active++ && et.event.trigger("ajaxStart"), !f.hasContent && (f.data && (f.url += (Ln.test(f.url) ? "&" : "?") + f.data, 
+            c && 0 === et.active++ && et.event.trigger("ajaxStart"), !f.hasContent && (f.data && (f.url += (Mn.test(f.url) ? "&" : "?") + f.data, 
             delete f.data), r = f.url, f.cache === !1)) {
                 var k = Nn++, T = f.url.replace(Fn, "$1_=" + k);
-                f.url = T + (T === f.url ? (Ln.test(f.url) ? "&" : "?") + "_=" + k : "");
+                f.url = T + (T === f.url ? (Mn.test(f.url) ? "&" : "?") + "_=" + k : "");
             }
             (f.data && f.hasContent && f.contentType !== !1 || n.contentType) && C.setRequestHeader("Content-Type", f.contentType), 
             f.ifModified && (r = r || f.url, et.lastModified[r] && C.setRequestHeader("If-Modified-Since", et.lastModified[r]), 
@@ -2601,7 +2601,7 @@
         lastModified: {},
         etag: {}
     });
-    var zn = [], Wn = /\?/, Vn = /(=)\?(?=&|$)|\?\?/, Un = et.now();
+    var zn = [], Vn = /\?/, Wn = /(=)\?(?=&|$)|\?\?/, Un = et.now();
     et.ajaxSetup({
         jsonp: "callback",
         jsonpCallback: function() {
@@ -2609,9 +2609,9 @@
             return this[e] = !0, e;
         }
     }), et.ajaxPrefilter("json jsonp", function(n, i, r) {
-        var o, s, a, l = n.data, u = n.url, c = n.jsonp !== !1, h = c && Vn.test(u), f = c && !h && "string" == typeof l && !(n.contentType || "").indexOf("application/x-www-form-urlencoded") && Vn.test(l);
+        var o, s, a, l = n.data, u = n.url, c = n.jsonp !== !1, h = c && Wn.test(u), f = c && !h && "string" == typeof l && !(n.contentType || "").indexOf("application/x-www-form-urlencoded") && Wn.test(l);
         return "jsonp" === n.dataTypes[0] || h || f ? (o = n.jsonpCallback = et.isFunction(n.jsonpCallback) ? n.jsonpCallback() : n.jsonpCallback, 
-        s = e[o], h ? n.url = u.replace(Vn, "$1" + o) : f ? n.data = l.replace(Vn, "$1" + o) : c && (n.url += (Wn.test(u) ? "&" : "?") + n.jsonp + "=" + o), 
+        s = e[o], h ? n.url = u.replace(Wn, "$1" + o) : f ? n.data = l.replace(Wn, "$1" + o) : c && (n.url += (Vn.test(u) ? "&" : "?") + n.jsonp + "=" + o), 
         n.converters["script json"] = function() {
             return a || et.error(o + " was not called"), a[0];
         }, n.dataTypes[0] = "json", e[o] = function() {
@@ -2713,7 +2713,7 @@
             return r;
         } ]
     };
-    et.Animation = et.extend(H, {
+    et.Animation = et.extend(L, {
         tweener: function(e, t) {
             et.isFunction(e) ? (t = e, e = [ "*" ]) : e = e.split(" ");
             for (var n, i = 0, r = e.length; r > i; i++) n = e[i], ni[n] = ni[n] || [], ni[n].unshift(t);
@@ -2765,7 +2765,7 @@
         },
         animate: function(e, t, n, i) {
             var r = et.isEmptyObject(e), o = et.speed(t, n, i), s = function() {
-                var t = H(this, et.extend({}, e), o);
+                var t = L(this, et.extend({}, e), o);
                 r && t.stop(!0);
             };
             return r || o.queue === !1 ? this.each(s) : this.queue(o.queue, s);
@@ -2929,7 +2929,7 @@
                 browser: t[1] || "",
                 version: t[2] || "0"
             };
-        }, e = et.uaMatch(V.userAgent), t = {}, e.browser && (t[e.browser] = !0, t.version = e.version), 
+        }, e = et.uaMatch(W.userAgent), t = {}, e.browser && (t[e.browser] = !0, t.version = e.version), 
         t.chrome ? t.webkit = !0 : t.webkit && (t.safari = !0), et.browser = t, et.sub = function() {
             function e(t, n) {
                 return new e.fn.init(t, n);
@@ -3413,16 +3413,16 @@
             };
         });
     };
-    var M = 0;
+    var H = 0;
     k.uniqueId = function(e) {
-        var t = M++;
+        var t = H++;
         return e ? e + t : t;
     }, k.templateSettings = {
         evaluate: /<%([\s\S]+?)%>/g,
         interpolate: /<%=([\s\S]+?)%>/g,
         escape: /<%-([\s\S]+?)%>/g
     };
-    var L = /(.)^/, H = {
+    var M = /(.)^/, L = {
         "'": "'",
         "\\": "\\",
         "\r": "r",
@@ -3433,10 +3433,10 @@
     }, F = /\\|'|\r|\n|\t|\u2028|\u2029/g;
     k.template = function(e, t, n) {
         n = k.defaults({}, n, k.templateSettings);
-        var i = RegExp([ (n.escape || L).source, (n.interpolate || L).source, (n.evaluate || L).source ].join("|") + "|$", "g"), r = 0, o = "__p+='";
+        var i = RegExp([ (n.escape || M).source, (n.interpolate || M).source, (n.evaluate || M).source ].join("|") + "|$", "g"), r = 0, o = "__p+='";
         e.replace(i, function(t, n, i, s, a) {
             o += e.slice(r, a).replace(F, function(e) {
-                return "\\" + H[e];
+                return "\\" + L[e];
             }), o += n ? "'+\n((__t=(" + n + "))==null?'':_.escape(__t))+\n'" : i ? "'+\n((__t=(" + i + "))==null?'':__t)+\n'" : s ? "';\n" + s + "\n__p+='" : "", 
             r = a + t.length;
         }), o += "';\n", n.variable || (o = "with(obj||{}){\n" + o + "}\n"), o = "var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};\n" + o + "return __p;\n";
@@ -5418,7 +5418,8 @@ var AppModel = Backbone.Collection.extend({}), AppView = Backbone.View.extend({
             s.length && (i = s.attr("type"), o = e.model.get(n), "number" == i && s.val(o), 
             "radio" == i && _.each(s, function(e) {
                 r = $(e), r.val() == o && r.prop("checked", !0), r = null;
-            }), "range" == i && (s.val(o), s.next().text(o)), "color" == i && s.val(o), s = null);
+            }), "range" == i && (s.val(o), s.next().text(o)), "color" == i && s.val(o), s.hasClass("color-input") && s.val(o), 
+            s = null);
         });
     },
     defaultAction: function() {},
@@ -5427,7 +5428,16 @@ var AppModel = Backbone.Collection.extend({}), AppView = Backbone.View.extend({
         "keyup input[type='number']": "changeNumberHandler",
         "change input[type='number']": "changeNumberHandler",
         "change input[type='range']": "changeNumberHandler",
-        "change input[type='color']": "valueChangeHanlder"
+        "change input[type='color']": "colorTypeInputValueChangeHanlder",
+        "keyup input.color-input": "colorInputValueChangeHanlder"
+    },
+    colorTypeInputValueChangeHanlder: function(e) {
+        var t = $(e.target), n = t.next();
+        n.val(t.val()), this.valueChangeHanlder(e);
+    },
+    colorInputValueChangeHanlder: function(e) {
+        var t = $(e.target), n = t.prev();
+        n.val(t.val()), this.valueChangeHanlder(e);
     },
     clickRadioHandler: function(e) {
         this.valueChangeHanlder(e);
