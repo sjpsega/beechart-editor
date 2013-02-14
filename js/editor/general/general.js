@@ -12,7 +12,7 @@ var GeneralView = Backbone.View.extend({
         _.each(this.views,function(view){
             view.remove();
         });
-        GeneralView.__super__.remove.apply(this,arguments);
+        this.constructor.__super__.remove.apply(this,arguments);
         return this;
     },
     defaultSetting:function(){

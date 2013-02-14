@@ -85,7 +85,7 @@ line {
         tickColor                css颜色值                      x轴线端点的颜色
         lineThickness            number值                       y轴线的粗细
         lineColor                css颜色值                      y轴线的颜色
-        labelGap                 auto\number值                  自动控制是否显示\间隔N个显示
+        *labelGap                 auto\number值                  自动控制是否显示\间隔N个显示
         labelRotation(废弃)      number值                       label旋转角度
         tickPosition(废弃)       reverse\other                  端点位置调整
         labelPosition(废弃)      center\other                   label位置调整
@@ -109,11 +109,11 @@ line {
         priLineThickness         number值                       横线粗细
         priLineColor             css颜色值                      横线颜色值
         priLineAlpha             number值(0-1)                  横线透明度
-        priLineStyle             dashed(虚线)/normal            横线绘制方式
+        priLineStyle             dashed(虚线)/line              横线绘制方式
         secLineThickness         number值                       竖线粗细
         secLineColor             css颜色值                      竖线颜色值
         secLineAlpha             number值(0-1)                  竖线透明度
-        secLineStyle             dashed(虚线)/normal            竖线绘制方式
+        secLineStyle             dashed(虚线)/line              竖线绘制方式
 
 ## Line特有样式
 
@@ -122,16 +122,17 @@ line {
         dropShadow               light\none                                     线条阴影
         thickness                number值                                       线条的粗细
         fillType                 gradient(竖直渐变)\normal                      线条辐射区的绘制方式
-        fileAplha                number值(0-1)                                  线条辐射区的透明度
+        fillAplha                number值(0-1)                                  线条辐射区的透明度
 
     line dot(特有状态.hl)
         shape                    circle\square\diamond                          点的形状
-        dropShadow               light\none                                     点阴影
+        color                    inherit(继承，即与线条颜色一致)、number值      点的颜色
         radius                   number值                                       点的半径
-        colors                   inherit(继承，即与线条颜色一致)、number值      点的颜色
+        alpha                    number值(0-1)                                  点的透明度
         borderColor              inherit#color(继承，即与线条颜色一致)、css颜色值                                      点边框的颜色
         borderThickness          number值                                       点边框的线条粗细
         borderAlpha              number值(0-1)                                  点边框的线条透明度
+        dropShadow               light\none                                     点阴影
 
     guideLine(引导线)
         color                    css颜色值                                      线条颜色

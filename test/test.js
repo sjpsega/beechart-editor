@@ -172,14 +172,6 @@ jQuery(function($){
             }
         }
     });
-    var BaseView = Backbone.View.extend({
-            initialize : function(){
-                var modelClz = this.options.modelClz;
-                if(modelClz){
-                    this.model = new modelClz(this.options.modelAttributes || {});
-                }
-            }
-        });
     var styleTest = 
             "chart {\
                 animate : clockwise;\
@@ -232,5 +224,18 @@ jQuery(function($){
             loop+=1;
         });
         equal(loop,4);
+    });
+    test("颜色正则测试",10,function(){
+        var colorReg = /^#([0-9]|[a-f]){6}$/i;
+        ok(!colorReg.test("14144"));
+        ok(!colorReg.test("aqaqa"));
+        ok(!colorReg.test("#14144"));
+        ok(colorReg.test("#114144"));
+        ok(colorReg.test("#abaeab"));
+        ok(!colorReg.test("#abeazb"));
+        ok(!colorReg.test("#abeaaba"));
+        ok(colorReg.test("#ABABAB"));
+        ok(colorReg.test("#aBaBaB"));
+        ok(!colorReg.test("#1aA1B2a"));
     });
 })

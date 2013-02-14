@@ -1,0 +1,36 @@
+h3 Line Dot
+.containe(data-key="shape")
+    h5 点的形状
+    label.radio.inline
+        input(type="radio",name="shape-group",value="circle")
+        span 圆形
+    label.radio.inline
+        input(type="radio",name="shape-group",value="square")
+        span 方形 
+    label.radio.inline
+        input(type="radio",name="shape-group",value="diamond")
+        span 直线
+.containe-colortype-choose(data-key="color")
+    h5 点的颜色
+    .colorTypeRadios
+        label.radio.inline
+            input(type="radio",name="color-group",value="inherit#color")
+            span 与线的颜色一致
+        label.radio.inline
+            input(type="radio",name="color-group",value="forCustom")
+            span 自定义
+    .for-color-custom
+        input(type="color")
+        input(type="text").help-inline.color-input
+.containe-colortype-choose(data-key="borderColor")
+    h5 点的边框颜色
+    .colorTypeRadios
+        label.radio.inline
+            input(type="radio",name="borderColor-group",value="inherit#color")
+            span 与线的颜色一致
+        label.radio.inline
+            input(type="radio",name="borderColor-group",value="forCustom")
+            span 自定义
+    .for-color-custom
+        input(type="color")
+        input(type="text").help-inline.color-input

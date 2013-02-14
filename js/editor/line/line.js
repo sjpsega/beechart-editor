@@ -12,17 +12,27 @@ var LineView = Backbone.View.extend({
         _.each(this.views,function(view){
             view.remove();
         });
-        LineView.__super__.remove.apply(this,arguments);
+        this.constructor.__super__.remove.apply(this,arguments);
         return this;
     },
     defaultSetting:function(){
-        // var pieChartSetView = new PieChartSetView({
-        //     modelClz:PieChartSetModel,
-        //     modelAttributes : StyleCenter.getInstance().getStyle("chart"),
-        //     el:$("#pie-chart-set")
-        // });
-        // this.views.push(pieChartSetView);
-        // this.model.push(pieChartSetView.model);
+        var lineStyleView = new BaseView({
+            modelClz:BaseModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("line"),
+            styleName : "line",
+            el:$("#line-style-set")
+        });
+        this.views.push(lineStyleView);
+        this.model.push(lineStyleView.model);
+
+        var lineDotView = new LineDotView({
+            modelClz:BaseModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("line dot"),
+            styleName : "line dot",
+            el:$("#line-dot-set")
+        });
+        this.views.push(lineDotView);
+        this.model.push(lineDotView.model);
 
         // var pieSliceSetView = new PieSliceSetView({
         //     modelClz:PieSliceSetModel,

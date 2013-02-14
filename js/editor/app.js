@@ -87,8 +87,8 @@ var AppView = Backbone.View.extend({
             line:function(){
                 var generalView = new GeneralView({model:self.model});
                 self.views.push(generalView);
-                var pieView = new PieView({model:self.model});
-                self.views.push(pieView);
+                var lineView = new LineView({model:self.model});
+                self.views.push(lineView);
             },
             bar:function(){
                 var generalView = new GeneralView({model:self.model});

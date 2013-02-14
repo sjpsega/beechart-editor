@@ -26,7 +26,7 @@ var BaseView = Backbone.View.extend({
         log(this.model.styleName,this.model.attributes);
         _.each(this.model.attributes,function(value,key){
             var inputs = $(".containe[data-key='"+ key +"'] input",self.$el);
-            var input_type,temp,itemValue,parent;
+            var input_type,temp,itemValue;
             if(inputs.length){
                 input_type = inputs.attr("type");
                 itemValue = self.model.get(key);
@@ -34,30 +34,25 @@ var BaseView = Backbone.View.extend({
                     inputs.val(itemValue);
                 }
                 if(input_type == "radio"){
-                    _.each(inputs,function(input){
-                        temp = $(input);
-                        if(temp.val() == itemValue){
-                            temp.prop("checked",true);
-                        }
-                        temp = null;
-                    });
+                    self.radioChecked(inputs,itemValue);
                 }
                 if(input_type == "range"){
                     inputs.val(itemValue);
                     inputs.next().text(itemValue);
                 }
                 if(input_type == "color"){
-                    inputs.val(itemValue);
+                    if(self._isColor(itemValue)){
+                        inputs.val(itemValue);
+                    }
                 }
                 if(inputs.hasClass("color-input")){
-                    inputs.val(itemValue);
+                    self._setColorInputValAndBorderColor(inputs,itemValue);
                 }
                 inputs = null;
             }
         })
     },
     defaultAction:function(){
-
     },
     events:{
         "click input[type='radio']":"clickRadioHandler",
@@ -67,13 +62,22 @@ var BaseView = Backbone.View.extend({
         "change input[type='color']":"colorTypeInputValueChangeHanlder",
         "keyup input.color-input":"colorInputValueChangeHanlder"
     },
+    radioChecked:function(radios,checkedVal){
+        var temp;
+        _.each(radios,function(radio){
+            temp = $(radio);
+            if(temp.val() == checkedVal){
+                temp.prop("checked",true);
+            }
+            temp = null;
+        });
+    },
     /*
     *修改color选择框的同时，修改color输入框的值
     */
     colorTypeInputValueChangeHanlder:function(e){
         var colorTypeInput = $(e.target);
-        var colorInput = colorTypeInput.next();
-        colorInput.val(colorTypeInput.val());
+        this._changeColorInpus(colorTypeInput);
         this.valueChangeHanlder(e);
     },
     /*
@@ -81,12 +85,31 @@ var BaseView = Backbone.View.extend({
     */
     colorInputValueChangeHanlder:function(e){
         var colorInput = $(e.target);
+        var colorInputVal = colorInput.val()
+        if(!this._isColor(colorInputVal)){
+            return;
+        }
         var colorTypeInput = colorInput.prev();
-        colorTypeInput.val(colorInput.val());
+        colorTypeInput.val(colorInputVal);
         this.valueChangeHanlder(e);
+    },
+    _changeColorInpus:function(colorTypeInput){
+        var colorTypeInput = colorTypeInput;
+        var colorInput = colorTypeInput.next();
+        this._setColorInputValAndBorderColor(colorInput,colorTypeInput.val());
     },
     clickRadioHandler : function(e){
         this.valueChangeHanlder(e);
+    },
+    _setColorInputValAndBorderColor:function(input,color){
+        if(this._isColor(color)){
+            input.val(color);
+            input.css("borderColor",color);
+        }
+    },
+    _isColor:function(color){
+        var colorReg = /^#([0-9]|[a-f]){6}$/i;
+        return colorReg.test(color);
     },
     changeNumberHandler : function(e){
         var jq_target = $(e.target);
@@ -97,7 +120,10 @@ var BaseView = Backbone.View.extend({
     },
     valueChangeHanlder : function(e){
         var target = $(e.target);
-        var well = target.closest(".containe");
+        var well = target.closest(".containe")
+        if(!well.length){
+            well = target.closest(".containe-colortype-choose");
+        }
         var propertyKey = well.data("key");
         var propertyVal = target.val();
         this.model.set(propertyKey,propertyVal);

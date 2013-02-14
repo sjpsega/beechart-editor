@@ -62,7 +62,9 @@ module.exports = function( grunt ) {
 				},
 				options: {
 					 sourceMap: "dist/merge.map",
-					 beautify: true
+					 beautify: true,
+					 compress: false,
+					 mangle: false
 				}
 			}
 		},
