@@ -126,7 +126,7 @@ line {
 
     line dot(特有状态.hl)
         shape                    circle\square\diamond                          点的形状
-        color                    inherit(继承，即与线条颜色一致)、number值      点的颜色
+        color                    inherit#color(继承，即与线条颜色一致)、number值      点的颜色
         radius                   number值                                       点的半径
         alpha                    number值(0-1)                                  点的透明度
         borderColor              inherit#color(继承，即与线条颜色一致)、css颜色值                                      点边框的颜色
@@ -148,7 +148,7 @@ line {
 ## Bar、HBar特有样式
 
     bar(特有状态.hl)
-        color                   css颜色值                   柱形的颜色
+        color                   inherit#color/css颜色值     柱形的颜色
         dropShadow              light\none                  阴影
         brightnessFading        number值((-1)-1)            柱形颜色渐变值
         backgroundType          slash(特定)\simple(常规)    背景形式
