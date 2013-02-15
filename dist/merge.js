@@ -9405,6 +9405,146 @@ window.log = function() {
     }
 };
 
+var BaseModel = Backbone.Model.extend({});
+
+var BaseView = Backbone.View.extend({
+    initialize: function() {
+        var modelClz = this.options.modelClz;
+        if (modelClz) {
+            this.model = new modelClz(this.options.modelAttributes || {});
+        }
+        if (this.options.styleName) {
+            this.model.styleName = this.options.styleName;
+        }
+        modelClz = null;
+        this.defaultSetting();
+        this.setDefaultValue();
+        this.defaultAction();
+    },
+    defaultSetting: function() {},
+    setDefaultValue: function() {
+        var self = this;
+        log(this.model.styleName, this.model.attributes);
+        _.each(this.model.attributes, function(value, key) {
+            var inputs = $(".containe[data-key='" + key + "'] input", self.$el);
+            var input_type, temp, itemValue;
+            if (inputs.length) {
+                input_type = inputs.attr("type");
+                itemValue = self.model.get(key);
+                if (input_type == "number") {
+                    inputs.val(itemValue);
+                }
+                if (input_type == "radio") {
+                    self.radioChecked(inputs, itemValue);
+                }
+                if (input_type == "range") {
+                    inputs.val(itemValue);
+                    inputs.next().text(itemValue);
+                }
+                if (input_type == "color") {
+                    if (self._isColor(itemValue)) {
+                        inputs.val(itemValue);
+                    }
+                }
+                if (inputs.hasClass("color-input")) {
+                    self._setColorInputValAndBorderColor(inputs, itemValue);
+                }
+                inputs = null;
+            }
+        });
+    },
+    defaultAction: function() {},
+    events: {
+        "click input[type='radio']": "clickRadioHandler",
+        "keyup input[type='number']": "changeNumberHandler",
+        "change input[type='number']": "changeNumberHandler",
+        "change input[type='range']": "changeNumberHandler",
+        "change input[type='color']": "colorTypeInputValueChangeHanlder",
+        "keyup input.color-input": "colorInputValueChangeHanlder"
+    },
+    radioChecked: function(radios, checkedVal) {
+        var temp;
+        _.each(radios, function(radio) {
+            temp = $(radio);
+            if (temp.val() == checkedVal) {
+                temp.prop("checked", true);
+            }
+            temp = null;
+        });
+    },
+    colorTypeInputValueChangeHanlder: function(e) {
+        var colorTypeInput = $(e.target);
+        this._changeColorInputByColorTypeInput(colorTypeInput);
+        this.valueChangeHanlder(e);
+    },
+    colorInputValueChangeHanlder: function(e) {
+        var colorInput = $(e.target);
+        var colorInputVal = colorInput.val();
+        if (!this._isColor(colorInputVal)) {
+            return;
+        }
+        colorInput.css("borderColor", colorInputVal);
+        var colorTypeInput = colorInput.prev();
+        colorTypeInput.val(colorInputVal);
+        this.valueChangeHanlder(e);
+    },
+    _changeColorInputByColorTypeInput: function(colorTypeInput) {
+        var colorTypeInput = colorTypeInput;
+        var colorInput = colorTypeInput.next();
+        this._setColorInputValAndBorderColor(colorInput, colorTypeInput.val());
+    },
+    _setColorInputValAndBorderColor: function(input, color) {
+        if (this._isColor(color)) {
+            input = input.filter(".color-input");
+            input.val(color);
+            input.css("borderColor", color);
+        }
+    },
+    _isColor: function(color) {
+        var colorReg = /^#([0-9]|[a-f]){6}$/i;
+        return colorReg.test(color);
+    },
+    clickRadioHandler: function(e) {
+        this.valueChangeHanlder(e);
+    },
+    changeNumberHandler: function(e) {
+        var jq_target = $(e.target);
+        if (jq_target.is("input[type='range']")) {
+            jq_target.next().text(jq_target.val());
+        }
+        this.valueChangeHanlder(e);
+    },
+    valueChangeHanlder: function(e) {
+        var target = $(e.target);
+        var well = target.closest(".containe");
+        var propertyKey = well.data("key");
+        var propertyVal = target.val();
+        this.model.set(propertyKey, propertyVal);
+    },
+    switchInputEnable: function(jq_content, isEnable) {
+        var inputs = $("input", jq_content);
+        if (isEnable) {
+            inputs.attr("disabled", false);
+        } else {
+            inputs.attr("disabled", true);
+        }
+    }
+});
+
+var ChartView = Backbone.View.extend({
+    initialize: function() {
+        this.views = [];
+        this.defaultSetting();
+    },
+    remove: function() {
+        _.each(this.views, function(view) {
+            view.remove();
+        });
+        return ChartView.__super__.remove.apply(this, arguments);
+    },
+    defaultSetting: function() {}
+});
+
 var AppModel = Backbone.Collection.extend({});
 
 var AppView = Backbone.View.extend({
@@ -9526,145 +9666,136 @@ var AppView = Backbone.View.extend({
     }
 });
 
-var BarView = Backbone.View.extend({
-    initialize: function() {
-        this.views = [];
-        this.defaultSetting();
-    },
-    remove: function() {
-        _.each(this.views, function(view) {
-            view.remove();
-        });
-        BarView.__super__.remove.apply(this, arguments);
-        return this;
-    },
-    defaultSetting: function() {}
-});
-
-var BaseModel = Backbone.Model.extend({});
-
-var BaseView = Backbone.View.extend({
-    initialize: function() {
-        var modelClz = this.options.modelClz;
-        if (modelClz) {
-            this.model = new modelClz(this.options.modelAttributes || {});
-        }
-        if (this.options.styleName) {
-            this.model.styleName = this.options.styleName;
-        }
-        modelClz = null;
-        this.defaultSetting();
-        this.setDefaultValue();
-        this.defaultAction();
-    },
-    defaultSetting: function() {},
+var BarStyleView = BaseView.extend({
     setDefaultValue: function() {
+        LineDotView.__super__.setDefaultValue.apply(this, arguments);
         var self = this;
-        log(this.model.styleName, this.model.attributes);
         _.each(this.model.attributes, function(value, key) {
-            var inputs = $(".containe[data-key='" + key + "'] input", self.$el);
-            var input_type, temp, itemValue;
-            if (inputs.length) {
-                input_type = inputs.attr("type");
-                itemValue = self.model.get(key);
-                if (input_type == "number") {
-                    inputs.val(itemValue);
+            var containe_colortype_choose = $(".containe-colortype-choose[data-key='" + key + "']", self.$el);
+            var colorTypeRadios, for_color_custom, colorTypeInput;
+            if (containe_colortype_choose.length) {
+                colorTypeRadios = $(".colorTypeRadios input[type='radio']", containe_colortype_choose);
+                for_color_custom = $(".for-color-custom", containe_colortype_choose);
+                if (self._isColor(value)) {
+                    colorTypeInput = $("input[type='color']", for_color_custom);
+                    self.radioChecked(colorTypeRadios, "forCustom");
+                    colorTypeInput.val(value);
+                    self._changeColorInputByColorTypeInput(colorTypeInput);
+                } else {
+                    self.radioChecked(colorTypeRadios, "inherit#color");
+                    self.switchInputEnable(for_color_custom, true);
                 }
-                if (input_type == "radio") {
-                    self.radioChecked(inputs, itemValue);
-                }
-                if (input_type == "range") {
-                    inputs.val(itemValue);
-                    inputs.next().text(itemValue);
-                }
-                if (input_type == "color") {
-                    if (self._isColor(itemValue)) {
-                        inputs.val(itemValue);
-                    }
-                }
-                if (inputs.hasClass("color-input")) {
-                    self._setColorInputValAndBorderColor(inputs, itemValue);
-                }
-                inputs = null;
             }
         });
     },
-    defaultAction: function() {},
-    events: {
-        "click input[type='radio']": "clickRadioHandler",
-        "keyup input[type='number']": "changeNumberHandler",
-        "change input[type='number']": "changeNumberHandler",
-        "change input[type='range']": "changeNumberHandler",
-        "change input[type='color']": "colorTypeInputValueChangeHanlder",
-        "keyup input.color-input": "colorInputValueChangeHanlder"
-    },
-    radioChecked: function(radios, checkedVal) {
-        var temp;
-        _.each(radios, function(radio) {
-            temp = $(radio);
-            if (temp.val() == checkedVal) {
-                temp.prop("checked", true);
-            }
-            temp = null;
+    events: function() {
+        return _.extend({}, BaseView.prototype.events, {
+            "click input[type='radio'][name='color-group']": "colorTypeSwitchClickHandler",
+            "click input[type='radio'][name='borderColor-group']": "colorTypeSwitchClickHandler",
+            "click input[type='radio'][name='color.hl-group']": "colorTypeSwitchClickHandler",
+            "click input[type='radio'][name='borderColor.hl-group']": "colorTypeSwitchClickHandler"
         });
     },
-    colorTypeInputValueChangeHanlder: function(e) {
-        var colorTypeInput = $(e.target);
-        this._changeColorInpus(colorTypeInput);
-        this.valueChangeHanlder(e);
+    colorTypeSwitchClickHandler: function(e) {
+        var radio = $(e.target);
+        var containe_colortype_choose = radio.closest(".containe-colortype-choose");
+        var forColorCustom = $(".for-color-custom", containe_colortype_choose);
+        this.switchForCustomEnable(radio, forColorCustom);
     },
-    colorInputValueChangeHanlder: function(e) {
-        var colorInput = $(e.target);
-        var colorInputVal = colorInput.val();
-        if (!this._isColor(colorInputVal)) {
-            return;
+    switchForCustomEnable: function(radio, forColorCustom) {
+        var isEnable = false;
+        if (radio.val() == "forCustom") {
+            isEnable = true;
         }
-        var colorTypeInput = colorInput.prev();
-        colorTypeInput.val(colorInputVal);
-        this.valueChangeHanlder(e);
-    },
-    _changeColorInpus: function(colorTypeInput) {
-        var colorTypeInput = colorTypeInput;
-        var colorInput = colorTypeInput.next();
-        this._setColorInputValAndBorderColor(colorInput, colorTypeInput.val());
-    },
-    clickRadioHandler: function(e) {
-        this.valueChangeHanlder(e);
-    },
-    _setColorInputValAndBorderColor: function(input, color) {
-        if (this._isColor(color)) {
-            input.val(color);
-            input.css("borderColor", color);
-        }
-    },
-    _isColor: function(color) {
-        var colorReg = /^#([0-9]|[a-f]){6}$/i;
-        return colorReg.test(color);
-    },
-    changeNumberHandler: function(e) {
-        var jq_target = $(e.target);
-        if (jq_target.is("input[type='range']")) {
-            jq_target.next().text(jq_target.val());
-        }
-        this.valueChangeHanlder(e);
+        this.switchInputEnable(forColorCustom, isEnable);
     },
     valueChangeHanlder: function(e) {
         var target = $(e.target);
         var well = target.closest(".containe");
+        var propertyKey = well.data("key");
+        var propertyVal = target.val();
         if (!well.length) {
             well = target.closest(".containe-colortype-choose");
         }
+        propertyKey = well.data("key");
+        propertyVal = target.val();
+        if (propertyVal == "forCustom") {
+            propertyVal = $(".for-color-custom .color-input", well).val();
+        }
+        this.model.set(propertyKey, propertyVal);
+    }
+});
+
+var LineDotView = BaseView.extend({
+    setDefaultValue: function() {
+        LineDotView.__super__.setDefaultValue.apply(this, arguments);
+        var self = this;
+        _.each(this.model.attributes, function(value, key) {
+            var containe_colortype_choose = $(".containe-colortype-choose[data-key='" + key + "']", self.$el);
+            var colorTypeRadios, for_color_custom, colorTypeInput;
+            if (containe_colortype_choose.length) {
+                colorTypeRadios = $(".colorTypeRadios input[type='radio']", containe_colortype_choose);
+                for_color_custom = $(".for-color-custom", containe_colortype_choose);
+                if (self._isColor(value)) {
+                    colorTypeInput = $("input[type='color']", for_color_custom);
+                    self.radioChecked(colorTypeRadios, "forCustom");
+                    colorTypeInput.val(value);
+                    self._changeColorInputByColorTypeInput(colorTypeInput);
+                } else {
+                    self.radioChecked(colorTypeRadios, "inherit#color");
+                    self.switchInputEnable(for_color_custom, true);
+                }
+            }
+        });
+    },
+    events: function() {
+        return _.extend({}, BaseView.prototype.events, {
+            "click input[type='radio'][name='color-group']": "colorTypeSwitchClickHandler",
+            "click input[type='radio'][name='borderColor-group']": "colorTypeSwitchClickHandler",
+            "click input[type='radio'][name='color.hl-group']": "colorTypeSwitchClickHandler",
+            "click input[type='radio'][name='borderColor.hl-group']": "colorTypeSwitchClickHandler"
+        });
+    },
+    colorTypeSwitchClickHandler: function(e) {
+        var radio = $(e.target);
+        var containe_colortype_choose = radio.closest(".containe-colortype-choose");
+        var forColorCustom = $(".for-color-custom", containe_colortype_choose);
+        this.switchForCustomEnable(radio, forColorCustom);
+    },
+    switchForCustomEnable: function(radio, forColorCustom) {
+        var isEnable = false;
+        if (radio.val() == "forCustom") {
+            isEnable = true;
+        }
+        this.switchInputEnable(forColorCustom, isEnable);
+    },
+    valueChangeHanlder: function(e) {
+        var target = $(e.target);
+        var well = target.closest(".containe");
         var propertyKey = well.data("key");
         var propertyVal = target.val();
-        this.model.set(propertyKey, propertyVal);
-    },
-    switchInputEnable: function(jq_content, isEnable) {
-        var inputs = $("input", jq_content);
-        if (isEnable) {
-            inputs.attr("disabled", true);
-        } else {
-            inputs.attr("disabled", false);
+        if (!well.length) {
+            well = target.closest(".containe-colortype-choose");
         }
+        propertyKey = well.data("key");
+        propertyVal = target.val();
+        if (propertyVal == "forCustom") {
+            propertyVal = $(".for-color-custom .color-input", well).val();
+        }
+        this.model.set(propertyKey, propertyVal);
+    }
+});
+
+var BarView = ChartView.extend({
+    defaultSetting: function() {
+        var barStyleView = new BarStyleView({
+            modelClz: BaseModel,
+            modelAttributes: StyleCenter.getInstance().getStyle("bar"),
+            styleName: "bar",
+            el: $("#bar-style-set")
+        });
+        this.views.push(barStyleView);
+        this.model.push(barStyleView.model);
     }
 });
 
@@ -9692,18 +9823,7 @@ var CommonView = BaseView.extend({
     }
 });
 
-var GeneralView = Backbone.View.extend({
-    initialize: function() {
-        this.views = [];
-        this.defaultSetting();
-    },
-    remove: function() {
-        _.each(this.views, function(view) {
-            view.remove();
-        });
-        this.constructor.__super__.remove.apply(this, arguments);
-        return this;
-    },
+var GeneralView = ChartView.extend({
     defaultSetting: function() {
         var commonView = new CommonView({
             modelClz: CommonModel,
@@ -9799,9 +9919,9 @@ var TooltipView = BaseView.extend({
     },
     switchForSimpleEnable: function(radio) {
         var forSimple = this.$el.find("#for-backgroundType-simple");
-        var isEnable = true;
+        var isEnable = false;
         if (radio.val() == "simple") {
-            isEnable = false;
+            isEnable = true;
         }
         this.switchInputEnable(forSimple, isEnable);
     }
@@ -9838,13 +9958,10 @@ jQuery(function($) {
                 });
                 $("#download").click(function(e) {
                     e.preventDefault();
-                    get_blob_builder = function() {
-                        return window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
-                    };
-                    var BB = get_blob_builder();
-                    var bb = new BB();
-                    bb.append(StyleCenter.getInstance().returnCSSText());
-                    saveAs(bb.getBlob("text/plain;charset=utf-8"), "chart.css");
+                    var blob = new Blob([ StyleCenter.getInstance().returnCSSText() ], {
+                        type: "text/plain;charset=utf-8"
+                    });
+                    saveAs(blob, "chart.css");
                 });
             },
             chartTypeSwitchModel: function() {
@@ -9900,19 +10017,19 @@ jQuery(function($) {
 
 var LineDotView = BaseView.extend({
     setDefaultValue: function() {
-        this.constructor.__super__.setDefaultValue.apply(this, arguments);
+        LineDotView.__super__.setDefaultValue.apply(this, arguments);
         var self = this;
         _.each(this.model.attributes, function(value, key) {
             var containe_colortype_choose = $(".containe-colortype-choose[data-key='" + key + "']", self.$el);
-            var colorTypeRadios, for_color_custom, colorInput;
+            var colorTypeRadios, for_color_custom, colorTypeInput;
             if (containe_colortype_choose.length) {
                 colorTypeRadios = $(".colorTypeRadios input[type='radio']", containe_colortype_choose);
                 for_color_custom = $(".for-color-custom", containe_colortype_choose);
                 if (self._isColor(value)) {
-                    colorInput = $("input[type='color']", for_color_custom);
+                    colorTypeInput = $("input[type='color']", for_color_custom);
                     self.radioChecked(colorTypeRadios, "forCustom");
-                    colorInput.val(value);
-                    self._changeColorInpus(colorInput);
+                    colorTypeInput.val(value);
+                    self._changeColorInputByColorTypeInput(colorTypeInput);
                 } else {
                     self.radioChecked(colorTypeRadios, "inherit#color");
                     self.switchInputEnable(for_color_custom, true);
@@ -9923,7 +10040,9 @@ var LineDotView = BaseView.extend({
     events: function() {
         return _.extend({}, BaseView.prototype.events, {
             "click input[type='radio'][name='color-group']": "colorTypeSwitchClickHandler",
-            "click input[type='radio'][name='borderColor-group']": "colorTypeSwitchClickHandler"
+            "click input[type='radio'][name='borderColor-group']": "colorTypeSwitchClickHandler",
+            "click input[type='radio'][name='color.hl-group']": "colorTypeSwitchClickHandler",
+            "click input[type='radio'][name='borderColor.hl-group']": "colorTypeSwitchClickHandler"
         });
     },
     colorTypeSwitchClickHandler: function(e) {
@@ -9933,26 +10052,30 @@ var LineDotView = BaseView.extend({
         this.switchForCustomEnable(radio, forColorCustom);
     },
     switchForCustomEnable: function(radio, forColorCustom) {
-        var isEnable = true;
+        var isEnable = false;
         if (radio.val() == "forCustom") {
-            isEnable = false;
+            isEnable = true;
         }
         this.switchInputEnable(forColorCustom, isEnable);
+    },
+    valueChangeHanlder: function(e) {
+        var target = $(e.target);
+        var well = target.closest(".containe");
+        var propertyKey = well.data("key");
+        var propertyVal = target.val();
+        if (!well.length) {
+            well = target.closest(".containe-colortype-choose");
+        }
+        propertyKey = well.data("key");
+        propertyVal = target.val();
+        if (propertyVal == "forCustom") {
+            propertyVal = $(".for-color-custom .color-input", well).val();
+        }
+        this.model.set(propertyKey, propertyVal);
     }
 });
 
-var LineView = Backbone.View.extend({
-    initialize: function() {
-        this.views = [];
-        this.defaultSetting();
-    },
-    remove: function() {
-        _.each(this.views, function(view) {
-            view.remove();
-        });
-        this.constructor.__super__.remove.apply(this, arguments);
-        return this;
-    },
+var LineView = ChartView.extend({
     defaultSetting: function() {
         var lineStyleView = new BaseView({
             modelClz: BaseModel,
@@ -9970,6 +10093,14 @@ var LineView = Backbone.View.extend({
         });
         this.views.push(lineDotView);
         this.model.push(lineDotView.model);
+        var guideLineView = new BaseView({
+            modelClz: BaseModel,
+            modelAttributes: StyleCenter.getInstance().getStyle("guideline"),
+            styleName: "guideLine",
+            el: $("#guideLine-set")
+        });
+        this.views.push(guideLineView);
+        this.model.push(guideLineView.model);
     }
 });
 
@@ -9991,18 +10122,7 @@ var PieSliceSetModel = BaseModel.extend({
 
 var PieSliceSetView = BaseView.extend({});
 
-var PieView = Backbone.View.extend({
-    initialize: function() {
-        this.views = [];
-        this.defaultSetting();
-    },
-    remove: function() {
-        _.each(this.views, function(view) {
-            view.remove();
-        });
-        PieView.__super__.remove.apply(this, arguments);
-        return this;
-    },
+var PieView = ChartView.extend({
     defaultSetting: function() {
         var pieChartSetView = new PieChartSetView({
             modelClz: PieChartSetModel,

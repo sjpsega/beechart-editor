@@ -9,7 +9,7 @@ h3 Line Dot
         span 方形 
     label.radio.inline
         input(type="radio",name="shape-group",value="diamond")
-        span 直线
+        span 菱形
 .containe-colortype-choose(data-key="color")
     h5 点的颜色
     .colorTypeRadios
@@ -21,7 +21,19 @@ h3 Line Dot
             span 自定义
     .for-color-custom
         input(type="color")
-        input(type="text").help-inline.color-input
+        input(type="text",value="#000000").help-inline.color-input
+.containe(data-key="dropShadow")
+    h5 点阴影
+    label.radio.inline
+        input(type="radio",name="dot-dropShadow-group",value="light")
+        span 有
+    label.radio.inline
+        input(type="radio",name="dot-dropShadow-group",value="none")
+        span 无
+.containe(data-key="radius")
+    h5 点的半径
+    input(type="range",max="20",min="0",step="0.1")
+    span
 .containe-colortype-choose(data-key="borderColor")
     h5 点的边框颜色
     .colorTypeRadios
@@ -33,4 +45,68 @@ h3 Line Dot
             span 自定义
     .for-color-custom
         input(type="color")
-        input(type="text").help-inline.color-input
+        input(type="text",value="#000000").help-inline.color-input
+.containe(data-key="borderThickness")
+    h5 点的边框粗细
+    input(type="range",max="20",min="0",step="0.1")
+    span
+.containe(data-key="borderAlpha")
+    h5 点的边框透明度
+    input(type="range",max="1",min="0",step="0.1")
+    span
+h3 Line Dot(高亮状态)
+.containe(data-key="shape.hl")
+    h5 点的形状
+    label.radio.inline
+        input(type="radio",name="shape.hl-group",value="circle")
+        span 圆形
+    label.radio.inline
+        input(type="radio",name="shape.hl-group",value="square")
+        span 方形 
+    label.radio.inline
+        input(type="radio",name="shape.hl-group",value="diamond")
+        span 菱形
+.containe-colortype-choose(data-key="color.hl")
+    h5 点的颜色
+    .colorTypeRadios
+        label.radio.inline
+            input(type="radio",name="color.hl-group",value="inherit#color")
+            span 与线的颜色一致
+        label.radio.inline
+            input(type="radio",name="color.hl-group",value="forCustom")
+            span 自定义
+    .for-color-custom
+        input(type="color")
+        input(type="text",value="#000000").help-inline.color-input
+.containe(data-key="dropShadow.hl")
+    h5 点阴影
+    label.radio.inline
+        input(type="radio",name="dot-dropShadow.hl-group",value="light")
+        span 有
+    label.radio.inline
+        input(type="radio",name="dot-dropShadow.hl-group",value="none")
+        span 无
+.containe(data-key="radius.hl")
+    h5 点的半径
+    input(type="range",max="20",min="0",step="0.1")
+    span
+.containe-colortype-choose(data-key="borderColor.hl")
+    h5 点的边框颜色
+    .colorTypeRadios
+        label.radio.inline
+            input(type="radio",name="borderColor.hl-group",value="inherit#color")
+            span 与线的颜色一致
+        label.radio.inline
+            input(type="radio",name="borderColor.hl-group",value="forCustom")
+            span 自定义
+    .for-color-custom
+        input(type="color")
+        input(type="text",value="#000000").help-inline.color-input
+.containe(data-key="borderThickness.hl")
+    h5 点的边框粗细
+    input(type="range",max="20",min="0",step="0.1")
+    span
+.containe(data-key="borderAlpha.hl")
+    h5 点的边框透明度
+    input(type="range",max="1",min="0",step="0.1")
+    span

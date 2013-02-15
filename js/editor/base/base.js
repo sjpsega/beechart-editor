@@ -1,3 +1,8 @@
+/*
+ 样式区块基类
+ @author  jianping.shenjp
+ @date    2012-11-2
+*/
 var BaseModel = Backbone.Model.extend({
     
 });
@@ -77,7 +82,7 @@ var BaseView = Backbone.View.extend({
     */
     colorTypeInputValueChangeHanlder:function(e){
         var colorTypeInput = $(e.target);
-        this._changeColorInpus(colorTypeInput);
+        this._changeColorInputByColorTypeInput(colorTypeInput);
         this.valueChangeHanlder(e);
     },
     /*
@@ -89,20 +94,22 @@ var BaseView = Backbone.View.extend({
         if(!this._isColor(colorInputVal)){
             return;
         }
+        colorInput.css("borderColor",colorInputVal);
         var colorTypeInput = colorInput.prev();
         colorTypeInput.val(colorInputVal);
         this.valueChangeHanlder(e);
     },
-    _changeColorInpus:function(colorTypeInput){
+    /*
+    * 根据color选择框的值修改输入框的值和背景颜色
+    */
+    _changeColorInputByColorTypeInput:function(colorTypeInput){
         var colorTypeInput = colorTypeInput;
         var colorInput = colorTypeInput.next();
         this._setColorInputValAndBorderColor(colorInput,colorTypeInput.val());
     },
-    clickRadioHandler : function(e){
-        this.valueChangeHanlder(e);
-    },
     _setColorInputValAndBorderColor:function(input,color){
         if(this._isColor(color)){
+            input = input.filter(".color-input");
             input.val(color);
             input.css("borderColor",color);
         }
@@ -110,6 +117,9 @@ var BaseView = Backbone.View.extend({
     _isColor:function(color){
         var colorReg = /^#([0-9]|[a-f]){6}$/i;
         return colorReg.test(color);
+    },
+    clickRadioHandler : function(e){
+        this.valueChangeHanlder(e);
     },
     changeNumberHandler : function(e){
         var jq_target = $(e.target);
@@ -121,9 +131,6 @@ var BaseView = Backbone.View.extend({
     valueChangeHanlder : function(e){
         var target = $(e.target);
         var well = target.closest(".containe")
-        if(!well.length){
-            well = target.closest(".containe-colortype-choose");
-        }
         var propertyKey = well.data("key");
         var propertyVal = target.val();
         this.model.set(propertyKey,propertyVal);
@@ -131,9 +138,9 @@ var BaseView = Backbone.View.extend({
     switchInputEnable:function(jq_content,isEnable){
         var inputs = $("input",jq_content);
         if(isEnable){
-            inputs.attr("disabled",true);
-        }else{
             inputs.attr("disabled",false);
+        }else{
+            inputs.attr("disabled",true);
         }
     }
 });

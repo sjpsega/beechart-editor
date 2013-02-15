@@ -98,12 +98,14 @@ html
                         include include/line/line-style-set.jade
                     .well#line-dot-set
                         include include/line/line-dot-set.jade
+                    .well#guideLine-set
+                        include include/line/guideLine-set.jade
         script(type="text/template")#bar-config
             ul.nav.nav-tabs
                 li.active
                     a(href="#general",data-toggle="tab") 通用样式
                 li
-                    a(href="#bar",data-toggle="tab") 折线专有
+                    a(href="#bar",data-toggle="tab") 柱形专有
             .tab-content
                 .tab-pane.active#general
                     .well#common-set
@@ -112,7 +114,24 @@ html
                         include include/legend-set.jade
                     .well#tooltip-set
                         include include/tooltip-set.jade
+                    .well#xAxis-set
+                        h3 X轴
+                        include include/axis-set.jade
+                    .well#xAxis-label-set
+                        h3 X轴文字
+                        include include/xaxis-label-set.jade
+                    #for-yAxis-visible
+                        .well#yAxis-set
+                            h3 Y轴
+                            include include/axis-set.jade
+                        .well#yAxis-label-set
+                            h3 Y轴文字
+                            include include/yaxis-label-set.jade
+                    .well#canvas-set
+                        include include/canvas-set.jade
                 .tab-pane#bar
+                    .well#bar-style-set
+                        include include/bar/bar-style-set.jade
         script(type="text/template")#timeline-config
 
 

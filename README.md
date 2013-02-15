@@ -14,9 +14,9 @@
 * 载入样式，拖拽方式？
 * 保存样式，本地保存，html5
 
-## 使用到的开源软件
+## 感谢使用到的开源软件
 
-* Grunt
+* Grunt 0.4+
 * Bootstrap
 * Backbone
 * FileSaver

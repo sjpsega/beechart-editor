@@ -134,7 +134,7 @@ line {
         borderAlpha              number值(0-1)                                  点边框的线条透明度
         dropShadow               light\none                                     点阴影
 
-    guideLine(引导线)
+    guideline(引导线)
         color                    css颜色值                                      线条颜色
 
 ## TimeLine特有样式
@@ -142,19 +142,19 @@ line {
     line
         thickness                number值                                       线条的粗细
 
-    guideLine(引导线)
+    guideline(引导线)
         color                    css颜色值                                      线条颜色
 
 ## Bar、HBar特有样式
 
     bar(特有状态.hl)
+        color                   css颜色值                   柱形的颜色
         dropShadow              light\none                  阴影
+        brightnessFading        number值((-1)-1)            柱形颜色渐变值
+        backgroundType          slash(特定)\simple(常规)    背景形式
         borderThickness         number值                    柱形边框线条粗细
         borderColor             css颜色值                   柱形边框颜色
         borderAlpha             number值(0-1)               柱形边框透明度
-        brightnessFading        number值((-1)-1)            柱形颜色渐变值
-        color                   css颜色值                   柱形的颜色
-        backgroundType          slash(特定)\simple(常规)    背景形式
         valueVisibility         visible\none                柱形顶部是否显示数值
     
 ## Pie特有样式

@@ -3,19 +3,16 @@
  @author  jianping.shenjp
  @date    2012-11-2
 */
-var BarView = Backbone.View.extend({
-    initialize:function(){
-        this.views = [];
-        this.defaultSetting();
-    },
-    remove:function(){
-        _.each(this.views,function(view){
-            view.remove();
-        });
-        BarView.__super__.remove.apply(this,arguments);
-        return this;
-    },
+var BarView = ChartView.extend({
     defaultSetting:function(){
+        var barStyleView = new BarStyleView({
+            modelClz:BaseModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("bar"),
+            styleName : "bar",
+            el:$("#bar-style-set")
+        });
+        this.views.push(barStyleView);
+        this.model.push(barStyleView.model);
         // var pieChartSetView = new PieChartSetView({
         //     modelClz:PieChartSetModel,
         //     modelAttributes : StyleCenter.getInstance().getStyle("chart"),

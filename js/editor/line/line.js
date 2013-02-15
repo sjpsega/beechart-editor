@@ -3,18 +3,7 @@
  @author  jianping.shenjp
  @date    2012-11-2
 */
-var LineView = Backbone.View.extend({
-    initialize:function(){
-        this.views = [];
-        this.defaultSetting();
-    },
-    remove:function(){
-        _.each(this.views,function(view){
-            view.remove();
-        });
-        this.constructor.__super__.remove.apply(this,arguments);
-        return this;
-    },
+var LineView = ChartView.extend({
     defaultSetting:function(){
         var lineStyleView = new BaseView({
             modelClz:BaseModel,
@@ -33,6 +22,15 @@ var LineView = Backbone.View.extend({
         });
         this.views.push(lineDotView);
         this.model.push(lineDotView.model);
+
+        var guideLineView = new BaseView({
+            modelClz:BaseModel,
+            modelAttributes : StyleCenter.getInstance().getStyle("guideline"),
+            styleName : "guideLine",
+            el:$("#guideLine-set")
+        });
+        this.views.push(guideLineView);
+        this.model.push(guideLineView.model);
 
         // var pieSliceSetView = new PieSliceSetView({
         //     modelClz:PieSliceSetModel,

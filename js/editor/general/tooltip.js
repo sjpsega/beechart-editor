@@ -32,9 +32,9 @@ var TooltipView = BaseView.extend({
     },
     switchForSimpleEnable:function(radio){
         var forSimple =  this.$el.find("#for-backgroundType-simple");
-        var isEnable = true;
+        var isEnable = false;
         if(radio.val()=="simple"){
-            isEnable = false;
+            isEnable = true;
         }
         this.switchInputEnable(forSimple,isEnable);
     }

@@ -528,13 +528,13 @@
                 <input type="radio" name="lineMethod-group" value="line"><span>直线</span>
               </label>
             </div>
-            <div data-key="dropshadow" class="containe">
+            <div data-key="dropShadow" class="containe">
               <h5>线条阴影</h5>
               <label class="radio inline">
-                <input type="radio" name="dropshadow-group" value="light"><span>有</span>
+                <input type="radio" name="dropShadow-group" value="light"><span>有</span>
               </label>
               <label class="radio inline">
-                <input type="radio" name="dropshadow-group" value="none"><span>无</span>
+                <input type="radio" name="dropShadow-group" value="none"><span>无</span>
               </label>
             </div>
             <div data-key="thickness" class="containe">
@@ -564,13 +564,13 @@
                 <input type="radio" name="lineMethod.active-group" value="line"><span>直线</span>
               </label>
             </div>
-            <div data-key="dropshadow.active" class="containe">
+            <div data-key="dropShadow.active" class="containe">
               <h5>线条阴影</h5>
               <label class="radio inline">
-                <input type="radio" name="dropshadow.active-group" value="light"><span>有</span>
+                <input type="radio" name="dropShadow.active-group" value="light"><span>有</span>
               </label>
               <label class="radio inline">
-                <input type="radio" name="dropshadow.active-group" value="none"><span>无</span>
+                <input type="radio" name="dropShadow.active-group" value="none"><span>无</span>
               </label>
             </div>
             <div data-key="thickness.active" class="containe">
@@ -602,7 +602,7 @@
                 <input type="radio" name="shape-group" value="square"><span>方形 </span>
               </label>
               <label class="radio inline">
-                <input type="radio" name="shape-group" value="diamond"><span>直线</span>
+                <input type="radio" name="shape-group" value="diamond"><span>菱形</span>
               </label>
             </div>
             <div data-key="color" class="containe-colortype-choose">
@@ -617,8 +617,21 @@
               </div>
               <div class="for-color-custom">
                 <input type="color">
-                <input type="text" class="help-inline color-input">
+                <input type="text" value="#000000" class="help-inline color-input">
               </div>
+            </div>
+            <div data-key="dropShadow" class="containe">
+              <h5>点阴影</h5>
+              <label class="radio inline">
+                <input type="radio" name="dot-dropShadow-group" value="light"><span>有</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="dot-dropShadow-group" value="none"><span>无</span>
+              </label>
+            </div>
+            <div data-key="radius" class="containe">
+              <h5>点的半径</h5>
+              <input type="range" max="20" min="0" step="0.1"><span></span>
             </div>
             <div data-key="borderColor" class="containe-colortype-choose">
               <h5>点的边框颜色</h5>
@@ -632,8 +645,88 @@
               </div>
               <div class="for-color-custom">
                 <input type="color">
-                <input type="text" class="help-inline color-input">
+                <input type="text" value="#000000" class="help-inline color-input">
               </div>
+            </div>
+            <div data-key="borderThickness" class="containe">
+              <h5>点的边框粗细</h5>
+              <input type="range" max="20" min="0" step="0.1"><span></span>
+            </div>
+            <div data-key="borderAlpha" class="containe">
+              <h5>点的边框透明度</h5>
+              <input type="range" max="1" min="0" step="0.1"><span></span>
+            </div>
+            <h3>Line Dot(高亮状态)</h3>
+            <div data-key="shape.hl" class="containe">
+              <h5>点的形状</h5>
+              <label class="radio inline">
+                <input type="radio" name="shape.hl-group" value="circle"><span>圆形</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="shape.hl-group" value="square"><span>方形 </span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="shape.hl-group" value="diamond"><span>菱形</span>
+              </label>
+            </div>
+            <div data-key="color.hl" class="containe-colortype-choose">
+              <h5>点的颜色</h5>
+              <div class="colorTypeRadios">
+                <label class="radio inline">
+                  <input type="radio" name="color.hl-group" value="inherit#color"><span>与线的颜色一致</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="color.hl-group" value="forCustom"><span>自定义</span>
+                </label>
+              </div>
+              <div class="for-color-custom">
+                <input type="color">
+                <input type="text" value="#000000" class="help-inline color-input">
+              </div>
+            </div>
+            <div data-key="dropShadow.hl" class="containe">
+              <h5>点阴影</h5>
+              <label class="radio inline">
+                <input type="radio" name="dot-dropShadow.hl-group" value="light"><span>有</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="dot-dropShadow.hl-group" value="none"><span>无</span>
+              </label>
+            </div>
+            <div data-key="radius.hl" class="containe">
+              <h5>点的半径</h5>
+              <input type="range" max="20" min="0" step="0.1"><span></span>
+            </div>
+            <div data-key="borderColor.hl" class="containe-colortype-choose">
+              <h5>点的边框颜色</h5>
+              <div class="colorTypeRadios">
+                <label class="radio inline">
+                  <input type="radio" name="borderColor.hl-group" value="inherit#color"><span>与线的颜色一致</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="borderColor.hl-group" value="forCustom"><span>自定义</span>
+                </label>
+              </div>
+              <div class="for-color-custom">
+                <input type="color">
+                <input type="text" value="#000000" class="help-inline color-input">
+              </div>
+            </div>
+            <div data-key="borderThickness.hl" class="containe">
+              <h5>点的边框粗细</h5>
+              <input type="range" max="20" min="0" step="0.1"><span></span>
+            </div>
+            <div data-key="borderAlpha.hl" class="containe">
+              <h5>点的边框透明度</h5>
+              <input type="range" max="1" min="0" step="0.1"><span></span>
+            </div>
+          </div>
+          <div id="guideLine-set" class="well">
+            <h3>GrideLine(引导线)</h3>
+            <div data-key="color" class="containe">
+              <h5>颜色</h5>
+              <input type="color">
+              <input type="text" value="#000000" class="help-inline color-input">
             </div>
           </div>
         </div>
@@ -642,7 +735,7 @@
     <script type="text/template" id="bar-config">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#general" data-toggle="tab">通用样式</a></li>
-        <li><a href="#bar" data-toggle="tab">折线专有</a></li>
+        <li><a href="#bar" data-toggle="tab">柱形专有</a></li>
       </ul>
       <div class="tab-content">
         <div id="general" class="tab-pane active">
@@ -801,8 +894,226 @@
               </div>
             </div>
           </div>
+          <div id="xAxis-set" class="well">
+            <h3>X轴</h3>
+            <div data-key="tickLength" class="containe">
+              <h5>端点长度</h5>
+              <input type="range" max="10" min="0" step="0.1"><span></span>
+            </div>
+            <div data-key="tickThickness" class="containe">
+              <h5>端点粗细</h5>
+              <input type="range" max="10" min="0" step="0.1"><span></span>
+            </div>
+            <div data-key="tickColor" class="containe">
+              <h5>端点的颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="lineThickness" class="containe">
+              <h5>轴线的粗细</h5>
+              <input type="range" max="10" min="0" step="0.1"><span></span>
+            </div>
+            <div data-key="lineColor" class="containe">
+              <h5>轴线的颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+          </div>
+          <div id="xAxis-label-set" class="well">
+            <h3>X轴文字</h3>
+            <div data-key="visibility" class="containe">
+              <h5>是否显示</h5>
+              <label class="radio inline">
+                <input type="radio" name="xasix-visibility-group" value="visible"><span>显示</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="xasix-visibility-group" value="hidden"><span>隐藏</span>
+              </label>
+            </div>
+            <div data-key="color" class="containe">
+              <h5>颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+          </div>
+          <div id="for-yAxis-visible">
+            <div id="yAxis-set" class="well">
+              <h3>Y轴</h3>
+              <div data-key="tickLength" class="containe">
+                <h5>端点长度</h5>
+                <input type="range" max="10" min="0" step="0.1"><span></span>
+              </div>
+              <div data-key="tickThickness" class="containe">
+                <h5>端点粗细</h5>
+                <input type="range" max="10" min="0" step="0.1"><span></span>
+              </div>
+              <div data-key="tickColor" class="containe">
+                <h5>端点的颜色</h5>
+                <input type="color">
+                <input type="text" class="help-inline color-input">
+              </div>
+              <div data-key="lineThickness" class="containe">
+                <h5>轴线的粗细</h5>
+                <input type="range" max="10" min="0" step="0.1"><span></span>
+              </div>
+              <div data-key="lineColor" class="containe">
+                <h5>轴线的颜色</h5>
+                <input type="color">
+                <input type="text" class="help-inline color-input">
+              </div>
+            </div>
+            <div id="yAxis-label-set" class="well">
+              <h3>Y轴文字</h3>
+              <div data-key="visibility" class="containe">
+                <h5>是否显示</h5>
+                <label class="radio inline">
+                  <input type="radio" name="yasix-visibility-group" value="visible"><span>显示</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="yasix-visibility-group" value="hidden"><span>隐藏</span>
+                </label>
+              </div>
+              <div data-key="color" class="containe">
+                <h5>颜色</h5>
+                <input type="color">
+                <input type="text" class="help-inline color-input">
+              </div>
+            </div>
+          </div>
+          <div id="canvas-set" class="well">
+            <h3>Canvas</h3>
+            <div data-key="borderColor" class="containe">
+              <h5>外边框颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="borderThickness" class="containe">
+              <h5>外边框粗细</h5>
+              <input type="range" max="10" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="borderAlpha" class="containe">
+              <h5>外边框透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="backgroundColor" class="containe">
+              <h5>背景颜色1</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="backgroundColor2" class="containe">
+              <h5>背景颜色2</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="backgroundAlpha" class="containe">
+              <h5>背景透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="gridColor" class="containe">
+              <h5>内网格颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="gridThickness" class="containe">
+              <h5>内网格粗细</h5>
+              <input type="range" max="10" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="gridAlpha" class="containe">
+              <h5>内网格透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="priLineColor" class="containe">
+              <h5>横网格颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="priLineThickness" class="containe">
+              <h5>横网格粗细</h5>
+              <input type="range" max="10" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="priLineAlpha" class="containe">
+              <h5>横网格透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="priLineStyle" class="containe">
+              <h5>横网格类型</h5>
+              <label class="radio inline">
+                <input type="radio" name="priLineStyle-group" value="line"><span>实线</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="priLineStyle-group" value="dashed"><span>点线</span>
+              </label>
+            </div>
+            <div data-key="secLineColor" class="containe">
+              <h5>竖网格颜色</h5>
+              <input type="color">
+              <input type="text" class="help-inline color-input">
+            </div>
+            <div data-key="secLineThickness" class="containe">
+              <h5>竖网格粗细</h5>
+              <input type="range" max="10" min="0" step="0.5"><span></span>
+            </div>
+            <div data-key="secLineAlpha" class="containe">
+              <h5>竖网格透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+            <div data-key="secLineStyle" class="containe">
+              <h5>竖网格类型</h5>
+              <label class="radio inline">
+                <input type="radio" name="secLineStyle-group" value="line"><span>实线</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="secLineStyle-group" value="dashed"><span>点线</span>
+              </label>
+            </div>
+          </div>
         </div>
-        <div id="bar" class="tab-pane"></div>
+        <div id="bar" class="tab-pane">
+          <div id="bar-style-set" class="well">
+            <h3>Bar</h3>
+            <div data-key="color" class="containe-colortype-choose">
+              <h5>点的颜色</h5>
+              <div class="colorTypeRadios">
+                <label class="radio inline">
+                  <input type="radio" name="color-group" value="inherit#color"><span>与线的颜色一致</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="color-group" value="forCustom"><span>自定义</span>
+                </label>
+              </div>
+              <div class="for-color-custom">
+                <input type="color">
+                <input type="text" value="#000000" class="help-inline color-input">
+              </div>
+            </div>
+            <div data-key="dropShadow" class="containe">
+              <h5>柱形阴影</h5>
+              <label class="radio inline">
+                <input type="radio" name="dropShadow-group" value="light"><span>有</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="dropShadow-group" value="none"><span>无</span>
+              </label>
+            </div>
+            <div data-key="thickness" class="containe">
+              <h5>线条粗细</h5>
+              <input type="range" max="10" min="0" step="0.1"><span></span>
+            </div>
+            <div data-key="fillType" class="containe">
+              <h5>线条辐射区类型</h5>
+              <label class="radio inline">
+                <input type="radio" name="fillType-group" value="gradient"><span>渐变</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="fillType-group" value="normal"><span>普通</span>
+              </label>
+            </div>
+            <div data-key="fillAlpha" class="containe">
+              <h5>线条辐射区透明度</h5>
+              <input type="range" max="1" min="0" step="0.01"><span></span>
+            </div>
+          </div>
+        </div>
       </div>
     </script>
     <script type="text/template" id="timeline-config"></script>

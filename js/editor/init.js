@@ -16,13 +16,8 @@ jQuery(function($) {
                 });
                 $("#download").click(function(e){
                     e.preventDefault();
-                    get_blob_builder = function() {
-                      return window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
-                    }
-                    var BB = get_blob_builder();
-                    var bb = new BB();
-                    bb.append(StyleCenter.getInstance().returnCSSText());
-                    saveAs(bb.getBlob("text/plain;charset=utf-8"), "chart.css");
+                    var blob = new Blob([StyleCenter.getInstance().returnCSSText()], {type: "text/plain;charset=utf-8"});
+                    saveAs(blob, "chart.css");
                 });
             },
             chartTypeSwitchModel:function(){
