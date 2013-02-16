@@ -1,4 +1,4 @@
-h3 slice
+h3 Slice
 .containe(data-key="labelPosition")
     h5 圆饼对应label放置的方式
     label.radio.inline
@@ -19,7 +19,79 @@ h3 slice
     label.radio.inline
         input(type="radio",name="labelPosition-group",value="callout")
         span 引导线
+.containe(data-key="pieSliceAlpha")
+    h5 圆饼的透明度
+    input(type="range",max="1",min="0",step="0.01")
+    span
+.containe(data-key="pieLineThickness")
+    h5 圆饼与label连线的线条粗细
+    input(type="range",max="10",min="0",step="0.1")
+    span
+.containe(data-key="pieLineAlpha")
+    h5 圆饼与label连线的透明度
+    input(type="range",max="1",min="0",step="0.01")
+    span
+.containe(data-key="frameColor")
+    h5 圆饼边框线条颜色值
+    input(type="color")
+    input(type="text",value="#000000").help-inline.color-input
 .containe(data-key="frameThickness")
     h5 圆饼边框线条粗细
-    input(type="number",max="100",min="0")
+    input(type="range",max="100",min="0",step="0.1")
+    span
+.containe(data-key="offsetRadius")
+    h5 圆饼与中心的距离
+    input(type="range",max="50",min="0",step="0.1")
+    span
+.containe(data-key="donutThickness")
+    h5 圆环的粗细(圆环图)
+    input(type="range",max="250",min="0",step="0.1")
+    span
+.containe(data-key="donutMaskAlpha")
+    h5 圆饼内圈透明度(圆环图)
+    input(type="range",max="1",min="0",step="0.01")
+    span
+.containe(data-key="donutMaskColor")
+    h5 圆饼内圈颜色值(圆环图)
+    input(type="color")
+    input(type="text",value="#000000").help-inline.color-input
+h3 Slice(Hover状态)
+.containe(data-key="pieSliceAlpha.hl")
+    h5 圆饼的透明度
+    input(type="range",max="1",min="0",step="0.01")
+    span
+.containe(data-key="pieLineThickness.hl")
+    h5 圆饼与label连线的线条粗细
+    input(type="range",max="10",min="0",step="0.1")
+    span
+.containe(data-key="pieLineAlpha.hl")
+    h5 圆饼与label连线的透明度
+    input(type="range",max="1",min="0",step="0.01")
+    span
+.containe(data-key="frameColor.hl")
+    h5 圆饼边框线条颜色值
+    input(type="color")
+    input(type="text",value="#000000").help-inline.color-input
+.containe(data-key="frameThickness.hl")
+    h5 圆饼边框线条粗细
+    input(type="range",max="100",min="0",step="0.1")
+    span
+.containe(data-key="offsetRadius.hl")
+    h5 圆饼与中心的距离
+    input(type="range",max="50",min="0",step="0.1")
+    span
+.containe(data-key="donutThickness.hl")
+    h5 圆环的粗细(圆环图)
+    input(type="range",max="250",min="0",step="0.1")
+    span
+.containe(data-key="donutMaskAlpha.hl")
+    h5 圆饼内圈透明度(圆环图)
+    input(type="range",max="1",min="0",step="0.01")
+    span
+.containe(data-key="donutMaskColor.hl")
+    h5 圆饼内圈颜色值(圆环图)
+    input(type="color")
+    input(type="text",value="#000000").help-inline.color-input
+
+
 

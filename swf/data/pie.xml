@@ -4,15 +4,12 @@
 			<set name="Offline Marketing">
 				<values>1327</values>
 			</set>
-
 			<set name="Search">
 				<values>2042</values>
 			</set>
-
 			<set name="Paid Search">
 				<values>850</values>
 			</set>
-
 			<set name="From Mail">
 				<values>541</values>
 			</set>

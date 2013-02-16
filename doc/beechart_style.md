@@ -13,7 +13,7 @@ line {
 对应说明：
 
     chart(作用域)
-        smoot(参数名称)                boolean值(取值)                  切换效果是否平滑过度(参数含义)
+        smooh(参数名称)                boolean值(取值)                  切换效果是否平滑过度(参数含义)
 
     line(作用域)
         thickness(参数名称)            number值(取值)                   线条的粗细(参数含义)
@@ -22,7 +22,8 @@ line {
 
     chart
         smooth                   boolean值                      切换效果是否平滑过度
-        colors                   css颜色值，以","分隔           图表预设的颜色取值
+        *colors                   css颜色值，以","分隔           图表预设的颜色取值
+        enableTooltip            boolean值                      提示是否可用
 
     tooltip(提示)
         color(只在单条线下有效)         css颜色值                      文字颜色值
@@ -59,7 +60,6 @@ line {
         paddingBottom            number值                       图表显示区域下内边距
         leftAxisVisibility       visible、invisible             y轴是否可见
         animate                  boolean值                      是否有初始动画
-        enableTooltip            boolean值                      提示是否可用
         fix(废弃)                auto\none                      x轴数据居中显示
 
     xAxis(x轴)
@@ -162,14 +162,20 @@ line {
     chart
         animate                  clockwise、counter_clockwise、composite、expand                      初始动画类型
         startAngle               number值                                                             圆饼放置的初始角度
-    slice   
-        labelPosition                none\normal\inside\inside!\outside\callout   圆饼对应label放置的方式
-        frameThickness               number值                   圆饼边框线条粗细
-        frameColor                   css颜色值                  圆饼边框线条颜色值
+        order                    asc/desc/none                                                        排序方式
+
+    slice(特有状态.hl)   
+        labelPosition(无hl状态)      none\normal\inside\inside!\outside\callout   圆饼对应label放置的方式
         pieSliceAlpha                number值(0-1)              圆饼的透明度
         pieLineThickness             number值                   圆饼与label连线的线条粗细
         pieLineAlpha                 number值(0-1)              圆饼与label连线的透明度
+        frameColor                   css颜色值                  圆饼边框线条颜色值
+        frameThickness               number值                   圆饼边框线条粗细
         offsetRadius                 number值                   圆饼与中心的距离
         donutThickness               number值                   圆环的粗细(圆环图)
         donutMaskAlpha               number值(0-1)              圆饼内圈透明度(圆环图)
         donutMaskColor               css颜色值                  圆饼内圈颜色值(圆环图)
+        *text                         string值                   配置圆饼显示数据
+    
+    tooltip
+        *tip                          string值                    配置饼图tooltip显示文字

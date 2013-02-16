@@ -1,5 +1,5 @@
 h3 Line
-.containe(data-key="lineMethod")
+.containe(data-key="lineMethod").timeline-hide
     h5 线条绘制方式
     label.radio.inline
         input(type="radio",name="lineMethod-group",value="curve")
@@ -7,7 +7,7 @@ h3 Line
     label.radio.inline
         input(type="radio",name="lineMethod-group",value="line")
         span 直线
-.containe(data-key="dropShadow")
+.containe(data-key="dropShadow").timeline-hide
     h5 线条阴影
     label.radio.inline
         input(type="radio",name="dropShadow-group",value="light")
@@ -19,7 +19,7 @@ h3 Line
     h5 线条粗细
     input(type="range",max="10",min="0",step="0.1")
     span
-.containe(data-key="fillType")
+.containe(data-key="fillType").timeline-hide
     h5 线条辐射区类型
     label.radio.inline
         input(type="radio",name="fillType-group",value="gradient")
@@ -27,40 +27,41 @@ h3 Line
     label.radio.inline
         input(type="radio",name="fillType-group",value="normal")
         span 普通
-.containe(data-key="fillAlpha")
+.containe(data-key="fillAlpha").timeline-hide
     h5 线条辐射区透明度
     input(type="range",max="1",min="0",step="0.01")
     span
-h3 Line(高亮状态)
-.containe(data-key="lineMethod.active")
-    h5 线条绘制方式
-    label.radio.inline
-        input(type="radio",name="lineMethod.active-group",value="curve")
-        span 曲线
-    label.radio.inline
-        input(type="radio",name="lineMethod.active-group",value="line")
-        span 直线
-.containe(data-key="dropShadow.active")
-    h5 线条阴影
-    label.radio.inline
-        input(type="radio",name="dropShadow.active-group",value="light")
-        span 有
-    label.radio.inline
-        input(type="radio",name="dropShadow.active-group",value="none")
-        span 无
-.containe(data-key="thickness.active")
-    h5 线条粗细
-    input(type="range",max="10",min="0",step="0.1")
-    span
-.containe(data-key="fillType.active")
-    h5 线条辐射区类型
-    label.radio.inline
-        input(type="radio",name="fillType.active-group",value="gradient")
-        span 渐变
-    label.radio.inline
-        input(type="radio",name="fillType.active-group",value="normal")
-        span 普通
-.containe(data-key="fillAlpha.active")
-    h5 线条辐射区透明度
-    input(type="range",max="1",min="0",step="0.01")
-    span
+.timeline-hide
+    h3 Line(Hover状态)
+    .containe(data-key="lineMethod.active")
+        h5 线条绘制方式
+        label.radio.inline
+            input(type="radio",name="lineMethod.active-group",value="curve")
+            span 曲线
+        label.radio.inline
+            input(type="radio",name="lineMethod.active-group",value="line")
+            span 直线
+    .containe(data-key="dropShadow.active")
+        h5 线条阴影
+        label.radio.inline
+            input(type="radio",name="dropShadow.active-group",value="light")
+            span 有
+        label.radio.inline
+            input(type="radio",name="dropShadow.active-group",value="none")
+            span 无
+    .containe(data-key="thickness.active")
+        h5 线条粗细
+        input(type="range",max="10",min="0",step="0.1")
+        span
+    .containe(data-key="fillType.active")
+        h5 线条辐射区类型
+        label.radio.inline
+            input(type="radio",name="fillType.active-group",value="gradient")
+            span 渐变
+        label.radio.inline
+            input(type="radio",name="fillType.active-group",value="normal")
+            span 普通
+    .containe(data-key="fillAlpha.active")
+        h5 线条辐射区透明度
+        input(type="range",max="1",min="0",step="0.01")
+        span

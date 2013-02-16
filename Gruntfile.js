@@ -58,8 +58,7 @@ module.exports = function( grunt ) {
 									   "js/flash.js",
 									   "js/FileSaver.js",
 									   "js/log.js",
-									   "js/editor/base/base.js",
-									   "js/editor/base/chartbase.js",
+									   "js/editor/base/*.js",
 									   "js/**/*.js" ]
 				},
 				options: {

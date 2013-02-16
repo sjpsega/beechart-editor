@@ -9545,6 +9545,58 @@ var ChartView = Backbone.View.extend({
     defaultSetting: function() {}
 });
 
+var ColorTypeChooseView = BaseView.extend({
+    setDefaultValue: function() {
+        ColorTypeChooseView.__super__.setDefaultValue.apply(this, arguments);
+        var self = this;
+        _.each(this.model.attributes, function(value, key) {
+            var containe_colortype_choose = $(".containe-colortype-choose[data-key='" + key + "']", self.$el);
+            var colorTypeRadios, for_color_custom, colorTypeInput;
+            if (containe_colortype_choose.length) {
+                colorTypeRadios = $(".colorTypeRadios input[type='radio']", containe_colortype_choose);
+                for_color_custom = $(".for-color-custom", containe_colortype_choose);
+                if (self._isColor(value)) {
+                    colorTypeInput = $("input[type='color']", for_color_custom);
+                    self.radioChecked(colorTypeRadios, "forCustom");
+                    colorTypeInput.val(value);
+                    self._changeColorInputByColorTypeInput(colorTypeInput);
+                } else {
+                    self.radioChecked(colorTypeRadios, "inherit#color");
+                    self.switchInputEnable(for_color_custom, true);
+                }
+            }
+        });
+    },
+    colorTypeSwitchClickHandler: function(e) {
+        var radio = $(e.target);
+        var containe_colortype_choose = radio.closest(".containe-colortype-choose");
+        var forColorCustom = $(".for-color-custom", containe_colortype_choose);
+        this.switchForCustomEnable(radio, forColorCustom);
+    },
+    switchForCustomEnable: function(radio, forColorCustom) {
+        var isEnable = false;
+        if (radio.val() == "forCustom") {
+            isEnable = true;
+        }
+        this.switchInputEnable(forColorCustom, isEnable);
+    },
+    valueChangeHanlder: function(e) {
+        var target = $(e.target);
+        var well = target.closest(".containe");
+        var propertyKey = well.data("key");
+        var propertyVal = target.val();
+        if (!well.length) {
+            well = target.closest(".containe-colortype-choose");
+        }
+        propertyKey = well.data("key");
+        propertyVal = target.val();
+        if (propertyVal == "forCustom") {
+            propertyVal = $(".for-color-custom .color-input", well).val();
+        }
+        this.model.set(propertyKey, propertyVal);
+    }
+});
+
 var AppModel = Backbone.Collection.extend({});
 
 var AppView = Backbone.View.extend({
@@ -9585,10 +9637,10 @@ var AppView = Backbone.View.extend({
             timeline: "swf/beechart-timeline.swf"
         };
         var dataMap = {
-            pie: "swf/data/site-reffers.xml",
-            line: "swf/data/2-serials.xml",
-            bar: "swf/data/mon-av-temp.xml",
-            timeline: "swf/data/small_data.json"
+            pie: "swf/data/pie.xml",
+            line: "swf/data/line.xml",
+            bar: "swf/data/bar.xml",
+            timeline: "swf/data/timeline.json"
         };
         if (this.options.type && this.flash) {
             self.chart = this.flash.flash({
@@ -9645,14 +9697,32 @@ var AppView = Backbone.View.extend({
                     model: self.model
                 });
                 self.views.push(barView);
+            },
+            timeline: function() {
+                self.timelineSomethingHide();
+                var generalView = new GeneralView({
+                    model: self.model
+                });
+                self.views.push(generalView);
+                var timelineView = new TimelineView({
+                    model: self.model
+                });
+                self.views.push(timelineView);
             }
         };
         try {
+            self.timelineSomethingShow();
             renderMap[self.options.type]();
             this.config_container.fadeIn();
         } catch (e) {
             alert(e);
         }
+    },
+    timelineSomethingHide: function() {
+        $(".timeline-hide").hide();
+    },
+    timelineSomethingShow: function() {
+        $(".timeline-hide").show();
     },
     modelChange: function(model) {
         var changedAttributes = model.changedAttributes();
@@ -9666,123 +9736,12 @@ var AppView = Backbone.View.extend({
     }
 });
 
-var BarStyleView = BaseView.extend({
-    setDefaultValue: function() {
-        LineDotView.__super__.setDefaultValue.apply(this, arguments);
-        var self = this;
-        _.each(this.model.attributes, function(value, key) {
-            var containe_colortype_choose = $(".containe-colortype-choose[data-key='" + key + "']", self.$el);
-            var colorTypeRadios, for_color_custom, colorTypeInput;
-            if (containe_colortype_choose.length) {
-                colorTypeRadios = $(".colorTypeRadios input[type='radio']", containe_colortype_choose);
-                for_color_custom = $(".for-color-custom", containe_colortype_choose);
-                if (self._isColor(value)) {
-                    colorTypeInput = $("input[type='color']", for_color_custom);
-                    self.radioChecked(colorTypeRadios, "forCustom");
-                    colorTypeInput.val(value);
-                    self._changeColorInputByColorTypeInput(colorTypeInput);
-                } else {
-                    self.radioChecked(colorTypeRadios, "inherit#color");
-                    self.switchInputEnable(for_color_custom, true);
-                }
-            }
-        });
-    },
+var BarStyleView = ColorTypeChooseView.extend({
     events: function() {
         return _.extend({}, BaseView.prototype.events, {
             "click input[type='radio'][name='color-group']": "colorTypeSwitchClickHandler",
-            "click input[type='radio'][name='borderColor-group']": "colorTypeSwitchClickHandler",
-            "click input[type='radio'][name='color.hl-group']": "colorTypeSwitchClickHandler",
-            "click input[type='radio'][name='borderColor.hl-group']": "colorTypeSwitchClickHandler"
+            "click input[type='radio'][name='color.hl-group']": "colorTypeSwitchClickHandler"
         });
-    },
-    colorTypeSwitchClickHandler: function(e) {
-        var radio = $(e.target);
-        var containe_colortype_choose = radio.closest(".containe-colortype-choose");
-        var forColorCustom = $(".for-color-custom", containe_colortype_choose);
-        this.switchForCustomEnable(radio, forColorCustom);
-    },
-    switchForCustomEnable: function(radio, forColorCustom) {
-        var isEnable = false;
-        if (radio.val() == "forCustom") {
-            isEnable = true;
-        }
-        this.switchInputEnable(forColorCustom, isEnable);
-    },
-    valueChangeHanlder: function(e) {
-        var target = $(e.target);
-        var well = target.closest(".containe");
-        var propertyKey = well.data("key");
-        var propertyVal = target.val();
-        if (!well.length) {
-            well = target.closest(".containe-colortype-choose");
-        }
-        propertyKey = well.data("key");
-        propertyVal = target.val();
-        if (propertyVal == "forCustom") {
-            propertyVal = $(".for-color-custom .color-input", well).val();
-        }
-        this.model.set(propertyKey, propertyVal);
-    }
-});
-
-var LineDotView = BaseView.extend({
-    setDefaultValue: function() {
-        LineDotView.__super__.setDefaultValue.apply(this, arguments);
-        var self = this;
-        _.each(this.model.attributes, function(value, key) {
-            var containe_colortype_choose = $(".containe-colortype-choose[data-key='" + key + "']", self.$el);
-            var colorTypeRadios, for_color_custom, colorTypeInput;
-            if (containe_colortype_choose.length) {
-                colorTypeRadios = $(".colorTypeRadios input[type='radio']", containe_colortype_choose);
-                for_color_custom = $(".for-color-custom", containe_colortype_choose);
-                if (self._isColor(value)) {
-                    colorTypeInput = $("input[type='color']", for_color_custom);
-                    self.radioChecked(colorTypeRadios, "forCustom");
-                    colorTypeInput.val(value);
-                    self._changeColorInputByColorTypeInput(colorTypeInput);
-                } else {
-                    self.radioChecked(colorTypeRadios, "inherit#color");
-                    self.switchInputEnable(for_color_custom, true);
-                }
-            }
-        });
-    },
-    events: function() {
-        return _.extend({}, BaseView.prototype.events, {
-            "click input[type='radio'][name='color-group']": "colorTypeSwitchClickHandler",
-            "click input[type='radio'][name='borderColor-group']": "colorTypeSwitchClickHandler",
-            "click input[type='radio'][name='color.hl-group']": "colorTypeSwitchClickHandler",
-            "click input[type='radio'][name='borderColor.hl-group']": "colorTypeSwitchClickHandler"
-        });
-    },
-    colorTypeSwitchClickHandler: function(e) {
-        var radio = $(e.target);
-        var containe_colortype_choose = radio.closest(".containe-colortype-choose");
-        var forColorCustom = $(".for-color-custom", containe_colortype_choose);
-        this.switchForCustomEnable(radio, forColorCustom);
-    },
-    switchForCustomEnable: function(radio, forColorCustom) {
-        var isEnable = false;
-        if (radio.val() == "forCustom") {
-            isEnable = true;
-        }
-        this.switchInputEnable(forColorCustom, isEnable);
-    },
-    valueChangeHanlder: function(e) {
-        var target = $(e.target);
-        var well = target.closest(".containe");
-        var propertyKey = well.data("key");
-        var propertyVal = target.val();
-        if (!well.length) {
-            well = target.closest(".containe-colortype-choose");
-        }
-        propertyKey = well.data("key");
-        propertyVal = target.val();
-        if (propertyVal == "forCustom") {
-            propertyVal = $(".for-color-custom .color-input", well).val();
-        }
-        this.model.set(propertyKey, propertyVal);
     }
 });
 
@@ -10015,28 +9974,7 @@ jQuery(function($) {
     }
 });
 
-var LineDotView = BaseView.extend({
-    setDefaultValue: function() {
-        LineDotView.__super__.setDefaultValue.apply(this, arguments);
-        var self = this;
-        _.each(this.model.attributes, function(value, key) {
-            var containe_colortype_choose = $(".containe-colortype-choose[data-key='" + key + "']", self.$el);
-            var colorTypeRadios, for_color_custom, colorTypeInput;
-            if (containe_colortype_choose.length) {
-                colorTypeRadios = $(".colorTypeRadios input[type='radio']", containe_colortype_choose);
-                for_color_custom = $(".for-color-custom", containe_colortype_choose);
-                if (self._isColor(value)) {
-                    colorTypeInput = $("input[type='color']", for_color_custom);
-                    self.radioChecked(colorTypeRadios, "forCustom");
-                    colorTypeInput.val(value);
-                    self._changeColorInputByColorTypeInput(colorTypeInput);
-                } else {
-                    self.radioChecked(colorTypeRadios, "inherit#color");
-                    self.switchInputEnable(for_color_custom, true);
-                }
-            }
-        });
-    },
+var LineDotView = ColorTypeChooseView.extend({
     events: function() {
         return _.extend({}, BaseView.prototype.events, {
             "click input[type='radio'][name='color-group']": "colorTypeSwitchClickHandler",
@@ -10044,34 +9982,6 @@ var LineDotView = BaseView.extend({
             "click input[type='radio'][name='color.hl-group']": "colorTypeSwitchClickHandler",
             "click input[type='radio'][name='borderColor.hl-group']": "colorTypeSwitchClickHandler"
         });
-    },
-    colorTypeSwitchClickHandler: function(e) {
-        var radio = $(e.target);
-        var containe_colortype_choose = radio.closest(".containe-colortype-choose");
-        var forColorCustom = $(".for-color-custom", containe_colortype_choose);
-        this.switchForCustomEnable(radio, forColorCustom);
-    },
-    switchForCustomEnable: function(radio, forColorCustom) {
-        var isEnable = false;
-        if (radio.val() == "forCustom") {
-            isEnable = true;
-        }
-        this.switchInputEnable(forColorCustom, isEnable);
-    },
-    valueChangeHanlder: function(e) {
-        var target = $(e.target);
-        var well = target.closest(".containe");
-        var propertyKey = well.data("key");
-        var propertyVal = target.val();
-        if (!well.length) {
-            well = target.closest(".containe-colortype-choose");
-        }
-        propertyKey = well.data("key");
-        propertyVal = target.val();
-        if (propertyVal == "forCustom") {
-            propertyVal = $(".for-color-custom .color-input", well).val();
-        }
-        this.model.set(propertyKey, propertyVal);
     }
 });
 
@@ -10104,15 +10014,6 @@ var LineView = ChartView.extend({
     }
 });
 
-var PieChartSetModel = BaseModel.extend({
-    styleName: "chart",
-    defaults: function() {
-        return {};
-    }
-});
-
-var PieChartSetView = BaseView.extend({});
-
 var PieSliceSetModel = BaseModel.extend({
     styleName: "slice",
     defaults: function() {
@@ -10124,13 +10025,6 @@ var PieSliceSetView = BaseView.extend({});
 
 var PieView = ChartView.extend({
     defaultSetting: function() {
-        var pieChartSetView = new PieChartSetView({
-            modelClz: PieChartSetModel,
-            modelAttributes: StyleCenter.getInstance().getStyle("chart"),
-            el: $("#pie-chart-set")
-        });
-        this.views.push(pieChartSetView);
-        this.model.push(pieChartSetView.model);
         var pieSliceSetView = new PieSliceSetView({
             modelClz: PieSliceSetModel,
             modelAttributes: StyleCenter.getInstance().getStyle("slice"),
@@ -10230,4 +10124,25 @@ StyleSheet.prototype = {
         return outputArr.join("\n");
     }
 };
+
+var TimelineView = ChartView.extend({
+    defaultSetting: function() {
+        var lineStyleView = new BaseView({
+            modelClz: BaseModel,
+            modelAttributes: StyleCenter.getInstance().getStyle("line"),
+            styleName: "line",
+            el: $("#line-style-set")
+        });
+        this.views.push(lineStyleView);
+        this.model.push(lineStyleView.model);
+        var guideLineView = new BaseView({
+            modelClz: BaseModel,
+            modelAttributes: StyleCenter.getInstance().getStyle("guideline"),
+            styleName: "guideLine",
+            el: $("#guideLine-set")
+        });
+        this.views.push(guideLineView);
+        this.model.push(guideLineView.model);
+    }
+});
 //@ sourceMappingURL=dist/merge.map

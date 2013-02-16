@@ -14,24 +14,93 @@ h3 Bar
 .containe(data-key="dropShadow")
     h5 柱形阴影
     label.radio.inline
-        input(type="radio",name="dropShadow-group",value="light")
+        input(type="radio",name="bar-dropShadow-group",value="light")
         span 有
     label.radio.inline
-        input(type="radio",name="dropShadow-group",value="none")
+        input(type="radio",name="bar-dropShadow-group",value="none")
         span 无
-.containe(data-key="thickness")
-    h5 线条粗细
-    input(type="range",max="10",min="0",step="0.1")
+.containe(data-key="brightnessFading")
+    h5 柱形颜色渐变值
+    input(type="range",max="1",min="-1",step="0.1")
     span
-.containe(data-key="fillType")
-    h5 线条辐射区类型
+.containe(data-key="backgroundType")
+    h5 背景形式
     label.radio.inline
-        input(type="radio",name="fillType-group",value="gradient")
+        input(type="radio",name="bar-backgroundType-group",value="slash")
         span 渐变
     label.radio.inline
-        input(type="radio",name="fillType-group",value="normal")
+        input(type="radio",name="bar-backgroundType-group",value="simple")
         span 普通
-.containe(data-key="fillAlpha")
-    h5 线条辐射区透明度
+.containe(data-key="borderThickness")
+    h5 柱形边框线条粗细
+    input(type="range",max="10",min="0",step="0.1")
+    span
+.containe(data-key="borderColor")
+    h5 柱形边框颜色
+    input(type="color")
+    input(type="text",value="#000000").help-inline.color-input
+.containe(data-key="borderAlpha")
+    h5 柱形边框透明度
     input(type="range",max="1",min="0",step="0.01")
     span
+.containe(data-key="valueVisibility")
+    h5 柱形顶部是否显示数值
+    label.radio.inline
+        input(type="radio",name="valueVisibility-group",value="visible")
+        span 是
+    label.radio.inline
+        input(type="radio",name="valueVisibility-group",value="none")
+        span 否
+h3 Bar(Hover状态)
+.containe-colortype-choose(data-key="color.hl")
+    h5 点的颜色
+    .colorTypeRadios
+        label.radio.inline
+            input(type="radio",name="dot-color.hl-group",value="inherit#color")
+            span 与线的颜色一致
+        label.radio.inline
+            input(type="radio",name="dot-color.hl-group",value="forCustom")
+            span 自定义
+    .for-color-custom
+        input(type="color")
+        input(type="text",value="#000000").help-inline.color-input
+.containe(data-key="dropShadow.hl")
+    h5 柱形阴影
+    label.radio.inline
+        input(type="radio",name="bar-dropShadow.hl-group",value="light")
+        span 有
+    label.radio.inline
+        input(type="radio",name="bar-dropShadow.hl-group",value="none")
+        span 无
+.containe(data-key="brightnessFading.hl")
+    h5 柱形颜色渐变值
+    input(type="range",max="1",min="-1",step="0.1")
+    span
+.containe(data-key="backgroundType.hl")
+    h5 背景形式
+    label.radio.inline
+        input(type="radio",name="bar-backgroundType.hl-group",value="slash")
+        span 渐变
+    label.radio.inline
+        input(type="radio",name="bar-backgroundType.hl-group",value="simple")
+        span 普通
+.containe(data-key="borderThickness.hl")
+    h5 柱形边框线条粗细
+    input(type="range",max="10",min="0",step="0.1")
+    span
+.containe(data-key="borderColor.hl")
+    h5 柱形边框颜色
+    input(type="color")
+    input(type="text",value="#000000").help-inline.color-input
+.containe(data-key="borderAlpha.hl")
+    h5 柱形边框透明度
+    input(type="range",max="1",min="0",step="0.01")
+    span
+.containe(data-key="valueVisibility.hl")
+    h5 柱形顶部是否显示数值
+    label.radio.inline
+        input(type="radio",name="valueVisibility.hl-group",value="visible")
+        span 是
+    label.radio.inline
+        input(type="radio",name="valueVisibility.hl-group",value="none")
+        span 否

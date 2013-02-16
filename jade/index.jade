@@ -57,11 +57,11 @@ html
                     a(href="#pie",data-toggle="tab") 饼图专有
             .tab-content
                 .tab-pane.active#general
+                    .well#common-set
+                        include include/pie/common-pie-set.jade
                     .well#legend-set
                         include include/legend-set.jade
                 .tab-pane#pie
-                    .well#pie-chart-set
-                        include include/pie-chart-set.jade
                     .well#pie-slice-set
                         include include/pie-slice-set.jade
         script(type="text/template")#line-config
@@ -133,5 +133,36 @@ html
                     .well#bar-style-set
                         include include/bar/bar-style-set.jade
         script(type="text/template")#timeline-config
+            ul.nav.nav-tabs
+                li.active
+                    a(href="#general",data-toggle="tab") 通用样式
+                li
+                    a(href="#timeline",data-toggle="tab") 柱形专有
+            .tab-content
+                .tab-pane.active#general
+                    .well#common-set
+                        include include/common-set.jade
+                    .well#tooltip-set
+                        include include/tooltip-set.jade
+                    .well#xAxis-set
+                        h3 X轴
+                        include include/axis-set.jade
+                    .well#xAxis-label-set
+                        h3 X轴文字
+                        include include/xaxis-label-set.jade
+                    #for-yAxis-visible
+                        .well#yAxis-set
+                            h3 Y轴
+                            include include/axis-set.jade
+                        .well#yAxis-label-set
+                            h3 Y轴文字
+                            include include/yaxis-label-set.jade
+                    .well#canvas-set
+                        include include/canvas-set.jade
+                .tab-pane#timeline
+                    .well#line-style-set
+                        include include/line/line-style-set.jade
+                    .well#guideLine-set
+                        include include/line/guideLine-set.jade
 
 

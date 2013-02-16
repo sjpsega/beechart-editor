@@ -19,4 +19,22 @@ h3 通用
 .containe(data-key="startAngle")
     h5 初始角度
     input(type="number",max="360",min="-360")
-
+.containe(data-key="enableTooltip")
+    h5 是否显示tooltip
+    label.radio.inline
+        input(type="radio",name="enableTooltip-group",value="true")
+        span 显示
+    label.radio.inline
+        input(type="radio",name="enableTooltip-group",value="false")
+        span 隐藏
+.containe(data-key="order")
+    h5 圆饼排序
+    label.radio.inline
+        input(type="radio",name="order-group",value="asc")
+        span 升序
+    label.radio.inline
+        input(type="radio",name="order-group",value="desc")
+        span 降序
+    label.radio.inline
+        input(type="radio",name="order-group",value="none")
+        span 不排序

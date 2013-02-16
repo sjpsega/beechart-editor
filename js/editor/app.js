@@ -47,10 +47,10 @@ var AppView = Backbone.View.extend({
             "timeline":"swf/beechart-timeline.swf"
         };
         var dataMap = {
-            "pie":"swf/data/site-reffers.xml",
-            "line":"swf/data/2-serials.xml",
-            "bar":"swf/data/mon-av-temp.xml",
-            "timeline":"swf/data/small_data.json"
+            "pie":"swf/data/pie.xml",
+            "line":"swf/data/line.xml",
+            "bar":"swf/data/bar.xml",
+            "timeline":"swf/data/timeline.json"
         }
         if(this.options.type && this.flash){
             self.chart = this.flash.flash({
@@ -95,14 +95,28 @@ var AppView = Backbone.View.extend({
                 self.views.push(generalView);
                 var barView = new BarView({model:self.model});
                 self.views.push(barView);
+            },
+            timeline:function(){
+                self.timelineSomethingHide();
+                var generalView = new GeneralView({model:self.model});
+                self.views.push(generalView);
+                var timelineView = new TimelineView({model:self.model});
+                self.views.push(timelineView);
             }
         }
         try{
+            self.timelineSomethingShow();
             renderMap[self.options.type]();
             this.config_container.fadeIn();
         }catch(e){
             alert(e);
         }
+    },
+    timelineSomethingHide:function(){
+        $(".timeline-hide").hide();
+    },
+    timelineSomethingShow:function(){
+        $(".timeline-hide").show();
     },
     modelChange:function(model){
         var changedAttributes = model.changedAttributes();
