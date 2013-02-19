@@ -9650,11 +9650,12 @@ var AppView = Backbone.View.extend({
                 allowScriptAccess: "always",
                 flashvars: {
                     dataUrl: dataMap[this.options.type],
-                    debug: true
+                    debug: location.search.indexOf("debug=true") > -1 ? true : false
                 }
             });
             self.chart.on("swfReady.flash", function() {
                 log("chartStyle", self.chart.getFlash()._returnChartCSS());
+                $(document).triggerHandler("hideLoading");
                 StyleCenter.getInstance().setStyleSheet(new StyleSheet(self.chart.getFlash()._returnChartCSS()));
             });
         }
@@ -9791,9 +9792,10 @@ var GeneralView = ChartView.extend({
         });
         this.views.push(commonView);
         this.model.push(commonView.model);
-        var legendView = new LegendView({
-            modelClz: LegendModel,
+        var legendView = new BaseView({
+            modelClz: BaseModel,
             modelAttributes: StyleCenter.getInstance().getStyle("legend"),
+            styleName: "legend",
             el: $("#legend-set")
         });
         this.views.push(legendView);
@@ -9805,16 +9807,18 @@ var GeneralView = ChartView.extend({
         });
         this.views.push(tooltipView);
         this.model.push(tooltipView.model);
-        var xAxisView = new XAxisView({
-            modelClz: XAxisModel,
+        var xAxisView = new BaseView({
+            modelClz: BaseModel,
             modelAttributes: StyleCenter.getInstance().getStyle("xaxis"),
+            styleName: "xaxis",
             el: $("#xAxis-set")
         });
         this.views.push(xAxisView);
         this.model.push(xAxisView.model);
-        var xAxisLabelView = new XAxisLabelView({
-            modelClz: XAxisLabelModel,
+        var xAxisLabelView = new BaseView({
+            modelClz: BaseModel,
             modelAttributes: StyleCenter.getInstance().getStyle("xaxis label"),
+            styleName: "xaxis label",
             el: $("#xAxis-label-set")
         });
         this.views.push(xAxisLabelView);
@@ -9845,15 +9849,6 @@ var GeneralView = ChartView.extend({
         this.model.push(canvasView.model);
     }
 });
-
-var LegendModel = BaseModel.extend({
-    styleName: "legend",
-    defaults: function() {
-        return {};
-    }
-});
-
-var LegendView = BaseView.extend({});
 
 var TooltipModel = BaseModel.extend({
     styleName: "tooltip",
@@ -9886,24 +9881,6 @@ var TooltipView = BaseView.extend({
     }
 });
 
-var XAxisLabelModel = BaseModel.extend({
-    styleName: "xaxis label",
-    defaults: function() {
-        return {};
-    }
-});
-
-var XAxisLabelView = BaseView.extend({});
-
-var XAxisModel = BaseModel.extend({
-    styleName: "xaxis",
-    defaults: function() {
-        return {};
-    }
-});
-
-var XAxisView = BaseView.extend({});
-
 jQuery(function($) {
     try {
         var start = {
@@ -9922,10 +9899,20 @@ jQuery(function($) {
                     });
                     saveAs(blob, "chart.css");
                 });
+                $(document).on("hideLoading", this.hideLoading);
+            },
+            showLoading: function() {
+                var loading = $("#loading-modal");
+                loading.fadeIn();
+            },
+            hideLoading: function() {
+                var loading = $("#loading-modal");
+                loading.fadeOut();
             },
             chartTypeSwitchModel: function() {
                 var model = $("#chart-type-switch-modal");
                 var currentBtn, lastAppView, lastChoiseType;
+                var self = this;
                 model.modal();
                 var btns = $(".chart-types button", model);
                 var confirmBtn = $(".confirm.btn", model);
@@ -9945,6 +9932,7 @@ jQuery(function($) {
                     if (!currentBtn) {
                         return;
                     }
+                    self.showLoading();
                     var charttype = currentBtn.data("charttype");
                     if (lastChoiseType == charttype) {
                         model.modal("hide");

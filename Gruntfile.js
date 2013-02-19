@@ -26,6 +26,7 @@ module.exports = function( grunt ) {
 	        files: {
 	          "index.html": "jade/index.jade",
 	          "filedownload.html": "jade/filedownload.jade",
+	          "loading.html": "jade/loading.jade"
 	        }
 	      }
 	    },
@@ -78,19 +79,19 @@ module.exports = function( grunt ) {
 		},
 		watch: {
 	      jade: {
-	        files: ['jade/*.jade','jade/**/*.jade'],
+	        files: ['jade/*.jade','jade/**/*.jade',"Gruntfile.js"],
 	        tasks: 'jade'
 	      },
 	      stylus: {
-	        files: ['styl/*.styl'],
+	        files: ['styl/*.styl',"Gruntfile.js"],
 	        tasks: 'stylus'
 	      },
 	      uglify: {
-	        files: ["js/*.js","js/**/*.js"],
+	        files: ["js/*.js","js/**/*.js","Gruntfile.js"],
 	        tasks: 'uglify'
 	      },
 	      mincss: {
-	        files: ["css/*.css"],
+	        files: ["css/*.css","Gruntfile.js"],
 	        tasks: 'mincss'
 	      }
 	    }
@@ -106,7 +107,7 @@ module.exports = function( grunt ) {
 
 	// Default grunt
 	// grunt.registerTask( "default", ["mincss"] );
-	grunt.registerTask( "default", ["uglify", "mincss", "jade", "stylus", "connect", "watch"] );
+	grunt.registerTask( "default", ["uglify", "jade", "stylus", "mincss", "connect", "watch"] );
 
 	// Short list as a high frequency watch task
 	// grunt.registerTask( "dev", [ "selector", "build:*:*", "jshint" ] );

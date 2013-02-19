@@ -3,6 +3,7 @@
 ## BeeChart 图表编辑器
 
 [编辑器地址](http://sjpsega.github.com/beechart-editor/)
+
 [BeeChart地址](http://sjpsega.github.com/beechart/)
 
 ## 基本逻辑

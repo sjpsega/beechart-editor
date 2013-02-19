@@ -19,12 +19,22 @@ jQuery(function($) {
                     var blob = new Blob([StyleCenter.getInstance().returnCSSText()], {type: "text/plain;charset=utf-8"});
                     saveAs(blob, "chart.css");
                 });
+                $(document).on("hideLoading",this.hideLoading);
+            },
+            showLoading:function(){
+                var loading = $("#loading-modal");
+                loading.fadeIn();
+            },
+            hideLoading:function(){
+                var loading = $("#loading-modal");
+                loading.fadeOut();
             },
             chartTypeSwitchModel:function(){
                 var model = $("#chart-type-switch-modal");
                 var currentBtn,
                 lastAppView,
                 lastChoiseType;
+                var self = this;
                 model.modal();
                 var btns = $(".chart-types button",model);
                 var confirmBtn = $(".confirm.btn",model);
@@ -46,6 +56,7 @@ jQuery(function($) {
                     if(!currentBtn){
                         return;
                     }
+                    self.showLoading();
                     var charttype = currentBtn.data("charttype");
                     if(lastChoiseType == charttype){
                         model.modal("hide");

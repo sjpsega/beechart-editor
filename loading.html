@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="dist/merge.css">
+    <style>
+      #loading-modal{
+          width:120px;
+          height:120px;
+          margin:-120px 0 0 -120px;
+          overflow:hidden;
+      }
+      .modal-body{
+          padding:0;
+          overflow:hidden;
+      }
+      .circle{
+          margin:15px;
+          width:90px;
+          height:90px;
+          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-timing-function: linear;
+          -webkit-animation-name: orbit;
+          -moz-animation-iteration-count: infinite;
+          -moz-animation-timing-function: linear;
+          -moz-animation-name: orbit;
+          -webkit-animation-duration:2s;
+      }
+      .bee{
+          background:url("../img/charttype.png") no-repeat 0 -235px;
+          width:40px;
+          height:40px;
+      }
+      @-webkit-keyframes orbit { 
+          from { -webkit-transform:rotate(0deg) } 
+          to { -webkit-transform:rotate(360deg) } 
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-modal" data-backdrop="static" class="modal hide">
+      <div class="modal-body">
+        <div class="circle">
+          <div class="bee"></div>
+        </div>
+      </div>
+    </div>
+    <script src="dist/merge.js"></script>
+    <script>
+      var model = jQuery("#loading-modal");
+      model.modal().fadeIn();
+    </script>
+  </body>
+</html>

@@ -27,9 +27,8 @@ body {
 .chart-types li .timeline i {
   background-position: -3px -168px;
 }
-#chart-type-switch-modal .alert {
-  padding: 4px 35px 4px 14px;
-  margin-bottom: 0;
+#chart-type-switch-modal {
+  margin: -160px 0 0 -280px;
 }
 #flash-container {
   position: fixed;
@@ -40,4 +39,40 @@ body {
 .color-input {
   width: 60px;
   color: #444;
+}
+#loading-modal {
+  width: 120px;
+  height: 120px;
+  margin: -120px 0 0 -60px;
+  overflow: hidden;
+}
+#loading-modal .modal-body {
+  padding: 0;
+  overflow: hidden;
+}
+#loading-modal .circle {
+  margin: 15px;
+  width: 90px;
+  height: 90px;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-name: orbit;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -moz-animation-name: orbit;
+  -webkit-animation-duration: 2s;
+}
+#loading-modal .circle .bee {
+  background: url("../img/charttype.png") no-repeat 0 -235px;
+  width: 40px;
+  height: 40px;
+}
+@-webkit-keyframes orbit {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
