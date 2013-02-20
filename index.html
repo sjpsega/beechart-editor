@@ -11,7 +11,7 @@
   <body>
     <div class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
-        <div class="container-fluid"><a href="#" class="brand">BeeChart</a>
+        <div class="container-fluid"><a href="https://github.com/sjpsega/beechart-editor" target="_blank" class="brand">BeeChart-Editor</a>
           <ul class="nav pull-right"><a href="#chart-type-switch-modal" role="button" data-toggle="modal" id="switch" class="btn btn-inverse">切换图表类型</a>
             <button id="download" class="btn btn-inverse">下载当前样式</button>
           </ul>
@@ -54,6 +54,13 @@
             </button>
           </li>
         </ul>
+      </div>
+    </div>
+    <div id="loading-modal" data-backdrop="static" class="modal hide fade">
+      <div class="modal-body">
+        <div class="circle">
+          <div class="bee"></div>
+        </div>
       </div>
     </div>
     <script>

@@ -13,9 +13,10 @@ var GeneralView = ChartView.extend({
         this.views.push(commonView);
         this.model.push(commonView.model);
 
-        var legendView = new LegendView({
-            modelClz:LegendModel,
+        var legendView = new BaseView({
+            modelClz:BaseModel,
             modelAttributes : StyleCenter.getInstance().getStyle("legend"),
+            styleName : "legend",
             el:$("#legend-set")
         });
         this.views.push(legendView);
@@ -29,17 +30,19 @@ var GeneralView = ChartView.extend({
         this.views.push(tooltipView);
         this.model.push(tooltipView.model);
 
-        var xAxisView = new XAxisView({
-            modelClz:XAxisModel,
+        var xAxisView = new BaseView({
+            modelClz:BaseModel,
             modelAttributes : StyleCenter.getInstance().getStyle("xaxis"),
+            styleName : "xaxis",
             el:$("#xAxis-set")
         });
         this.views.push(xAxisView);
         this.model.push(xAxisView.model);
 
-        var xAxisLabelView = new XAxisLabelView({
-            modelClz:XAxisLabelModel,
+        var xAxisLabelView = new BaseView({
+            modelClz:BaseModel,
             modelAttributes : StyleCenter.getInstance().getStyle("xaxis label"),
+            styleName : "xaxis label",
             el:$("#xAxis-label-set")
         });
         this.views.push(xAxisLabelView);

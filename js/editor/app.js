@@ -60,11 +60,12 @@ var AppView = Backbone.View.extend({
                 allowScriptAccess : "always",
                 flashvars  : { 
                   dataUrl : dataMap[this.options.type],
-                  debug:true
+                  debug: (location.search.indexOf("debug=true")>-1) ? true : false
                 } 
             });
             self.chart.on("swfReady.flash",function(){
                 log("chartStyle",self.chart.getFlash()._returnChartCSS());
+                $(document).triggerHandler("hideLoading");
                 StyleCenter.getInstance().setStyleSheet(new StyleSheet(self.chart.getFlash()._returnChartCSS()));
             });
         }
