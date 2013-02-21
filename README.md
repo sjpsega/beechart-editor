@@ -17,9 +17,11 @@
 
 ## 感谢使用到的开源软件
 
-* Grunt 0.4+
-* Bootstrap
-* Backbone
-* FileSaver
-* Stylus
-* Jade
+* [Grunt 0.4+](https://github.com/gruntjs/grunt/wiki/Upgrading-from-0.3-to-0.4)
+* [Bootstrap](http://twitter.github.com/bootstrap/)
+* [Underscore](http://underscorejs.org/)
+* [Backbone](http://backbonejs.org/)
+* [FileSaver](https://github.com/eligrey/FileSaver.js)
+* [Stylus](https://github.com/LearnBoost/stylus)
+* [Jade](https://github.com/visionmedia/jade)
+* [uglify](https://github.com/gruntjs/grunt-contrib-uglify)
