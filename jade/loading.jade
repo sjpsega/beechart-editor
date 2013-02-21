@@ -17,6 +17,14 @@ html
             .modal-body{
                 padding:0;
                 overflow:hidden;
+                width:120px;
+                height:120px;
+                position:relative;
+            }
+            .loading-txt{
+                position:absolute;
+                top:50px;
+                left:28px;
             }
             .circle{
                 margin:15px;
@@ -40,8 +48,9 @@ html
                 to { -webkit-transform:rotate(360deg) } 
             }
     body
-        #loading-modal.modal(data-backdrop="static").hide
+        #loading-modal.modal(data-backdrop="static").hide.fade
             .modal-body
+                .loading-txt Loading...
                 .circle
                     .bee
         script(src="dist/merge.js")

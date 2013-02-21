@@ -49,6 +49,14 @@ body {
 #loading-modal .modal-body {
   padding: 0;
   overflow: hidden;
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+#loading-modal .loading-txt {
+  position: absolute;
+  top: 50px;
+  left: 28px;
 }
 #loading-modal .circle {
   margin: 15px;

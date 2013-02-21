@@ -17,6 +17,14 @@
       .modal-body{
           padding:0;
           overflow:hidden;
+          width:120px;
+          height:120px;
+          position:relative;
+      }
+      .loading-txt{
+          position:absolute;
+          top:50px;
+          left:28px;
       }
       .circle{
           margin:15px;
@@ -42,8 +50,9 @@
     </style>
   </head>
   <body>
-    <div id="loading-modal" data-backdrop="static" class="modal hide">
+    <div id="loading-modal" data-backdrop="static" class="modal hide fade">
       <div class="modal-body">
+        <div class="loading-txt">Loading...</div>
         <div class="circle">
           <div class="bee"></div>
         </div>
