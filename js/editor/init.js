@@ -7,8 +7,15 @@ jQuery(function($) {
     try{
         var start = {
             init:function(){
+                this.browserSense();
                 this.btnEvent();
                 this.chartTypeSwitchModel();
+            },
+            browserSense:function(){
+                var safariReg = /safari/;
+                if(!$.browser.chrome){
+                    alert("强烈建议使用Chrome浏览器，否则会有兼容性问题。");
+                }
             },
             btnEvent:function(){
                 $("#switch").click(function(e){
