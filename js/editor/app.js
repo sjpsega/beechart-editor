@@ -105,13 +105,13 @@ var AppView = Backbone.View.extend({
                 self.views.push(timelineView);
             }
         }
-        try{
+        // try{
             self.timelineSomethingShow();
             renderMap[self.options.type]();
             this.config_container.fadeIn();
-        }catch(e){
-            alert(e);
-        }
+        // }catch(e){
+        //     alert(e);
+        // }
     },
     timelineSomethingHide:function(){
         $(".timeline-hide").hide();

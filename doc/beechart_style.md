@@ -63,15 +63,15 @@ line {
         fix(废弃)                auto\none                      x轴数据居中显示
 
     xAxis(x轴)
-        tickLength               number值                       x轴数据端点的长度
-        tickThickness            number值                       x轴数据端点的粗细
-        tickColor                css颜色值                      x轴线端点的颜色
-        lineThickness            number值                       x轴线的粗细
-        lineColor                css颜色值                      x轴线的颜色
-        labelGap(废弃)           auto\none                      x轴数据居中
-        labelRotation(废弃)      number值                       label旋转角度
-        tickPosition(废弃)       reverse\other                  端点位置调整
-        labelPosition(废弃)      center\other                   label位置调整
+        tickLength                      number值                       x轴数据端点的长度
+        tickThickness                   number值                       x轴数据端点的粗细
+        tickColor                       css颜色值                      x轴线端点的颜色
+        lineThickness                   number值                       x轴线的粗细
+        lineColor                       css颜色值                      x轴线的颜色
+        labelGap(废弃)                  auto\none                      x轴数据居中
+        labelRotation(废弃)             number值                       label旋转角度
+        tickPosition(废弃)              reverse\other                  端点位置调整
+        labelPosition(废弃,only bar)    center\other                   label位置调整
 
     xAxis label
         color                    css颜色值                      label颜色值

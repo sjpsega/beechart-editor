@@ -63,7 +63,7 @@ module.exports = function( grunt ) {
 									   "js/**/*.js" ]
 				},
 				options: {
-					 // sourceMap: "dist/merge.map",
+					 sourceMap: "/merge.map"
 					 // beautify: true,
 					 // compress: false,
 					 // mangle: false

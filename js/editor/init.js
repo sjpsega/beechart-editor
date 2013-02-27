@@ -4,7 +4,7 @@
  @date    2012-11-2
 */
 jQuery(function($) {
-    try{
+    // try{
         var start = {
             init:function(){
                 this.browserSense();
@@ -88,7 +88,7 @@ jQuery(function($) {
             }
         }
         start.init();
-    }catch(e){
-        console.log(e);
-    }
+    // }catch(e){
+    //     console.log(e);
+    // }
 })
