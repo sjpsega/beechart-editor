@@ -22,7 +22,7 @@ var GeneralView = ChartView.extend({
         this.views.push(legendView);
         this.model.push(legendView.model);
 
-        var tooltipView = new ToooltipView({
+        var tooltipView = new TooltipView({
             modelClz:TooltipModel,
             modelAttributes : StyleCenter.getInstance().getStyle("tooltip"),
             el:$("#tooltip-set")
