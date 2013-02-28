@@ -63,7 +63,7 @@ module.exports = function( grunt ) {
 									   "js/**/*.js" ]
 				},
 				options: {
-					 sourceMap: "../merge.map",
+					 sourceMap: "dist/merge.map",
 					 sourceMapRoot: "http://sjpsega.github.com/beechart-editor/"
 					 // beautify: true,
 					 // compress: false,
