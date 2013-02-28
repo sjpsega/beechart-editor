@@ -64,7 +64,7 @@ module.exports = function( grunt ) {
 				},
 				options: {
 					 sourceMap: "merge.map",
-					 sourceMapRoot: "http://sjpsega.github.com/beechart-editor/"
+					 sourceMapRoot: "../"
 					 // beautify: true,
 					 // compress: false,
 					 // mangle: false
@@ -76,6 +76,18 @@ module.exports = function( grunt ) {
 		    files: {
 		      "dist/merge.css": ["css/*.css"]
 		    }
+		  }
+		},
+		//修复soureMap的一个路径问题:
+		//grunt中uglify配置生成会按照Gruntfile的路径来生成；
+		//如sourceMap: "merge.map"会在Gruntfile同级目录生成sourceMap;
+		//而merge.js中的sourceMap会根据merge.js的相对路径来寻找，merge.js在dist目录中，soureMap配置为"//@ sourceMappingURL=merge.map",
+		//故它回去寻找dist/merge.map这个文件。
+		copy: {
+		  main: {
+		    files: [
+		      {src: ['merge.map'], dest: 'dist/merge.map', filter: 'isFile'}, // includes files in path
+		    ]
 		  }
 		},
 		watch: {
@@ -94,6 +106,10 @@ module.exports = function( grunt ) {
 	      mincss: {
 	        files: ["css/*.css","Gruntfile.js"],
 	        tasks: 'mincss'
+	      },
+	      copy: {
+	        files: ["merge.map"],
+	        tasks: 'copy'
 	      }
 	    }
 	});
@@ -105,10 +121,11 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks("grunt-contrib-stylus");
 	grunt.loadNpmTasks("grunt-contrib-connect");
 	grunt.loadNpmTasks("grunt-contrib-mincss");
+	grunt.loadNpmTasks("grunt-contrib-copy");
 
 	// Default grunt
 	// grunt.registerTask( "default", ["mincss"] );
-	grunt.registerTask( "default", ["uglify", "jade", "stylus", "mincss", "connect", "watch"] );
+	grunt.registerTask( "default", ["uglify", "copy", "jade", "stylus", "mincss", "connect", "watch"] );
 
 	// Short list as a high frequency watch task
 	// grunt.registerTask( "dev", [ "selector", "build:*:*", "jshint" ] );
